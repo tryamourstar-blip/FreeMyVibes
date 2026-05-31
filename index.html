@@ -61,18 +61,6 @@
         <h3 class="mt-12 text-2xl">🎵 My Jams (Max 20)</h3>
         <button onclick="addCustomSong()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Add Song</button>
         <div id="playlist-container" class="mt-6 space-y-4"></div>
-
-        <h3 class="mt-12 text-2xl">📸 Photos & Videos (Max 20)</h3>
-        <button onclick="uploadPhoto()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Upload Photo or Video</button>
-        <div id="uploaded-media" class="mt-6 grid grid-cols-2 gap-6"></div>
-      </div>
-    </div>
-
-    <!-- MESSAGES -->
-    <div id="tab1" class="tab-content hidden">
-      <h2 class="text-4xl font-bold">Messages 💬</h2>
-      <div class="mt-8 bg-zinc-900 p-8 rounded-3xl text-center">
-        <p class="text-gray-400">Messages coming soon...</p>
       </div>
     </div>
 
@@ -85,6 +73,7 @@
         <button onclick="exitRoom()" class="text-pink-400">← Back</button>
         <h3 id="room-name-display" class="text-3xl font-bold mt-6"></h3>
         <p class="text-green-400 font-medium">👑 You are the Host - You control the music!</p>
+        
         <iframe id="room-player" width="100%" height="420" class="mt-6 rounded-3xl" frameborder="0" allowfullscreen allow="autoplay"></iframe>
       </div>
     </div>
