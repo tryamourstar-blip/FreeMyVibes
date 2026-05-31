@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreeMyVibes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { font-family: 'Poppins', system-ui, sans-serif; }
+    h1, h2, h3, .banner-text { font-family: 'Bebas Neue', sans-serif; }
+    .neon-pink { text-shadow: 0 0 15px #ec4899; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+
+  <div class="bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 py-3 text-center banner-text text-2xl tracking-wider">
+    ❤️ LOVE + MUSIC = HEALING THE NATIONS 🌍
+  </div>
+
+  <nav class="bg-black border-b-4 border-pink-500 p-6 sticky top-0">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-6xl font-bold text-pink-500 neon-pink tracking-wider">FreeMyVibes</h1>
+      <button onclick="customizeProfile()" class="bg-pink-600 hover:bg-pink-700 px-6 py-3 rounded-2xl">Customize Profile</button>
+    </div>
+  </nav>
+
+  <div class="max-w-6xl mx-auto p-8">
+
+    <div class="flex justify-center gap-4 mb-12 flex-wrap">
+      <button onclick="switchTab(0)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">👤 Profile</button>
+      <button onclick="switchTab(1)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">💬 Messages</button>
+      <button onclick="switchTab(2)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">🎙️ Live Rooms</button>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="tab0" class="tab-content">
+      <div class="bg-zinc-900 rounded-3xl p-10">
+        <div class="flex gap-8 items-end">
+          <img src="https://picsum.photos/id/64/200" class="w-52 h-52 rounded-3xl border-4 border-pink-500" alt="">
+          <div>
+            <h2 id="username" class="text-5xl font-bold">@yourusername</h2>
+            <p id="mood" class="text-pink-400 text-2xl">Currently vibing to: lo-fi chillwave 🌙</p>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-black p-6 rounded-2xl">
+          <h3 class="font-bold flex justify-between">
+            About Me 
+            <button onclick="editAboutMe()" class="text-pink-400 text-sm underline">Edit</button>
+          </h3>
+          <p id="about-me" class="text-gray-300 mt-2">Just a pixel kid who believes music can heal the world...</p>
+        </div>
+
+        <div class="mt-8 flex gap-4 flex-wrap">
+          <button onclick="sendFriendRequest()" class="bg-green-600 px-6 py-3 rounded-2xl">Send Friend Request</button>
+          <button onclick="sendFanRequest()" class="bg-purple-600 px-6 py-3 rounded-2xl">Send Fan Request</button>
+          <button onclick="switchTab(1)" class="bg-blue-600 px-6 py-3 rounded-2xl">💬 Send Message</button>
+        </div>
+
+        <h3 class="mt-12 text-2xl">🎵 My Jams (Max 20)</h3>
+        <button onclick="addCustomSong()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Add Song</button>
+        <div id="playlist-container" class="mt-6 space-y-4"></div>
+
+        <h3 class="mt-12 text-2xl">📸 Photos & Videos (Max 20)</h3>
+        <button onclick="uploadPhoto()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Upload Photo or Video</button>
+        <div id="uploaded-media" class="mt-6 grid grid-cols-2 gap-6"></div>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div id="tab1" class="tab-content hidden">
+      <h2 class="text-4xl font-bold">Messages 💬</h2>
+      <div class="mt-8 bg-zinc-900 p-8 rounded-3xl text-center">
+        <p class="text-gray-400">Messages coming soon...</p>
+      </div>
+    </div>
+
+    <!-- LIVE ROOMS -->
+    <div id="tab2" class="tab-content hidden">
+      <h2 class="text-4xl font-bold">Live Rooms 🎙️</h2>
+      <button onclick="createRoom()" class="mt-4 bg-green-600 px-6 py-3 rounded-2xl">+ Create New Room (You are the Host)</button>
+      
+      <div id="current-room" class="hidden mt-8 bg-zinc-900 p-6 rounded-3xl">
+        <button onclick="exitRoom()" class="text-pink-400">← Back</button>
+        <h3 id="room-name-display" class="text-3xl font-bold mt-6"></h3>
+        <p class="text-green-400 font-medium">👑 You are the Host - You control the music!</p>
+        <iframe id="room-player" width="100%" height="420" class="mt-6 rounded-3xl" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let myJams = [{title:"Midnight City", artist:"M83"}, {title:"Weightless", artist:"Marconi Union"}];
+
+    function renderPlaylist() {
+      const container = document.getElementById('playlist-container');
+      container.innerHTML = myJams.map((s,i) => `
+        <div class="flex justify-between items-center bg-zinc-900 p-5 rounded-3xl">
+          <button onclick="playSong('${s.title} - ${s.artist}')" class="text-5xl text-pink-400">▶</button>
+          <div class="flex-1 ml-4">
+            <p class="text-xl">${s.title}</p>
+            <p class="text-gray-400">${s.artist}</p>
+          </div>
+          <button onclick="deleteSong(${i})" class="text-red-400 text-2xl">🗑</button>
+        </div>
+      `).join('');
+    }
+
+    function playSong(query) {
+      alert(`🎵 Searching for: ${query}`);
+      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank');
+    }
+
+    function addCustomSong() {
+      if (myJams.length >= 20) return alert("Maximum 20 songs reached!");
+      const title = prompt("Song title?");
+      const artist = prompt("Artist name?");
+      if (title) { 
+        myJams.push({title: title, artist: artist || "Unknown"}); 
+        renderPlaylist(); 
+      }
+    }
+
+    function deleteSong(i) { 
+      if (confirm("Delete?")) { 
+        myJams.splice(i,1); 
+        renderPlaylist(); 
+      } 
+    }
+
+    function editAboutMe() {
+      const current = document.getElementById('about-me').innerText;
+      const newText = prompt("Edit your About Me:", current);
+      if (newText !== null) document.getElementById('about-me').innerText = newText;
+    }
+
+    function customizeProfile() {
+      let name = prompt("New username? (without @)", "yourusername");
+      if (name) document.getElementById('username').textContent = "@" + name;
+      let mood = prompt("What's your current vibe/mood?", "lo-fi chillwave 🌙");
+      if (mood) document.getElementById('mood').innerHTML = `Currently vibing to: ${mood}`;
+    }
+
+    function sendFriendRequest() { alert("Friend Request Sent!"); }
+    function sendFanRequest() { alert("Fan Request Sent!"); }
+
+    function createRoom() {
+      const roomName = prompt("Name your new room?", "Prophetic Worship & Prayer");
+      if (roomName) {
+        document.getElementById('current-room').classList.remove('hidden');
+        document.getElementById('room-name-display').textContent = roomName;
+        document.getElementById('room-player').src = "https://www.youtube-nocookie.com/embed/5qap5aO7v9A?autoplay=1";
+      }
+    }
+
+    function exitRoom() {
+      document.getElementById('current-room').classList.add('hidden');
+    }
+
+    function switchTab(n) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+      document.getElementById('tab' + n).classList.remove('hidden');
+    }
+
+    renderPlaylist();
+    switchTab(0);
+  </script>
+</body>
+</html>
