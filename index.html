@@ -27,10 +27,9 @@
 
   <div class="max-w-6xl mx-auto p-8">
 
-    <div class="flex justify-center gap-4 mb-12 flex-wrap">
-      <button onclick="switchTab(0)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">👤 Profile</button>
-      <button onclick="switchTab(1)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">💬 Messages</button>
-      <button onclick="switchTab(2)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">🎙️ Live Rooms</button>
+    <div class="flex justify-center gap-4 mb-12">
+      <button onclick="switchTab(0)" class="px-10 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">👤 Profile</button>
+      <button onclick="switchTab(1)" class="px-10 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">🎙️ Live Rooms</button>
     </div>
 
     <!-- PROFILE -->
@@ -52,11 +51,18 @@
           <p id="about-me" class="text-gray-300 mt-2">Just a pixel kid who believes music can heal the world...</p>
         </div>
 
-        <div class="mt-8 flex gap-4 flex-wrap">
-          <button onclick="sendFriendRequest()" class="bg-green-600 px-6 py-3 rounded-2xl">Send Friend Request</button>
-          <button onclick="sendFanRequest()" class="bg-purple-600 px-6 py-3 rounded-2xl">Send Fan Request</button>
-          <button onclick="switchTab(1)" class="bg-blue-600 px-6 py-3 rounded-2xl">💬 Send Message</button>
+        <h3 class="mt-10 text-2xl">👥 My Top 8 Real Life Homies ❤️</h3>
+        <div class="grid grid-cols-4 gap-4 mt-4 text-center">
+          @bestie1 @musicbro @chillvibes @scenequeen @lofiaddict @nightowl @dreamer @echoangel
         </div>
+
+        <h3 class="mt-10 text-2xl">🔥 Top 10 Fans</h3>
+        <div class="grid grid-cols-5 gap-4 mt-4 text-center">
+          @musiclover42 @indiequeen @retrobeat @scenequeen @lofiaddict @nightowl88 @beatseeker @vinylvibes @dreamchaser @echochild
+        </div>
+
+        <h3 class="mt-8">👀 Creepers / Peeping (Showing No Love)</h3>
+        <p class="mt-2 text-red-400">@randomguy87 viewed 5x • @trollmaster left shady comment • @ghostlistener lurking • @sneakyfan22 creeping • @quietviber here again</p>
 
         <h3 class="mt-12 text-2xl">🎵 My Jams (Max 20)</h3>
         <button onclick="addCustomSong()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Add Song</button>
@@ -69,7 +75,7 @@
     </div>
 
     <!-- LIVE ROOMS -->
-    <div id="tab2" class="tab-content hidden">
+    <div id="tab1" class="tab-content hidden">
       <h2 class="text-4xl font-bold">Live Rooms 🎙️</h2>
       <button onclick="createRoom()" class="mt-4 bg-green-600 px-6 py-3 rounded-2xl">+ Create New Room (You are the Host)</button>
       
@@ -102,8 +108,8 @@
     }
 
     function playSong(query) {
-      alert(`🎵 Now searching for "${query}" on YouTube...`);
-      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query + " official audio")}`, '_blank');
+      alert(`🎵 Searching for: ${query}`);
+      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank');
     }
 
     function addCustomSong() {
