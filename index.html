@@ -61,6 +61,18 @@
         <h3 class="mt-12 text-2xl">🎵 My Jams (Max 20)</h3>
         <button onclick="addCustomSong()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Add Song</button>
         <div id="playlist-container" class="mt-6 space-y-4"></div>
+
+        <h3 class="mt-12 text-2xl">📸 Photos & Videos (Max 20)</h3>
+        <button onclick="uploadPhoto()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Upload Photo or Video</button>
+        <div id="uploaded-media" class="mt-6 grid grid-cols-2 gap-6"></div>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div id="tab1" class="tab-content hidden">
+      <h2 class="text-4xl font-bold">Messages 💬</h2>
+      <div class="mt-8 bg-zinc-900 p-8 rounded-3xl text-center">
+        <p class="text-gray-400">Messages coming soon...</p>
       </div>
     </div>
 
@@ -81,6 +93,7 @@
 
   <script>
     let myJams = [{title:"Midnight City", artist:"M83"}, {title:"Weightless", artist:"Marconi Union"}];
+    let photoCount = 0;
 
     function renderPlaylist() {
       const container = document.getElementById('playlist-container');
@@ -122,6 +135,35 @@
       const current = document.getElementById('about-me').innerText;
       const newText = prompt("Edit your About Me:", current);
       if (newText !== null) document.getElementById('about-me').innerText = newText;
+    }
+
+    function uploadPhoto() {
+      if (photoCount >= 20) return alert("Maximum 20 photos reached!");
+      photoCount++;
+      document.getElementById('uploaded-media').innerHTML += `
+        <div class="bg-zinc-900 p-4 rounded-3xl">
+          <img src="https://picsum.photos/id/${200 + photoCount}/400" class="rounded-3xl w-full">
+          <div class="flex gap-4 text-3xl mt-3">
+            <button onclick="addReaction('❤️')">❤️</button>
+            <button onclick="addReaction('🔥')">🔥</button>
+            <button onclick="addReaction('🌊')">🌊</button>
+            <button onclick="addReaction('✨')">✨</button>
+            <button onclick="addReaction('🙌')">🙌</button>
+          </div>
+          <input id="comment${photoCount}" placeholder="Write a comment..." class="w-full bg-zinc-800 p-3 rounded-2xl mt-3">
+          <button onclick="postComment(${photoCount})" class="mt-2 bg-pink-600 px-6 py-2 rounded-xl">Post Comment</button>
+          <div id="comments${photoCount}" class="mt-4 text-sm space-y-2"></div>
+        </div>`;
+    }
+
+    function addReaction(emoji) { alert(`You reacted with ${emoji}`); }
+
+    function postComment(id) {
+      const input = document.getElementById('comment' + id);
+      if (input.value.trim() === '') return;
+      const div = document.getElementById('comments' + id);
+      div.innerHTML += `<p class="text-sm"><strong>@you:</strong> ${input.value}</p>`;
+      input.value = '';
     }
 
     function customizeProfile() {
