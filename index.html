@@ -10,20 +10,18 @@
     body { font-family: 'Poppins', system-ui, sans-serif; }
     h1, h2, h3, .banner-text { font-family: 'Bebas Neue', sans-serif; }
     .neon-pink { text-shadow: 0 0 15px #ec4899; }
-    .periwinkle { color: #a78bfa; }
-    .soft-blue { color: #7dd3fc; }
   </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
 
-  <div class="bg-gradient-to-r from-pink-500 via-purple-600 to-blue-500 py-3 text-center banner-text text-2xl tracking-wider">
+  <div class="bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 py-3 text-center banner-text text-2xl tracking-wider">
     ❤️ LOVE + MUSIC = HEALING THE NATIONS 🌍
   </div>
 
   <nav class="bg-black border-b-4 border-pink-500 p-6 sticky top-0">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <h1 class="text-6xl font-bold text-pink-500 neon-pink tracking-wider">FreeMyVibes</h1>
-      <button onclick="customizeProfile()" class="bg-gradient-to-r from-pink-500 to-blue-500 hover:from-pink-600 hover:to-blue-600 px-6 py-3 rounded-2xl">Customize Profile</button>
+      <button onclick="customizeProfile()" class="bg-pink-600 hover:bg-pink-700 px-6 py-3 rounded-2xl">Customize Profile</button>
     </div>
   </nav>
 
@@ -31,7 +29,9 @@
 
     <div class="flex justify-center gap-4 mb-12 flex-wrap">
       <button onclick="switchTab(0)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">👤 Profile</button>
-      <button onclick="switchTab(1)" class="px-8 py-4 bg-zinc-800 hover:bg-purple-600 rounded-2xl">🎙️ Live Rooms</button>
+      <button onclick="switchTab(1)" class="px-8 py-4 bg-zinc-800 hover:bg-purple-600 rounded-2xl">🎨 Creative Corner</button>
+      <button onclick="switchTab(2)" class="px-8 py-4 bg-zinc-800 hover:bg-blue-600 rounded-2xl">🛒 Shop</button>
+      <button onclick="switchTab(3)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">🎙️ Live Rooms</button>
     </div>
 
     <!-- PROFILE -->
@@ -40,13 +40,13 @@
         <div class="flex gap-8 items-end">
           <img src="https://picsum.photos/id/64/200" class="w-52 h-52 rounded-3xl border-4 border-pink-500" alt="">
           <div>
-            <h2 id="username" class="text-5xl font-bold periwinkle">@yourusername</h2>
-            <p id="mood" class="soft-blue text-2xl">Currently vibing to: lo-fi chillwave 🌙</p>
+            <h2 id="username" class="text-5xl font-bold">@yourusername</h2>
+            <p id="mood" class="text-pink-400 text-2xl">Currently vibing to: lo-fi chillwave 🌙</p>
           </div>
         </div>
 
         <div class="mt-8 bg-black p-6 rounded-2xl">
-          <h3 class="font-bold flex justify-between text-soft-blue">
+          <h3 class="font-bold flex justify-between">
             About Me 
             <button onclick="editAboutMe()" class="text-pink-400 text-sm underline">Edit</button>
           </h3>
@@ -58,19 +58,6 @@
           <button onclick="sendFanRequest()" class="bg-purple-600 px-6 py-3 rounded-2xl">Send Fan Request</button>
         </div>
 
-        <h3 class="mt-10 text-2xl">👥 My Top 8 Real Life Homies ❤️</h3>
-        <div class="grid grid-cols-4 gap-4 mt-4 text-center">
-          @bestie1 @musicbro @chillvibes @scenequeen @lofiaddict @nightowl @dreamer @echoangel
-        </div>
-
-        <h3 class="mt-10 text-2xl">🔥 Top 10 Fans</h3>
-        <div class="grid grid-cols-5 gap-4 mt-4 text-center">
-          @musiclover42 @indiequeen @retrobeat @scenequeen @lofiaddict @nightowl88 @beatseeker @vinylvibes @dreamchaser @echochild
-        </div>
-
-        <h3 class="mt-8">👀 Creepers / Peeping (Showing No Love)</h3>
-        <p class="mt-2 text-red-400">@randomguy87 viewed 5x • @trollmaster left shady comment • @ghostlistener lurking • @sneakyfan22 creeping • @quietviber here again</p>
-
         <h3 class="mt-12 text-2xl">🎵 My Jams (Max 20)</h3>
         <button onclick="addCustomSong()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Add Song</button>
         <div id="playlist-container" class="mt-6 space-y-4"></div>
@@ -81,8 +68,33 @@
       </div>
     </div>
 
-    <!-- LIVE ROOMS -->
+    <!-- CREATIVE CORNER -->
     <div id="tab1" class="tab-content hidden">
+      <h2 class="text-4xl font-bold">Creative Corner 🎨</h2>
+      <p class="text-gray-400 mt-4">Share your art, poetry, music, photography, or any creation.</p>
+      <button onclick="alert('Creative Corner coming soon! This is where people will share and possibly sell their creations.')" class="mt-8 bg-purple-600 px-8 py-4 rounded-2xl text-lg">Share Your Creation</button>
+    </div>
+
+    <!-- SHOP -->
+    <div id="tab2" class="tab-content hidden">
+      <h2 class="text-4xl font-bold">Shop 🛒</h2>
+      <p class="text-gray-400 mt-4">Profile Skins & Themes</p>
+      <div class="mt-8 grid grid-cols-2 gap-6">
+        <div class="bg-zinc-900 p-6 rounded-3xl text-center">
+          <p class="text-xl">Neon Dream Skin</p>
+          <p class="text-pink-400">$2.99</p>
+          <button onclick="alert('Skin purchase coming soon!')" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">Buy</button>
+        </div>
+        <div class="bg-zinc-900 p-6 rounded-3xl text-center">
+          <p class="text-xl">Healing Blue Theme</p>
+          <p class="text-blue-400">$2.99</p>
+          <button onclick="alert('Skin purchase coming soon!')" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">Buy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE ROOMS -->
+    <div id="tab3" class="tab-content hidden">
       <h2 class="text-4xl font-bold">Live Rooms 🎙️</h2>
       <button onclick="createRoom()" class="mt-4 bg-green-600 px-6 py-3 rounded-2xl">+ Create New Room (You are the Host)</button>
       
@@ -92,6 +104,22 @@
         <p class="text-green-400 font-medium">👑 You are the Host - You control the music!</p>
         
         <iframe id="room-player" width="100%" height="420" class="mt-6 rounded-3xl" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+        
+        <!-- Queue -->
+        <div class="mt-8">
+          <h4 class="font-bold">Queue (Max 8)</h4>
+          <div id="queue-list" class="mt-3 space-y-2 min-h-[180px] bg-black p-4 rounded-2xl"></div>
+        </div>
+        
+        <!-- Chat -->
+        <div class="mt-8">
+          <h4 class="font-bold mb-2">Live Chat</h4>
+          <div id="chat-log" class="h-64 bg-black p-4 rounded-2xl overflow-y-auto text-sm space-y-2"></div>
+          <div class="flex mt-3">
+            <input id="chat-input" placeholder="Type a message..." class="flex-1 bg-zinc-800 p-4 rounded-l-2xl">
+            <button onclick="sendChatMessage()" class="bg-pink-600 px-8 rounded-r-2xl">Send</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -192,6 +220,15 @@
 
     function exitRoom() {
       document.getElementById('current-room').classList.add('hidden');
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      if (!input.value.trim()) return;
+      const log = document.getElementById('chat-log');
+      log.innerHTML += `<p><strong>@you:</strong> ${input.value}</p>`;
+      log.scrollTop = log.scrollHeight;
+      input.value = '';
     }
 
     function switchTab(n) {
