@@ -37,7 +37,85 @@
       <button onclick="showCreativeSub()" class="px-6 py-3 bg-zinc-800 hover:bg-amber-600 rounded-2xl text-sm">🎨 Creative Corner</button>
     </div>
 
-    <!-- Rivers of Eden -->
+    <!-- VILLAGE SQUARE -->
+    <div id="tab0" class="tab-content hidden">
+      <div class="bg-zinc-900 rounded-3xl p-10">
+        <h2 class="text-4xl mb-8 text-center">💫 Village Square</h2>
+        <div id="feed" class="space-y-6"></div>
+        <textarea id="new-post" rows="3" placeholder="Share hope, a song, a prayer..." class="w-full bg-zinc-800 p-6 rounded-3xl mt-8"></textarea>
+        <button onclick="postToSquare()" class="mt-4 w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-3xl">Share with the Village</button>
+      </div>
+    </div>
+
+    <!-- MY TRIBE -->
+    <div id="tab1" class="tab-content hidden">
+      <div class="bg-zinc-900 rounded-3xl p-10">
+        <div class="flex gap-8 items-end mb-10">
+          <img src="https://picsum.photos/id/64/200" class="w-52 h-52 rounded-3xl border-4 border-pink-500">
+          <div>
+            <h3 id="username" class="text-5xl font-bold">@yourusername</h3>
+            <p id="mood" class="text-sky-400 text-2xl">Currently vibing to: lo-fi chillwave 🌙</p>
+          </div>
+        </div>
+
+        <button onclick="customizeProfile()" class="bg-pink-600 hover:bg-pink-700 px-8 py-4 rounded-2xl mb-8">Customize Profile</button>
+
+        <div class="mt-8 bg-black p-6 rounded-2xl">
+          <h3 class="font-bold flex justify-between">About Me <button onclick="editAboutMe()" class="text-pink-400 underline text-sm">Edit</button></h3>
+          <p id="about-me" class="text-gray-300 mt-3">Just a pixel kid who believes music and love can heal the world...</p>
+        </div>
+
+        <h3 class="text-2xl mt-12 mb-4">🎵 My Jams</h3>
+        <div class="flex gap-4 mb-4">
+          <button onclick="addSong()" class="bg-pink-600 px-6 py-3 rounded-2xl">+ Add Song</button>
+        </div>
+        <div id="playlist" class="space-y-3 mb-6"></div>
+
+        <h3 class="text-2xl mt-12 mb-4">📸 Photos & Videos</h3>
+        <button onclick="uploadPhoto()" class="bg-pink-600 px-6 py-3 rounded-2xl mb-6">+ Upload Photo</button>
+        <div id="photos-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6"></div>
+      </div>
+    </div>
+
+    <!-- LIVE ROOMS -->
+    <div id="tab2" class="tab-content hidden">
+      <div class="bg-zinc-900 rounded-3xl p-10">
+        <h2 class="text-4xl mb-6">🎙️ Live Rooms</h2>
+        <button onclick="createRoom()" class="bg-green-600 px-8 py-4 rounded-2xl mb-8">+ Create New Room</button>
+        
+        <div id="room-area" class="hidden">
+          <button onclick="exitRoom()" class="text-red-400 mb-6">← Leave Room</button>
+          <h3 id="room-name" class="text-3xl mb-6"></h3>
+          <iframe id="music-player" width="100%" height="320" class="rounded-3xl mb-8" frameborder="0" allowfullscreen></iframe>
+          
+          <div>
+            <h4 class="font-bold mb-3">Live Chat</h4>
+            <div id="chat-log" class="h-80 overflow-y-auto bg-black p-4 rounded-3xl mb-4"></div>
+            <div class="flex">
+              <input id="chat-input" placeholder="Type a message..." class="flex-1 bg-zinc-800 p-4 rounded-l-3xl">
+              <button onclick="sendChatMessage()" class="bg-pink-600 px-10 rounded-r-3xl">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MERCH BOOTH -->
+    <div id="tab3" class="tab-content hidden">
+      <div class="bg-zinc-900 rounded-3xl p-10">
+        <h2 class="text-4xl mb-8 text-center">🛒 Merch Booth</h2>
+        <p class="text-center text-gray-400 mb-8">Physical & digital items coming soon to support the village.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-black p-6 rounded-2xl text-center">
+            <p class="font-bold">Cheerful Giver Skin</p>
+            <p class="text-amber-400">$4.99</p>
+            <button class="mt-4 bg-amber-600 px-6 py-2 rounded-2xl">Coming Soon</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIVERS OF EDEN -->
     <div id="tab4" class="tab-content">
       <div class="text-center mb-10">
         <h2 class="text-5xl font-bold mb-4">🌊 Rivers of Eden</h2>
@@ -84,12 +162,39 @@
           <p class="text-sm text-emerald-100/80">Lay down anxiety about the future or family struggles.</p>
         </div>
       </div>
+    </div>
 
-      <p class="text-center text-xs text-gray-500 mt-10">This is a work in progress. Your feedback is deeply appreciated ❤️</p>
+    <!-- Creative Corner -->
+    <div id="creative-sub" class="hidden bg-zinc-900 rounded-3xl p-10">
+      <h2 class="text-4xl mb-8 text-center">🎨 Creative Corner</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
+          <div class="text-6xl mb-4">☕</div>
+          <h4 class="font-bold">Coffee House Lounge</h4>
+          <p class="text-sm text-gray-400">Poetry • Stories • Open Mic</p>
+        </div>
+        <div class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
+          <div class="text-6xl mb-4">🎨</div>
+          <h4 class="font-bold">Art Easel</h4>
+          <p class="text-sm text-gray-400">Paintings • Drawings • Digital Art</p>
+        </div>
+        <div class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
+          <div class="text-6xl mb-4">🪨</div>
+          <h4 class="font-bold">God’s Creations</h4>
+          <p class="text-sm text-gray-400">Rocks • Crystals • Beach Finds</p>
+        </div>
+        <div class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
+          <div class="text-6xl mb-4">🎵</div>
+          <h4 class="font-bold">Music Studio</h4>
+          <p class="text-sm text-gray-400">Original Songs • Lyric Videos</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ==================== PISHON MODAL ==================== -->
+  <!-- ==================== RIVERS OF EDEN MODALS ==================== -->
+
+  <!-- Pishon Modal -->
   <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
     <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-amber-500/60">
       <div class="flex justify-between items-start mb-6">
@@ -119,6 +224,87 @@
 
       <h4 class="font-semibold mb-3 text-amber-300">What’s flowing down Pishon right now...</h4>
       <div id="pishon-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Gihon Modal -->
+  <div id="gihon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-teal-500/60">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h2 class="text-4xl font-bold text-teal-400">💧 Gihon</h2>
+          <p class="text-teal-300">The River of Life & Healing</p>
+        </div>
+        <button onclick="closeRiverModal('gihon')" class="text-4xl text-gray-400 hover:text-white">×</button>
+      </div>
+
+      <div class="bg-teal-950/60 p-5 rounded-2xl mb-8 text-sm">
+        <p class="italic">"He heals the brokenhearted and binds up their wounds." — Psalm 147:3</p>
+        <p class="mt-2">Lay your pain or brokenness here. Let healing and life flow over you.</p>
+      </div>
+
+      <div class="mb-8">
+        <h4 class="font-semibold mb-2 text-teal-300">Lay your burden down at Gihon</h4>
+        <textarea id="gihon-burden" rows="3" placeholder="I’m carrying deep emotional pain and exhaustion..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
+        <button onclick="postToRiver('gihon')" class="w-full bg-teal-600 hover:bg-teal-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
+      </div>
+
+      <h4 class="font-semibold mb-3 text-teal-300">What’s flowing down Gihon right now...</h4>
+      <div id="gihon-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Tigris Modal -->
+  <div id="tigris-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-indigo-500/60">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h2 class="text-4xl font-bold text-indigo-400">⚡ Tigris</h2>
+          <p class="text-indigo-300">The River of Power & Discernment</p>
+        </div>
+        <button onclick="closeRiverModal('tigris')" class="text-4xl text-gray-400 hover:text-white">×</button>
+      </div>
+
+      <div class="bg-indigo-950/60 p-5 rounded-2xl mb-8 text-sm">
+        <p class="italic">"For God has not given us a spirit of fear, but of power..." — 2 Timothy 1:7</p>
+        <p class="mt-2">Lay down confusion or spiritual heaviness here. Receive clarity and breakthrough.</p>
+      </div>
+
+      <div class="mb-8">
+        <h4 class="font-semibold mb-2 text-indigo-300">Lay your burden down at Tigris</h4>
+        <textarea id="tigris-burden" rows="3" placeholder="I’m carrying confusion and spiritual attack..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
+        <button onclick="postToRiver('tigris')" class="w-full bg-indigo-600 hover:bg-indigo-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
+      </div>
+
+      <h4 class="font-semibold mb-3 text-indigo-300">What’s flowing down Tigris right now...</h4>
+      <div id="tigris-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Euphrates Modal -->
+  <div id="euphrates-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-emerald-500/60">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h2 class="text-4xl font-bold text-emerald-400">🌿 Euphrates</h2>
+          <p class="text-emerald-300">The River of Fruitfulness & Peace</p>
+        </div>
+        <button onclick="closeRiverModal('euphrates')" class="text-4xl text-gray-400 hover:text-white">×</button>
+      </div>
+
+      <div class="bg-emerald-950/60 p-5 rounded-2xl mb-8 text-sm">
+        <p class="italic">"The fruit of the Spirit is love, joy, peace..." — Galatians 5:22</p>
+        <p class="mt-2">Lay down anxiety about the future or family here. Receive peace and steady growth.</p>
+      </div>
+
+      <div class="mb-8">
+        <h4 class="font-semibold mb-2 text-emerald-300">Lay your burden down at Euphrates</h4>
+        <textarea id="euphrates-burden" rows="3" placeholder="I’m carrying anxiety about my future and family..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
+        <button onclick="postToRiver('euphrates')" class="w-full bg-emerald-600 hover:bg-emerald-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
+      </div>
+
+      <h4 class="font-semibold mb-3 text-emerald-300">What’s flowing down Euphrates right now...</h4>
+      <div id="euphrates-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
     </div>
   </div>
 
@@ -160,13 +346,7 @@
   </div>
 
   <script>
-    let riverPosts = {
-      pishon: [],
-      gihon: [],
-      tigris: [],
-      euphrates: []
-    };
-
+    let riverPosts = { pishon: [], gihon: [], tigris: [], euphrates: [] };
     let givingCount = 0;
     let currentBadgeLevel = 'none';
 
@@ -181,6 +361,73 @@
       document.getElementById('creative-sub').classList.remove('hidden');
     }
 
+    // My Tribe functions
+    function customizeProfile() {
+      let name = prompt("New username?", "yourusername");
+      if (name) document.getElementById('username').textContent = "@" + name;
+    }
+
+    function editAboutMe() {
+      const current = document.getElementById('about-me').innerText;
+      const newText = prompt("Edit your About Me:", current);
+      if (newText !== null) document.getElementById('about-me').innerText = newText;
+    }
+
+    function addSong() {
+      const title = prompt("Song title?");
+      const artist = prompt("Artist?");
+      if (title && artist) {
+        const container = document.getElementById('playlist');
+        const div = document.createElement('div');
+        div.className = "flex justify-between items-center bg-zinc-800 p-4 rounded-2xl";
+        div.innerHTML = `<span>${title} — ${artist}</span> <button onclick="this.parentElement.remove()" class="text-red-400">×</button>`;
+        container.appendChild(div);
+      }
+    }
+
+    function uploadPhoto() {
+      const grid = document.getElementById('photos-grid');
+      const div = document.createElement('div');
+      div.className = "bg-zinc-800 rounded-3xl p-4";
+      div.innerHTML = `<img src="https://picsum.photos/id/${200 + grid.children.length}/600/400" class="rounded-2xl w-full">`;
+      grid.appendChild(div);
+    }
+
+    // Village Square
+    function postToSquare() {
+      const textarea = document.getElementById('new-post');
+      if (!textarea.value.trim()) return;
+      const feed = document.getElementById('feed');
+      const newPost = document.createElement('div');
+      newPost.className = "bg-black p-6 rounded-3xl";
+      newPost.innerHTML = `<p class="text-pink-400">@you • just now</p><p class="mt-3">${textarea.value}</p>`;
+      feed.prepend(newPost);
+      textarea.value = '';
+    }
+
+    // Live Rooms
+    function createRoom() {
+      const name = prompt("Name your room?", "Prophetic Worship & Prayer");
+      if (name) {
+        document.getElementById('room-area').classList.remove('hidden');
+        document.getElementById('room-name').textContent = name;
+      }
+    }
+
+    function exitRoom() {
+      document.getElementById('room-area').classList.add('hidden');
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      if (!input.value.trim()) return;
+      const log = document.getElementById('chat-log');
+      log.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
+      log.scrollTop = log.scrollHeight;
+      input.value = '';
+    }
+
+    // Rivers of Eden + Badge System
     function openRiverModal(river) {
       document.getElementById(river + '-modal').classList.remove('hidden');
       document.getElementById(river + '-modal').classList.add('flex');
@@ -193,21 +440,21 @@
     }
 
     function postToRiver(river) {
-      const burdenInput = document.getElementById(river + '-burden');
-      if (!burdenInput.value.trim()) return;
+      const input = document.getElementById(river + '-burden');
+      if (!input.value.trim()) return;
 
       const isPracticalNeed = river === 'pishon' && document.getElementById('pishon-need-help')?.checked;
 
       const post = {
         id: Date.now(),
-        burden: burdenInput.value.trim(),
+        burden: input.value.trim(),
         isPracticalNeed: isPracticalNeed,
         responses: [],
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
       riverPosts[river].unshift(post);
-      burdenInput.value = '';
+      input.value = '';
       if (river === 'pishon') document.getElementById('pishon-need-help').checked = false;
 
       renderRiverFeed(river);
@@ -218,7 +465,7 @@
       container.innerHTML = '';
 
       if (riverPosts[river].length === 0) {
-        container.innerHTML = `<p class="text-center text-gray-400 py-8">The river is quiet right now. Be the first to lay something down.</p>`;
+        container.innerHTML = `<p class="text-center text-gray-400 py-8">The river is quiet right now.</p>`;
         return;
       }
 
@@ -226,24 +473,23 @@
         const postEl = document.createElement('div');
         postEl.className = 'bg-black/50 p-5 rounded-2xl';
 
-        let html = `
-          <p class="text-sm mb-3">${post.burden}</p>
-          <p class="text-xs text-gray-400 mb-4">Laid down at ${post.time}</p>
-        `;
-
         let verse = '';
         if (river === 'pishon') verse = `"The Lord will open the heavens, the storehouse of his bounty..." — Deuteronomy 28:12`;
         if (river === 'gihon') verse = `"He heals the brokenhearted and binds up their wounds." — Psalm 147:3`;
         if (river === 'tigris') verse = `"For God has not given us a spirit of fear, but of power..." — 2 Timothy 1:7`;
         if (river === 'euphrates') verse = `"The fruit of the Spirit is love, joy, peace..." — Galatians 5:22`;
 
-        html += `<div class="bg-zinc-800/60 p-4 rounded-xl mb-4 text-sm italic text-gray-300">"${verse}"</div>`;
+        let html = `
+          <p class="text-sm mb-3">${post.burden}</p>
+          <p class="text-xs text-gray-400 mb-4">Laid down at ${post.time}</p>
+          <div class="bg-zinc-800/60 p-4 rounded-xl mb-4 text-sm italic text-gray-300">"${verse}"</div>
+        `;
 
         if (river === 'pishon' && post.isPracticalNeed) {
           html += `
             <div class="flex gap-3 mb-4">
-              <button onclick="giveToPost(${post.id}, 2.22)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $2.22 (Two by Two)</button>
-              <button onclick="giveToPost(${post.id}, 5.55)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $5.55 (Triple Grace)</button>
+              <button onclick="giveToPost(${post.id}, 2.22)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $2.22</button>
+              <button onclick="giveToPost(${post.id}, 5.55)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $5.55</button>
             </div>
           `;
         }
@@ -253,7 +499,7 @@
             <button onclick="prayForPost(this)" class="flex-1 bg-sky-600 hover:bg-sky-700 py-2 rounded-xl text-sm">🙏 I'm praying with you</button>
           </div>
           <div class="flex gap-2">
-            <input id="response-${river}-${post.id}" placeholder="Leave a short prayer or encouragement..." class="flex-1 bg-zinc-800 p-3 rounded-2xl text-sm">
+            <input id="response-${river}-${post.id}" placeholder="Leave a short prayer..." class="flex-1 bg-zinc-800 p-3 rounded-2xl text-sm">
             <button onclick="addResponse('${river}', ${post.id})" class="bg-zinc-700 hover:bg-zinc-600 px-5 rounded-2xl text-sm">Send</button>
           </div>
           <div id="responses-${river}-${post.id}" class="mt-4 space-y-2 text-sm"></div>
@@ -267,17 +513,12 @@
 
     function giveToPost(postId, amount) {
       givingCount++;
-
-      // Show Thank You Card
       showThankYouCard();
 
-      // Check for badge level up
       const newLevel = getBadgeLevel(givingCount);
       if (newLevel !== currentBadgeLevel) {
         currentBadgeLevel = newLevel;
-        setTimeout(() => {
-          showBadgeUnlock(newLevel);
-        }, 1800);
+        setTimeout(() => showBadgeUnlock(newLevel), 1800);
       }
     }
 
@@ -291,22 +532,19 @@
     function showThankYouCard() {
       const modal = document.getElementById('thank-you-modal');
       const verseEl = document.getElementById('thank-you-verse');
-
       const verses = [
-        "Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap. — Luke 6:38",
-        "The generous will themselves be blessed, for they share their food with the poor. — Proverbs 22:9",
-        "And God is able to bless you abundantly, so that in all things at all times, having all that you need, you will abound in every good work. — 2 Corinthians 9:8"
+        "Give, and it will be given to you. A good measure, pressed down, shaken together and running over... — Luke 6:38",
+        "The generous will themselves be blessed... — Proverbs 22:9",
+        "God is able to bless you abundantly... — 2 Corinthians 9:8"
       ];
-
       verseEl.innerHTML = verses[Math.floor(Math.random() * verses.length)];
       modal.classList.remove('hidden');
       modal.classList.add('flex');
     }
 
     function closeThankYouModal() {
-      const modal = document.getElementById('thank-you-modal');
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
+      document.getElementById('thank-you-modal').classList.remove('flex');
+      document.getElementById('thank-you-modal').classList.add('hidden');
     }
 
     function showBadgeUnlock(level) {
@@ -322,15 +560,15 @@
       } else if (level === 'sprout') {
         levelName.innerHTML = '🌿 Sprout';
         description.innerHTML = 'Your generosity is growing beautifully.';
-        skin.innerHTML = 'Sprout Skin (Light Green + Gold Veins)';
+        skin.innerHTML = 'Sprout Skin';
       } else if (level === 'bloom') {
         levelName.innerHTML = '💜 Bloom';
         description.innerHTML = 'You are becoming a cheerful and faithful giver.';
-        skin.innerHTML = 'Cheerful Giver Skin (Purple + Gold)';
+        skin.innerHTML = 'Cheerful Giver Skin';
       } else if (level === 'harvest') {
         levelName.innerHTML = '✨ Faithful';
-        description.innerHTML = 'You have become a mature and consistent sower at the River.';
-        skin.innerHTML = 'Faithful Harvest Skin (Radiant Deep Gold)';
+        description.innerHTML = 'You have become a mature and consistent sower.';
+        skin.innerHTML = 'Faithful Harvest Skin';
       }
 
       modal.classList.remove('hidden');
@@ -338,17 +576,14 @@
     }
 
     function closeBadgeUnlockModal() {
-      const modal = document.getElementById('badge-unlock-modal');
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
+      document.getElementById('badge-unlock-modal').classList.remove('flex');
+      document.getElementById('badge-unlock-modal').classList.add('hidden');
     }
 
     function prayForPost(btn) {
       btn.innerHTML = '❤️ Praying';
       btn.disabled = true;
-      setTimeout(() => {
-        btn.innerHTML = 'Thank you for praying';
-      }, 1400);
+      setTimeout(() => btn.innerHTML = 'Thank you for praying', 1400);
     }
 
     function addResponse(river, postId) {
@@ -358,11 +593,7 @@
       const post = riverPosts[river].find(p => p.id === postId);
       if (!post) return;
 
-      post.responses.push({
-        text: input.value.trim(),
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
-
+      post.responses.push({ text: input.value.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       input.value = '';
       renderResponses(river, postId);
     }
