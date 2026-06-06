@@ -3,241 +3,393 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreeMyVibes</title>
+  <title>FreeMyVibes • The Digital Healing Village</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', system-ui, sans-serif; }
-    h1, h2, h3, .banner-text { font-family: 'Bebas Neue', sans-serif; }
-    .neon-pink { text-shadow: 0 0 15px #ec4899; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', sans-serif; }
+    .neon-pink { text-shadow: 0 0 20px #ec4899; }
+    .river-card { transition: all 0.3s ease; }
+    .river-card:hover { transform: translateY(-6px); }
   </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
 
-  <div class="bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 py-3 text-center banner-text text-2xl tracking-wider">
-    ❤️ LOVE + MUSIC = HEALING THE NATIONS 🌍
+  <!-- Banner -->
+  <div class="bg-gradient-to-r from-pink-600 via-purple-700 to-indigo-700 py-6 text-center">
+    <p class="text-3xl font-bold tracking-wider neon-pink">Let’s Bring Heaven Down to Earth</p>
+    <p class="text-sm text-white/70 mt-1">One vibe, one prayer, one song at a time 🌍</p>
   </div>
 
-  <nav class="bg-black border-b-4 border-pink-500 p-6 sticky top-0">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <h1 class="text-6xl font-bold text-pink-500 neon-pink tracking-wider">FreeMyVibes</h1>
-      <button onclick="customizeProfile()" class="bg-pink-600 hover:bg-pink-700 px-6 py-3 rounded-2xl">Customize Profile</button>
-    </div>
-  </nav>
-
   <div class="max-w-6xl mx-auto p-8">
+    <h1 class="text-7xl font-bold text-center text-pink-500 neon-pink mb-4">FreeMyVibes</h1>
+    <p class="text-center text-gray-400 mb-10">A digital healing village • Music • Prayer • Community • Creativity</p>
 
-    <div class="flex justify-center gap-4 mb-12 flex-wrap">
-      <button onclick="switchTab(0)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">👤 Profile</button>
-      <button onclick="switchTab(1)" class="px-8 py-4 bg-zinc-800 hover:bg-purple-600 rounded-2xl">🎨 Creative Corner</button>
-      <button onclick="switchTab(2)" class="px-8 py-4 bg-zinc-800 hover:bg-blue-600 rounded-2xl">🛒 Shop</button>
-      <button onclick="switchTab(3)" class="px-8 py-4 bg-zinc-800 hover:bg-pink-600 rounded-2xl">🎙️ Live Rooms</button>
+    <!-- Navigation -->
+    <div class="flex justify-center gap-3 mb-12 flex-wrap">
+      <button onclick="switchTab(0)" class="px-6 py-3 bg-zinc-800 hover:bg-pink-600 rounded-2xl text-sm">🏠 Village Square</button>
+      <button onclick="switchTab(1)" class="px-6 py-3 bg-purple-600 text-white rounded-2xl text-sm">👤 My Tribe</button>
+      <button onclick="switchTab(2)" class="px-6 py-3 bg-teal-600 hover:bg-teal-700 rounded-2xl text-sm">🎙️ Live Rooms</button>
+      <button onclick="switchTab(3)" class="px-6 py-3 bg-amber-600 hover:bg-amber-700 rounded-2xl text-sm">🛒 Merch Booth</button>
+      <button onclick="switchTab(4)" class="px-6 py-3 bg-sky-600 hover:bg-sky-700 rounded-2xl text-sm font-semibold">🌊 Rivers of Eden</button>
+      <button onclick="showCreativeSub()" class="px-6 py-3 bg-zinc-800 hover:bg-amber-600 rounded-2xl text-sm">🎨 Creative Corner</button>
     </div>
 
-    <!-- PROFILE -->
-    <div id="tab0" class="tab-content">
-      <div class="bg-zinc-900 rounded-3xl p-10">
-        <div class="flex gap-8 items-end">
-          <img src="https://picsum.photos/id/64/200" class="w-52 h-52 rounded-3xl border-4 border-pink-500" alt="">
-          <div>
-            <h2 id="username" class="text-5xl font-bold">@yourusername</h2>
-            <p id="mood" class="text-pink-400 text-2xl">Currently vibing to: lo-fi chillwave 🌙</p>
-          </div>
-        </div>
-
-        <div class="mt-8 bg-black p-6 rounded-2xl">
-          <h3 class="font-bold flex justify-between">
-            About Me 
-            <button onclick="editAboutMe()" class="text-pink-400 text-sm underline">Edit</button>
-          </h3>
-          <p id="about-me" class="text-gray-300 mt-2">Just a pixel kid who believes music can heal the world...</p>
-        </div>
-
-        <div class="mt-8 flex gap-4 flex-wrap">
-          <button onclick="sendFriendRequest()" class="bg-green-600 px-6 py-3 rounded-2xl">Send Friend Request</button>
-          <button onclick="sendFanRequest()" class="bg-purple-600 px-6 py-3 rounded-2xl">Send Fan Request</button>
-        </div>
-
-        <h3 class="mt-12 text-2xl">🎵 My Jams (Max 20)</h3>
-        <button onclick="addCustomSong()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Add Song</button>
-        <div id="playlist-container" class="mt-6 space-y-4"></div>
-
-        <h3 class="mt-12 text-2xl">📸 Photos & Videos (Max 20)</h3>
-        <button onclick="uploadPhoto()" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">+ Upload Photo or Video</button>
-        <div id="uploaded-media" class="mt-6 grid grid-cols-2 gap-6"></div>
+    <!-- Rivers of Eden -->
+    <div id="tab4" class="tab-content">
+      <div class="text-center mb-10">
+        <h2 class="text-5xl font-bold mb-4">🌊 Rivers of Eden</h2>
+        <p class="text-xl text-sky-200 max-w-3xl mx-auto">
+          In the beginning, a river flowed from Eden and split into four headwaters. 
+          Each river carries something different from the heart of God.
+        </p>
+        <p class="mt-4 text-sky-300 max-w-2xl mx-auto">
+          Come lay your burden down at the river that meets you where you are.<br>
+          Let heaven respond through Scripture, prayer, and the kindness of others.
+        </p>
       </div>
-    </div>
 
-    <!-- CREATIVE CORNER -->
-    <div id="tab1" class="tab-content hidden">
-      <h2 class="text-4xl font-bold">Creative Corner 🎨</h2>
-      <p class="text-gray-400 mt-4">Share your art, poetry, music, photography, or any creation.</p>
-      <button onclick="alert('Creative Corner coming soon! This is where people will share and possibly sell their creations.')" class="mt-8 bg-purple-600 px-8 py-4 rounded-2xl text-lg">Share Your Creation</button>
-    </div>
-
-    <!-- SHOP -->
-    <div id="tab2" class="tab-content hidden">
-      <h2 class="text-4xl font-bold">Shop 🛒</h2>
-      <p class="text-gray-400 mt-4">Profile Skins & Themes</p>
-      <div class="mt-8 grid grid-cols-2 gap-6">
-        <div class="bg-zinc-900 p-6 rounded-3xl text-center">
-          <p class="text-xl">Neon Dream Skin</p>
-          <p class="text-pink-400">$2.99</p>
-          <button onclick="alert('Skin purchase coming soon!')" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">Buy</button>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Pishon -->
+        <div onclick="openRiverModal('pishon')" class="river-card bg-gradient-to-br from-amber-900 to-yellow-800 p-8 rounded-3xl cursor-pointer border border-amber-500/50">
+          <div class="text-6xl mb-4">🌟</div>
+          <h3 class="text-3xl font-bold mb-2">Pishon</h3>
+          <p class="text-amber-200 text-sm mb-4">Blessing • Increase • Divine Value</p>
+          <p class="text-sm text-amber-100/80">Lay down burdens of lack, discouragement, or practical need.</p>
         </div>
-        <div class="bg-zinc-900 p-6 rounded-3xl text-center">
-          <p class="text-xl">Healing Blue Theme</p>
-          <p class="text-blue-400">$2.99</p>
-          <button onclick="alert('Skin purchase coming soon!')" class="mt-4 bg-pink-600 px-6 py-3 rounded-2xl">Buy</button>
+
+        <!-- Gihon -->
+        <div onclick="openRiverModal('gihon')" class="river-card bg-gradient-to-br from-teal-900 to-cyan-800 p-8 rounded-3xl cursor-pointer border border-teal-500/50">
+          <div class="text-6xl mb-4">💧</div>
+          <h3 class="text-3xl font-bold mb-2">Gihon</h3>
+          <p class="text-teal-200 text-sm mb-4">Life • Healing • Outpouring</p>
+          <p class="text-sm text-teal-100/80">Lay down pain, grief, sickness, or emotional wounds.</p>
+        </div>
+
+        <!-- Tigris -->
+        <div onclick="openRiverModal('tigris')" class="river-card bg-gradient-to-br from-indigo-900 to-violet-800 p-8 rounded-3xl cursor-pointer border border-indigo-500/50">
+          <div class="text-6xl mb-4">⚡</div>
+          <h3 class="text-3xl font-bold mb-2">Tigris</h3>
+          <p class="text-indigo-200 text-sm mb-4">Power • Discernment • Breakthrough</p>
+          <p class="text-sm text-indigo-100/80">Lay down confusion, fear, or spiritual heaviness.</p>
+        </div>
+
+        <!-- Euphrates -->
+        <div onclick="openRiverModal('euphrates')" class="river-card bg-gradient-to-br from-emerald-900 to-green-800 p-8 rounded-3xl cursor-pointer border border-emerald-500/50">
+          <div class="text-6xl mb-4">🌿</div>
+          <h3 class="text-3xl font-bold mb-2">Euphrates</h3>
+          <p class="text-emerald-200 text-sm mb-4">Fruitfulness • Peace • Stability</p>
+          <p class="text-sm text-emerald-100/80">Lay down anxiety about the future or family struggles.</p>
         </div>
       </div>
-    </div>
 
-    <!-- LIVE ROOMS -->
-    <div id="tab3" class="tab-content hidden">
-      <h2 class="text-4xl font-bold">Live Rooms 🎙️</h2>
-      <button onclick="createRoom()" class="mt-4 bg-green-600 px-6 py-3 rounded-2xl">+ Create New Room (You are the Host)</button>
+      <p class="text-center text-xs text-gray-500 mt-10">This is a work in progress. Your feedback is deeply appreciated ❤️</p>
+    </div>
+  </div>
+
+  <!-- ==================== PISHON MODAL ==================== -->
+  <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-amber-500/60">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h2 class="text-4xl font-bold text-amber-400">🌟 Pishon</h2>
+          <p class="text-amber-300">The River of Blessing & Increase</p>
+        </div>
+        <button onclick="closeRiverModal('pishon')" class="text-4xl text-gray-400 hover:text-white">×</button>
+      </div>
+
+      <div class="bg-amber-950/60 p-5 rounded-2xl mb-8 text-sm">
+        <p class="italic">"The first river is the Pishon... the land where there is gold." — Genesis 2:11</p>
+        <p class="mt-2">Lay your burden here. Others can respond with prayer and small seeds of practical help.</p>
+      </div>
+
+      <div class="mb-8">
+        <h4 class="font-semibold mb-2 text-amber-300">Lay your burden down at Pishon</h4>
+        <textarea id="pishon-burden" rows="3" placeholder="I’m carrying the weight of not having enough this month..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
+        
+        <label class="flex items-center gap-2 text-sm mb-4">
+          <input type="checkbox" id="pishon-need-help" class="w-4 h-4">
+          <span>This is a practical/financial need</span>
+        </label>
+
+        <button onclick="postToRiver('pishon')" class="w-full bg-amber-600 hover:bg-amber-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
+      </div>
+
+      <h4 class="font-semibold mb-3 text-amber-300">What’s flowing down Pishon right now...</h4>
+      <div id="pishon-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Thank You Card Modal -->
+  <div id="thank-you-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
+    <div class="bg-gradient-to-br from-amber-900 via-yellow-900 to-amber-800 rounded-3xl max-w-md w-full p-9 text-center border border-amber-400/70 shadow-2xl">
+      <div class="text-7xl mb-4">🌟</div>
+      <h2 class="text-3xl font-bold mb-2 tracking-wide">Thank You for Sowing in Faith</h2>
+      <p class="text-amber-200 mb-7">Your gift is seen by God and treasured.</p>
+
+      <div class="bg-black/40 p-6 rounded-2xl mb-6 text-left">
+        <p id="thank-you-verse" class="italic text-amber-100 leading-relaxed"></p>
+      </div>
+
+      <div class="mb-7">
+        <p class="text-sm text-amber-200">May the Lord bless you and keep you.<br>May He cause His face to shine upon you and be gracious to you.</p>
+        <p class="text-xs text-amber-300 mt-1">— Numbers 6:24-25</p>
+      </div>
+
+      <button onclick="closeThankYouModal()" class="bg-amber-600 hover:bg-amber-700 px-12 py-3.5 rounded-2xl font-semibold text-lg">Amen • Close</button>
+    </div>
+  </div>
+
+  <!-- Badge Unlock Modal -->
+  <div id="badge-unlock-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[70] p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-md w-full p-8 text-center border border-amber-500/60">
+      <div class="text-6xl mb-4">🏅</div>
+      <h2 class="text-3xl font-bold mb-2">Badge Unlocked!</h2>
+      <p id="badge-level-name" class="text-2xl font-semibold text-amber-400 mb-2"></p>
+      <p id="badge-description" class="text-gray-300 mb-6"></p>
       
-      <div id="current-room" class="hidden mt-8 bg-zinc-900 p-6 rounded-3xl">
-        <button onclick="exitRoom()" class="text-pink-400">← Back</button>
-        <h3 id="room-name-display" class="text-3xl font-bold mt-6"></h3>
-        <p class="text-green-400 font-medium">👑 You are the Host - You control the music!</p>
-        
-        <iframe id="room-player" width="100%" height="420" class="mt-6 rounded-3xl" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        
-        <!-- Queue -->
-        <div class="mt-8">
-          <h4 class="font-bold">Queue (Max 8)</h4>
-          <div id="queue-list" class="mt-3 space-y-2 min-h-[180px] bg-black p-4 rounded-2xl"></div>
-        </div>
-        
-        <!-- Chat -->
-        <div class="mt-8">
-          <h4 class="font-bold mb-2">Live Chat</h4>
-          <div id="chat-log" class="h-64 bg-black p-4 rounded-2xl overflow-y-auto text-sm space-y-2"></div>
-          <div class="flex mt-3">
-            <input id="chat-input" placeholder="Type a message..." class="flex-1 bg-zinc-800 p-4 rounded-l-2xl">
-            <button onclick="sendChatMessage()" class="bg-pink-600 px-8 rounded-r-2xl">Send</button>
-          </div>
-        </div>
+      <div class="bg-black/40 p-4 rounded-2xl mb-6">
+        <p class="text-sm text-amber-200">You also unlocked a new skin:</p>
+        <p id="skin-unlocked" class="font-semibold text-lg mt-1"></p>
       </div>
+
+      <button onclick="closeBadgeUnlockModal()" class="bg-amber-600 hover:bg-amber-700 px-10 py-3 rounded-2xl font-semibold">Nice! Continue</button>
     </div>
   </div>
 
   <script>
-    let myJams = [{title:"Midnight City", artist:"M83"}, {title:"Weightless", artist:"Marconi Union"}];
-    let photoCount = 0;
+    let riverPosts = {
+      pishon: [],
+      gihon: [],
+      tigris: [],
+      euphrates: []
+    };
 
-    function renderPlaylist() {
-      const container = document.getElementById('playlist-container');
-      container.innerHTML = myJams.map((s,i) => `
-        <div class="flex justify-between items-center bg-zinc-900 p-5 rounded-3xl">
-          <button onclick="playSong('${s.title} - ${s.artist}')" class="text-5xl text-pink-400">▶</button>
-          <div class="flex-1 ml-4">
-            <p class="text-xl">${s.title}</p>
-            <p class="text-gray-400">${s.artist}</p>
+    let givingCount = 0;
+    let currentBadgeLevel = 'none';
+
+    function switchTab(n) {
+      document.getElementById('creative-sub').classList.add('hidden');
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById('tab' + n).classList.remove('hidden');
+    }
+
+    function showCreativeSub() {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById('creative-sub').classList.remove('hidden');
+    }
+
+    function openRiverModal(river) {
+      document.getElementById(river + '-modal').classList.remove('hidden');
+      document.getElementById(river + '-modal').classList.add('flex');
+      renderRiverFeed(river);
+    }
+
+    function closeRiverModal(river) {
+      document.getElementById(river + '-modal').classList.remove('flex');
+      document.getElementById(river + '-modal').classList.add('hidden');
+    }
+
+    function postToRiver(river) {
+      const burdenInput = document.getElementById(river + '-burden');
+      if (!burdenInput.value.trim()) return;
+
+      const isPracticalNeed = river === 'pishon' && document.getElementById('pishon-need-help')?.checked;
+
+      const post = {
+        id: Date.now(),
+        burden: burdenInput.value.trim(),
+        isPracticalNeed: isPracticalNeed,
+        responses: [],
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      riverPosts[river].unshift(post);
+      burdenInput.value = '';
+      if (river === 'pishon') document.getElementById('pishon-need-help').checked = false;
+
+      renderRiverFeed(river);
+    }
+
+    function renderRiverFeed(river) {
+      const container = document.getElementById(river + '-feed');
+      container.innerHTML = '';
+
+      if (riverPosts[river].length === 0) {
+        container.innerHTML = `<p class="text-center text-gray-400 py-8">The river is quiet right now. Be the first to lay something down.</p>`;
+        return;
+      }
+
+      riverPosts[river].forEach(post => {
+        const postEl = document.createElement('div');
+        postEl.className = 'bg-black/50 p-5 rounded-2xl';
+
+        let html = `
+          <p class="text-sm mb-3">${post.burden}</p>
+          <p class="text-xs text-gray-400 mb-4">Laid down at ${post.time}</p>
+        `;
+
+        let verse = '';
+        if (river === 'pishon') verse = `"The Lord will open the heavens, the storehouse of his bounty..." — Deuteronomy 28:12`;
+        if (river === 'gihon') verse = `"He heals the brokenhearted and binds up their wounds." — Psalm 147:3`;
+        if (river === 'tigris') verse = `"For God has not given us a spirit of fear, but of power..." — 2 Timothy 1:7`;
+        if (river === 'euphrates') verse = `"The fruit of the Spirit is love, joy, peace..." — Galatians 5:22`;
+
+        html += `<div class="bg-zinc-800/60 p-4 rounded-xl mb-4 text-sm italic text-gray-300">"${verse}"</div>`;
+
+        if (river === 'pishon' && post.isPracticalNeed) {
+          html += `
+            <div class="flex gap-3 mb-4">
+              <button onclick="giveToPost(${post.id}, 2.22)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $2.22 (Two by Two)</button>
+              <button onclick="giveToPost(${post.id}, 5.55)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $5.55 (Triple Grace)</button>
+            </div>
+          `;
+        }
+
+        html += `
+          <div class="flex gap-2 mb-3">
+            <button onclick="prayForPost(this)" class="flex-1 bg-sky-600 hover:bg-sky-700 py-2 rounded-xl text-sm">🙏 I'm praying with you</button>
           </div>
-          <button onclick="deleteSong(${i})" class="text-red-400 text-2xl">🗑</button>
+          <div class="flex gap-2">
+            <input id="response-${river}-${post.id}" placeholder="Leave a short prayer or encouragement..." class="flex-1 bg-zinc-800 p-3 rounded-2xl text-sm">
+            <button onclick="addResponse('${river}', ${post.id})" class="bg-zinc-700 hover:bg-zinc-600 px-5 rounded-2xl text-sm">Send</button>
+          </div>
+          <div id="responses-${river}-${post.id}" class="mt-4 space-y-2 text-sm"></div>
+        `;
+
+        postEl.innerHTML = html;
+        container.appendChild(postEl);
+        renderResponses(river, post.id);
+      });
+    }
+
+    function giveToPost(postId, amount) {
+      givingCount++;
+
+      // Show Thank You Card
+      showThankYouCard();
+
+      // Check for badge level up
+      const newLevel = getBadgeLevel(givingCount);
+      if (newLevel !== currentBadgeLevel) {
+        currentBadgeLevel = newLevel;
+        setTimeout(() => {
+          showBadgeUnlock(newLevel);
+        }, 1800);
+      }
+    }
+
+    function getBadgeLevel(count) {
+      if (count >= 11) return 'harvest';
+      if (count >= 6) return 'bloom';
+      if (count >= 2) return 'sprout';
+      return 'seed';
+    }
+
+    function showThankYouCard() {
+      const modal = document.getElementById('thank-you-modal');
+      const verseEl = document.getElementById('thank-you-verse');
+
+      const verses = [
+        "Give, and it will be given to you. A good measure, pressed down, shaken together and running over, will be poured into your lap. — Luke 6:38",
+        "The generous will themselves be blessed, for they share their food with the poor. — Proverbs 22:9",
+        "And God is able to bless you abundantly, so that in all things at all times, having all that you need, you will abound in every good work. — 2 Corinthians 9:8"
+      ];
+
+      verseEl.innerHTML = verses[Math.floor(Math.random() * verses.length)];
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeThankYouModal() {
+      const modal = document.getElementById('thank-you-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function showBadgeUnlock(level) {
+      const modal = document.getElementById('badge-unlock-modal');
+      const levelName = document.getElementById('badge-level-name');
+      const description = document.getElementById('badge-description');
+      const skin = document.getElementById('skin-unlocked');
+
+      if (level === 'seed') {
+        levelName.innerHTML = '🌱 Seed';
+        description.innerHTML = 'You took your first step of faith at the River.';
+        skin.innerHTML = 'Golden Seed Skin';
+      } else if (level === 'sprout') {
+        levelName.innerHTML = '🌿 Sprout';
+        description.innerHTML = 'Your generosity is growing beautifully.';
+        skin.innerHTML = 'Sprout Skin (Light Green + Gold Veins)';
+      } else if (level === 'bloom') {
+        levelName.innerHTML = '💜 Bloom';
+        description.innerHTML = 'You are becoming a cheerful and faithful giver.';
+        skin.innerHTML = 'Cheerful Giver Skin (Purple + Gold)';
+      } else if (level === 'harvest') {
+        levelName.innerHTML = '✨ Faithful';
+        description.innerHTML = 'You have become a mature and consistent sower at the River.';
+        skin.innerHTML = 'Faithful Harvest Skin (Radiant Deep Gold)';
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeBadgeUnlockModal() {
+      const modal = document.getElementById('badge-unlock-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function prayForPost(btn) {
+      btn.innerHTML = '❤️ Praying';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = 'Thank you for praying';
+      }, 1400);
+    }
+
+    function addResponse(river, postId) {
+      const input = document.getElementById(`response-${river}-${postId}`);
+      if (!input.value.trim()) return;
+
+      const post = riverPosts[river].find(p => p.id === postId);
+      if (!post) return;
+
+      post.responses.push({
+        text: input.value.trim(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+
+      input.value = '';
+      renderResponses(river, postId);
+    }
+
+    function renderResponses(river, postId) {
+      const container = document.getElementById(`responses-${river}-${postId}`);
+      if (!container) return;
+
+      const post = riverPosts[river].find(p => p.id === postId);
+      if (!post || post.responses.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+
+      container.innerHTML = post.responses.map(r => `
+        <div class="bg-zinc-800/60 p-3 rounded-xl text-sm">
+          <p>${r.text}</p>
+          <p class="text-xs text-gray-400 mt-1 text-right">${r.time}</p>
         </div>
       `).join('');
     }
 
-    function playSong(query) {
-      alert(`🎵 Searching for: ${query}`);
-      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`, '_blank');
+    function init() {
+      switchTab(4);
     }
 
-    function addCustomSong() {
-      if (myJams.length >= 20) return alert("Maximum 20 songs reached!");
-      const title = prompt("Song title?");
-      const artist = prompt("Artist name?");
-      if (title) { 
-        myJams.push({title: title, artist: artist || "Unknown"}); 
-        renderPlaylist(); 
-      }
-    }
-
-    function deleteSong(i) { 
-      if (confirm("Delete?")) { 
-        myJams.splice(i,1); 
-        renderPlaylist(); 
-      } 
-    }
-
-    function editAboutMe() {
-      const current = document.getElementById('about-me').innerText;
-      const newText = prompt("Edit your About Me:", current);
-      if (newText !== null) document.getElementById('about-me').innerText = newText;
-    }
-
-    function uploadPhoto() {
-      if (photoCount >= 20) return alert("Maximum 20 photos reached!");
-      photoCount++;
-      document.getElementById('uploaded-media').innerHTML += `
-        <div class="bg-zinc-900 p-4 rounded-3xl">
-          <img src="https://picsum.photos/id/${200 + photoCount}/400" class="rounded-3xl w-full">
-          <div class="flex gap-4 text-3xl mt-3">
-            <button onclick="addReaction('❤️')">❤️</button>
-            <button onclick="addReaction('🔥')">🔥</button>
-            <button onclick="addReaction('🌊')">🌊</button>
-            <button onclick="addReaction('✨')">✨</button>
-            <button onclick="addReaction('🙌')">🙌</button>
-          </div>
-          <input id="comment${photoCount}" placeholder="Write a comment..." class="w-full bg-zinc-800 p-3 rounded-2xl mt-3">
-          <button onclick="postComment(${photoCount})" class="mt-2 bg-pink-600 px-6 py-2 rounded-xl">Post Comment</button>
-          <div id="comments${photoCount}" class="mt-4 text-sm space-y-2"></div>
-        </div>`;
-    }
-
-    function addReaction(emoji) { alert(`You reacted with ${emoji}`); }
-
-    function postComment(id) {
-      const input = document.getElementById('comment' + id);
-      if (input.value.trim() === '') return;
-      const div = document.getElementById('comments' + id);
-      div.innerHTML += `<p class="text-sm"><strong>@you:</strong> ${input.value}</p>`;
-      input.value = '';
-    }
-
-    function customizeProfile() {
-      let name = prompt("New username? (without @)", "yourusername");
-      if (name) document.getElementById('username').textContent = "@" + name;
-      let mood = prompt("What's your current vibe/mood?", "lo-fi chillwave 🌙");
-      if (mood) document.getElementById('mood').innerHTML = `Currently vibing to: ${mood}`;
-    }
-
-    function sendFriendRequest() { alert("Friend Request Sent!"); }
-    function sendFanRequest() { alert("Fan Request Sent!"); }
-
-    function createRoom() {
-      const roomName = prompt("Name your new room?", "Prophetic Worship & Prayer");
-      if (roomName) {
-        document.getElementById('current-room').classList.remove('hidden');
-        document.getElementById('room-name-display').textContent = roomName;
-        document.getElementById('room-player').src = "https://www.youtube-nocookie.com/embed/5qap5aO7v9A?autoplay=1";
-      }
-    }
-
-    function exitRoom() {
-      document.getElementById('current-room').classList.add('hidden');
-    }
-
-    function sendChatMessage() {
-      const input = document.getElementById('chat-input');
-      if (!input.value.trim()) return;
-      const log = document.getElementById('chat-log');
-      log.innerHTML += `<p><strong>@you:</strong> ${input.value}</p>`;
-      log.scrollTop = log.scrollHeight;
-      input.value = '';
-    }
-
-    function switchTab(n) {
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
-      document.getElementById('tab' + n).classList.remove('hidden');
-    }
-
-    renderPlaylist();
-    switchTab(0);
+    init();
   </script>
 </body>
 </html>
