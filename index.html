@@ -17,7 +17,7 @@
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
 
-  <!-- NEW BANNER -->
+  <!-- BANNER -->
   <div class="bg-gradient-to-r from-pink-600 via-purple-700 to-indigo-700 py-8 text-center">
     <p class="text-4xl font-bold tracking-wider neon-pink mb-2">Jesus Is King</p>
     <p class="text-xl max-w-4xl mx-auto px-6">
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <!-- MY TRIBE / PROFILE (Now the main starting point) -->
+    <!-- MY TRIBE / PROFILE (Starting tab) -->
     <div id="tab1" class="tab-content">
       <div class="bg-zinc-900 rounded-3xl p-10">
 
@@ -69,7 +69,7 @@
           <img src="https://picsum.photos/id/64/200" class="w-52 h-52 rounded-3xl border-4 border-pink-500">
           <div>
             <h3 id="username" class="text-5xl font-bold">@tryamourstar</h3>
-            <p id="mood" class="text-sky-400 text-2xl">Currently vibing to: lo-fi chillwave 🌙</p>
+            <p id="mood" class="text-sky-400 text-2xl">Currently vibing to: Double Pedal Jesus Metal 🔥</p>
           </div>
         </div>
 
@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <!-- My Jams + Queue -->
+        <!-- My Jams + Queue (Pre-loaded with your songs) -->
         <h3 class="text-2xl mt-10 mb-4">🎵 My Jams</h3>
         <div class="flex gap-3 mb-4">
           <button onclick="addSong()" class="bg-pink-600 px-5 py-2 rounded-2xl text-sm">+ Add Song</button>
@@ -241,7 +241,8 @@
     </div>
   </div>
 
-  <!-- Rivers Modals + Thank You + Badge (same as before) -->
+  <!-- RIVERS OF EDEN MODALS (All 4) -->
+  <!-- Pishon -->
   <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-amber-900 to-yellow-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -257,6 +258,51 @@
         <button onclick="postToRiver('pishon')" class="mt-4 w-full bg-amber-600 hover:bg-amber-700 py-4 rounded-3xl">Float it down the river</button>
       </div>
       <div id="pishon-feed" class="max-h-[420px] overflow-y-auto space-y-4 pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Gihon -->
+  <div id="gihon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
+    <div class="bg-gradient-to-br from-teal-900 to-cyan-900 rounded-3xl max-w-3xl w-full p-8">
+      <div class="flex justify-between mb-6">
+        <h2 class="text-4xl font-bold">💧 Gihon • Life & Healing</h2>
+        <button onclick="closeRiverModal('gihon')" class="text-4xl">×</button>
+      </div>
+      <div class="mb-6">
+        <textarea id="gihon-burden" rows="3" placeholder="I’m laying down my burden of..." class="w-full bg-black/40 p-5 rounded-2xl"></textarea>
+        <button onclick="postToRiver('gihon')" class="mt-4 w-full bg-teal-600 hover:bg-teal-700 py-4 rounded-3xl">Float it down the river</button>
+      </div>
+      <div id="gihon-feed" class="max-h-[420px] overflow-y-auto space-y-4 pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Tigris -->
+  <div id="tigris-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
+    <div class="bg-gradient-to-br from-indigo-900 to-violet-900 rounded-3xl max-w-3xl w-full p-8">
+      <div class="flex justify-between mb-6">
+        <h2 class="text-4xl font-bold">⚡ Tigris • Power & Breakthrough</h2>
+        <button onclick="closeRiverModal('tigris')" class="text-4xl">×</button>
+      </div>
+      <div class="mb-6">
+        <textarea id="tigris-burden" rows="3" placeholder="I’m laying down my burden of..." class="w-full bg-black/40 p-5 rounded-2xl"></textarea>
+        <button onclick="postToRiver('tigris')" class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 py-4 rounded-3xl">Float it down the river</button>
+      </div>
+      <div id="tigris-feed" class="max-h-[420px] overflow-y-auto space-y-4 pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Euphrates -->
+  <div id="euphrates-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
+    <div class="bg-gradient-to-br from-emerald-900 to-green-900 rounded-3xl max-w-3xl w-full p-8">
+      <div class="flex justify-between mb-6">
+        <h2 class="text-4xl font-bold">🌿 Euphrates • Fruitfulness & Peace</h2>
+        <button onclick="closeRiverModal('euphrates')" class="text-4xl">×</button>
+      </div>
+      <div class="mb-6">
+        <textarea id="euphrates-burden" rows="3" placeholder="I’m laying down my burden of..." class="w-full bg-black/40 p-5 rounded-2xl"></textarea>
+        <button onclick="postToRiver('euphrates')" class="mt-4 w-full bg-emerald-600 hover:bg-emerald-700 py-4 rounded-3xl">Float it down the river</button>
+      </div>
+      <div id="euphrates-feed" class="max-h-[420px] overflow-y-auto space-y-4 pr-2"></div>
     </div>
   </div>
 
@@ -299,10 +345,8 @@
       document.getElementById('creative-sub').classList.remove('hidden');
     }
 
-    // Make This Yours (new onboarding)
     function makeThisYours() {
       alert("Beautiful! This space is now yours. Feel free to customize your username, About Me, add your own songs, photos, and vibe.");
-      // In a real version this would enable full editing mode
     }
 
     function customizeProfile() {
@@ -319,18 +363,16 @@
       if (newText !== null) document.getElementById('about-me').innerText = newText;
     }
 
-    // My Jams + Queue
-    let myJams = [];
-    let jamsQueue = [];
+    // Pre-loaded with your songs
+    let myJams = [
+      { title: "Phoenix", artist: "For Today" },
+      { title: "Seraphim", artist: "For Today" },
+      { title: "Tithemi", artist: "Sleeping Giants" },
+      { title: "All Around Me", artist: "Flyleaf" },
+      { title: "Talmidim", artist: "For Today" }
+    ];
 
-    function addSong() {
-      const title = prompt("Song title?");
-      const artist = prompt("Artist?");
-      if (title && artist) {
-        myJams.push({ title, artist });
-        renderJams();
-      }
-    }
+    let jamsQueue = [...myJams];
 
     function renderJams() {
       const container = document.getElementById('playlist');
@@ -667,8 +709,9 @@
     }
 
     function init() {
-      // Start on My Tribe (Profile) tab
-      switchTab(1);
+      renderJams();
+      renderJamsQueue();
+      switchTab(1); // Start on Profile (My Tribe)
     }
 
     init();
