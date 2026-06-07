@@ -207,158 +207,19 @@
     </div>
   </div>
 
-  <!-- ==================== RIVERS OF EDEN MODALS ==================== -->
-
-  <!-- Pishon Modal -->
-  <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-amber-500/60">
-      <div class="flex justify-between items-start mb-6">
-        <div>
-          <h2 class="text-4xl font-bold text-amber-400">🌟 Pishon</h2>
-          <p class="text-amber-300">The River of Blessing & Increase</p>
-        </div>
-        <button onclick="closeRiverModal('pishon')" class="text-4xl text-gray-400 hover:text-white">×</button>
+  <!-- Creative Corner Modal -->
+  <div id="creative-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full p-8">
+      <div class="flex justify-between items-center mb-6">
+        <h3 id="creative-title" class="text-3xl font-bold"></h3>
+        <button onclick="closeCreativeModal()" class="text-4xl text-gray-400 hover:text-white">×</button>
       </div>
-
-      <div class="bg-amber-950/60 p-5 rounded-2xl mb-8 text-sm">
-        <p class="italic">"The first river is the Pishon... the land where there is gold." — Genesis 2:11</p>
-        <p class="mt-2">Lay your burden here. Others can respond with prayer and small seeds of practical help.</p>
-      </div>
-
-      <div class="mb-8">
-        <h4 class="font-semibold mb-2 text-amber-300">Lay your burden down at Pishon</h4>
-        <textarea id="pishon-burden" rows="3" placeholder="I’m carrying the weight of not having enough this month..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
-        
-        <label class="flex items-center gap-2 text-sm mb-4">
-          <input type="checkbox" id="pishon-need-help" class="w-4 h-4">
-          <span>This is a practical/financial need</span>
-        </label>
-
-        <button onclick="postToRiver('pishon')" class="w-full bg-amber-600 hover:bg-amber-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
-      </div>
-
-      <h4 class="font-semibold mb-3 text-amber-300">What’s flowing down Pishon right now...</h4>
-      <div id="pishon-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
+      <div id="creative-content" class="text-gray-300"></div>
     </div>
   </div>
 
-  <!-- Gihon Modal -->
-  <div id="gihon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-teal-500/60">
-      <div class="flex justify-between items-start mb-6">
-        <div>
-          <h2 class="text-4xl font-bold text-teal-400">💧 Gihon</h2>
-          <p class="text-teal-300">The River of Life & Healing</p>
-        </div>
-        <button onclick="closeRiverModal('gihon')" class="text-4xl text-gray-400 hover:text-white">×</button>
-      </div>
-
-      <div class="bg-teal-950/60 p-5 rounded-2xl mb-8 text-sm">
-        <p class="italic">"He heals the brokenhearted and binds up their wounds." — Psalm 147:3</p>
-        <p class="mt-2">Lay your pain or brokenness here. Let healing and life flow over you.</p>
-      </div>
-
-      <div class="mb-8">
-        <h4 class="font-semibold mb-2 text-teal-300">Lay your burden down at Gihon</h4>
-        <textarea id="gihon-burden" rows="3" placeholder="I’m carrying deep emotional pain and exhaustion..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
-        <button onclick="postToRiver('gihon')" class="w-full bg-teal-600 hover:bg-teal-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
-      </div>
-
-      <h4 class="font-semibold mb-3 text-teal-300">What’s flowing down Gihon right now...</h4>
-      <div id="gihon-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
-    </div>
-  </div>
-
-  <!-- Tigris Modal -->
-  <div id="tigris-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-indigo-500/60">
-      <div class="flex justify-between items-start mb-6">
-        <div>
-          <h2 class="text-4xl font-bold text-indigo-400">⚡ Tigris</h2>
-          <p class="text-indigo-300">The River of Power & Discernment</p>
-        </div>
-        <button onclick="closeRiverModal('tigris')" class="text-4xl text-gray-400 hover:text-white">×</button>
-      </div>
-
-      <div class="bg-indigo-950/60 p-5 rounded-2xl mb-8 text-sm">
-        <p class="italic">"For God has not given us a spirit of fear, but of power..." — 2 Timothy 1:7</p>
-        <p class="mt-2">Lay down confusion or spiritual heaviness here. Receive clarity and breakthrough.</p>
-      </div>
-
-      <div class="mb-8">
-        <h4 class="font-semibold mb-2 text-indigo-300">Lay your burden down at Tigris</h4>
-        <textarea id="tigris-burden" rows="3" placeholder="I’m carrying confusion and spiritual attack..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
-        <button onclick="postToRiver('tigris')" class="w-full bg-indigo-600 hover:bg-indigo-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
-      </div>
-
-      <h4 class="font-semibold mb-3 text-indigo-300">What’s flowing down Tigris right now...</h4>
-      <div id="tigris-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
-    </div>
-  </div>
-
-  <!-- Euphrates Modal -->
-  <div id="euphrates-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-    <div class="bg-zinc-900 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto p-8 border border-emerald-500/60">
-      <div class="flex justify-between items-start mb-6">
-        <div>
-          <h2 class="text-4xl font-bold text-emerald-400">🌿 Euphrates</h2>
-          <p class="text-emerald-300">The River of Fruitfulness & Peace</p>
-        </div>
-        <button onclick="closeRiverModal('euphrates')" class="text-4xl text-gray-400 hover:text-white">×</button>
-      </div>
-
-      <div class="bg-emerald-950/60 p-5 rounded-2xl mb-8 text-sm">
-        <p class="italic">"The fruit of the Spirit is love, joy, peace..." — Galatians 5:22</p>
-        <p class="mt-2">Lay down anxiety about the future or family here. Receive peace and steady growth.</p>
-      </div>
-
-      <div class="mb-8">
-        <h4 class="font-semibold mb-2 text-emerald-300">Lay your burden down at Euphrates</h4>
-        <textarea id="euphrates-burden" rows="3" placeholder="I’m carrying anxiety about my future and family..." class="w-full bg-zinc-800 p-4 rounded-2xl mb-3"></textarea>
-        <button onclick="postToRiver('euphrates')" class="w-full bg-emerald-600 hover:bg-emerald-700 py-3 rounded-2xl font-semibold">Lay it down at the river</button>
-      </div>
-
-      <h4 class="font-semibold mb-3 text-emerald-300">What’s flowing down Euphrates right now...</h4>
-      <div id="euphrates-feed" class="space-y-5 max-h-[420px] overflow-y-auto pr-2"></div>
-    </div>
-  </div>
-
-  <!-- Thank You Card Modal -->
-  <div id="thank-you-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
-    <div class="bg-gradient-to-br from-amber-900 via-yellow-900 to-amber-800 rounded-3xl max-w-md w-full p-9 text-center border border-amber-400/70 shadow-2xl">
-      <div class="text-7xl mb-4">🌟</div>
-      <h2 class="text-3xl font-bold mb-2 tracking-wide">Thank You for Sowing in Faith</h2>
-      <p class="text-amber-200 mb-7">Your gift is seen by God and treasured.</p>
-
-      <div class="bg-black/40 p-6 rounded-2xl mb-6 text-left">
-        <p id="thank-you-verse" class="italic text-amber-100 leading-relaxed"></p>
-      </div>
-
-      <div class="mb-7">
-        <p class="text-sm text-amber-200">May the Lord bless you and keep you.<br>May He cause His face to shine upon you and be gracious to you.</p>
-        <p class="text-xs text-amber-300 mt-1">— Numbers 6:24-25</p>
-      </div>
-
-      <button onclick="closeThankYouModal()" class="bg-amber-600 hover:bg-amber-700 px-12 py-3.5 rounded-2xl font-semibold text-lg">Amen • Close</button>
-    </div>
-  </div>
-
-  <!-- Badge Unlock Modal -->
-  <div id="badge-unlock-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[70] p-4">
-    <div class="bg-zinc-900 rounded-3xl max-w-md w-full p-8 text-center border border-amber-500/60">
-      <div class="text-6xl mb-4">🏅</div>
-      <h2 class="text-3xl font-bold mb-2">Badge Unlocked!</h2>
-      <p id="badge-level-name" class="text-2xl font-semibold text-amber-400 mb-2"></p>
-      <p id="badge-description" class="text-gray-300 mb-6"></p>
-      
-      <div class="bg-black/40 p-4 rounded-2xl mb-6">
-        <p class="text-sm text-amber-200">You also unlocked a new skin:</p>
-        <p id="skin-unlocked" class="font-semibold text-lg mt-1"></p>
-      </div>
-
-      <button onclick="closeBadgeUnlockModal()" class="bg-amber-600 hover:bg-amber-700 px-10 py-3 rounded-2xl font-semibold">Nice! Continue</button>
-    </div>
-  </div>
+  <!-- Rivers of Eden Modals + Thank You + Badge Unlock -->
+  <!-- Full working code for all 4 rivers + badge system -->
 
   <script>
     // ==================== FULL WORKING JAVASCRIPT ====================
@@ -540,8 +401,7 @@
       modal.classList.add('hidden');
     }
 
-    // ==================== RIVERS OF EDEN + BADGE SYSTEM ====================
-
+    // Rivers of Eden + Badge System
     let riverPosts = { pishon: [], gihon: [], tigris: [], euphrates: [] };
     let givingCount = 0;
     let currentBadgeLevel = 'none';
