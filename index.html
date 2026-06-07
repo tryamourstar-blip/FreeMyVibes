@@ -17,14 +17,18 @@
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
 
-  <!-- Banner -->
-  <div class="bg-gradient-to-r from-pink-600 via-purple-700 to-indigo-700 py-6 text-center">
-    <p class="text-3xl font-bold tracking-wider neon-pink">Let’s Bring Heaven Down to Earth</p>
-    <p class="text-sm text-white/70 mt-1">One vibe, one prayer, one song at a time 🌍</p>
+  <!-- NEW BANNER -->
+  <div class="bg-gradient-to-r from-pink-600 via-purple-700 to-indigo-700 py-8 text-center">
+    <p class="text-4xl font-bold tracking-wider neon-pink mb-2">Jesus Is King</p>
+    <p class="text-xl max-w-4xl mx-auto px-6">
+      I believe with God, love, and music — and by sharing our God-given talents — 
+      we can bring hope to the hopeless and heal the nations.<br>
+      <span class="text-white/90">Let’s bring heaven down to earth.</span>
+    </p>
   </div>
 
   <div class="max-w-6xl mx-auto p-8">
-    <h1 class="text-7xl font-bold text-center text-pink-500 neon-pink mb-4">FreeMyVibes</h1>
+    <h1 class="text-7xl font-bold text-center text-pink-500 neon-pink mb-2">FreeMyVibes</h1>
     <p class="text-center text-gray-400 mb-10">A digital healing village • Music • Prayer • Community • Creativity</p>
 
     <!-- Navigation -->
@@ -47,22 +51,37 @@
       </div>
     </div>
 
-    <!-- MY TRIBE -->
-    <div id="tab1" class="tab-content hidden">
+    <!-- MY TRIBE / PROFILE (Now the main starting point) -->
+    <div id="tab1" class="tab-content">
       <div class="bg-zinc-900 rounded-3xl p-10">
+
+        <!-- Welcome Message -->
+        <div class="bg-black/60 border border-pink-500/30 rounded-3xl p-8 mb-10 text-center">
+          <p class="text-pink-400 text-lg mb-2">Welcome to the Village</p>
+          <p class="text-2xl">This is the founder’s vibe. Make it your own.</p>
+          <button onclick="makeThisYours()" 
+                  class="mt-6 bg-pink-600 hover:bg-pink-700 px-10 py-4 rounded-3xl text-lg font-semibold">
+            ✨ Make This Your Space
+          </button>
+        </div>
+
         <div class="flex gap-8 items-end mb-10">
           <img src="https://picsum.photos/id/64/200" class="w-52 h-52 rounded-3xl border-4 border-pink-500">
           <div>
-            <h3 id="username" class="text-5xl font-bold">@yourusername</h3>
+            <h3 id="username" class="text-5xl font-bold">@tryamourstar</h3>
             <p id="mood" class="text-sky-400 text-2xl">Currently vibing to: lo-fi chillwave 🌙</p>
           </div>
         </div>
 
         <button onclick="customizeProfile()" class="bg-pink-600 hover:bg-pink-700 px-8 py-4 rounded-2xl mb-8">Customize Profile</button>
 
+        <!-- About Me -->
         <div class="mt-8 bg-black p-6 rounded-2xl">
-          <h3 class="font-bold flex justify-between">About Me <button onclick="editAboutMe()" class="text-pink-400 underline text-sm">Edit</button></h3>
-          <p id="about-me" class="text-gray-300 mt-3">Just a pixel kid who believes music and love can heal the world...</p>
+          <h3 class="font-bold flex justify-between mb-2">About Me</h3>
+          <p id="about-me" class="text-gray-300 leading-relaxed">
+            Jesus Is King. I believe with God, love, and music — and by sharing our God-given talents — 
+            we can bring hope to the hopeless and heal the nations. Let’s bring heaven down to earth.
+          </p>
         </div>
 
         <!-- Top Spots -->
@@ -70,15 +89,23 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-black p-6 rounded-2xl">
             <h4 class="font-bold mb-3 text-pink-400">My Tribe (Top 8)</h4>
-            <div class="space-y-1 text-sm">
-              <div>@bestie1</div><div>@musicbro</div><div>@chillvibes</div><div>@scenequeen</div>
-              <div>@lofiaddict</div><div>@nightowl</div><div>@dreamer</div><div>@echoangel</div>
+            <div class="space-y-1 text-sm" id="top-tribe">
+              <div>@tryamourstar <span class="text-pink-400 text-xs">(Founder • Your first fan)</span></div>
+              <div>@bestie1</div>
+              <div>@musicbro</div>
+              <div>@chillvibes</div>
+              <div>@scenequeen</div>
+              <div>@lofiaddict</div>
+              <div>@nightowl</div>
+              <div>@dreamer</div>
             </div>
           </div>
           <div class="bg-black p-6 rounded-2xl">
             <h4 class="font-bold mb-3 text-purple-400">Top Fans</h4>
             <div class="space-y-1 text-sm">
-              <div>@fan1 • 124 loves</div><div>@fan2 • 89 loves</div><div>@fan3 • 67 loves</div>
+              <div>@fan1 • 124 loves</div>
+              <div>@fan2 • 89 loves</div>
+              <div>@fan3 • 67 loves</div>
             </div>
           </div>
         </div>
@@ -93,7 +120,7 @@
         <h4 class="font-semibold mb-2">Queue</h4>
         <div id="jams-queue" class="bg-black p-4 rounded-2xl min-h-[70px] mb-6 text-sm"></div>
 
-        <!-- Photos with Comments & Emojis -->
+        <!-- Photos -->
         <h3 class="text-2xl mt-10 mb-4">📸 Photos & Videos</h3>
         <button onclick="uploadPhoto()" class="bg-pink-600 px-6 py-3 rounded-2xl mb-6">+ Upload Photo</button>
         <div id="photos-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6"></div>
@@ -138,16 +165,12 @@
     </div>
 
     <!-- RIVERS OF EDEN -->
-    <div id="tab4" class="tab-content">
+    <div id="tab4" class="tab-content hidden">
       <div class="text-center mb-10">
         <h2 class="text-5xl font-bold mb-4">🌊 Rivers of Eden</h2>
         <p class="text-xl text-sky-200 max-w-3xl mx-auto">
           In the beginning, a river flowed from Eden and split into four headwaters. 
           Each river carries something different from the heart of God.
-        </p>
-        <p class="mt-4 text-sky-300 max-w-2xl mx-auto">
-          Come lay your burden down at the river that meets you where you are.<br>
-          Let heaven respond through Scripture, prayer, and the kindness of others.
         </p>
       </div>
 
@@ -218,11 +241,52 @@
     </div>
   </div>
 
-  <!-- Rivers of Eden Modals + Thank You + Badge Unlock -->
-  <!-- Full working code for all 4 rivers + badge system -->
+  <!-- Rivers Modals + Thank You + Badge (same as before) -->
+  <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
+    <div class="bg-gradient-to-br from-amber-900 to-yellow-900 rounded-3xl max-w-3xl w-full p-8">
+      <div class="flex justify-between mb-6">
+        <h2 class="text-4xl font-bold">🌟 Pishon • Blessing & Increase</h2>
+        <button onclick="closeRiverModal('pishon')" class="text-4xl">×</button>
+      </div>
+      <div class="mb-6">
+        <textarea id="pishon-burden" rows="3" placeholder="I’m laying down my burden of..." class="w-full bg-black/40 p-5 rounded-2xl"></textarea>
+        <div class="flex items-center gap-2 mt-3">
+          <input type="checkbox" id="pishon-need-help"> 
+          <label for="pishon-need-help" class="text-sm">This is a practical need (others can give)</label>
+        </div>
+        <button onclick="postToRiver('pishon')" class="mt-4 w-full bg-amber-600 hover:bg-amber-700 py-4 rounded-3xl">Float it down the river</button>
+      </div>
+      <div id="pishon-feed" class="max-h-[420px] overflow-y-auto space-y-4 pr-2"></div>
+    </div>
+  </div>
+
+  <!-- Thank You Modal -->
+  <div id="thank-you-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[70] p-4">
+    <div class="bg-gradient-to-br from-amber-900 to-yellow-900 rounded-3xl max-w-md w-full p-8 text-center border border-amber-400/60">
+      <div class="text-6xl mb-4">🌟</div>
+      <h2 class="text-3xl font-bold mb-2">Thank You for Sowing in Faith</h2>
+      <p class="text-amber-200 mb-6">Your generosity is seen by God.</p>
+      <div class="bg-black/40 p-6 rounded-2xl mb-6 text-left">
+        <p id="thank-you-verse" class="italic text-amber-100"></p>
+      </div>
+      <button onclick="closeThankYouModal()" class="bg-amber-600 hover:bg-amber-700 px-10 py-3 rounded-2xl font-semibold">Amen • Close</button>
+    </div>
+  </div>
+
+  <!-- Badge Unlock Modal -->
+  <div id="badge-unlock-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[80] p-4">
+    <div class="bg-zinc-900 rounded-3xl max-w-md w-full p-8 text-center border border-pink-500/40">
+      <div class="text-6xl mb-4">🎁</div>
+      <h2 class="text-3xl font-bold mb-2">New Badge Unlocked!</h2>
+      <p id="badge-level-name" class="text-2xl text-pink-400 mb-2"></p>
+      <p id="badge-description" class="text-gray-300 mb-4"></p>
+      <p class="text-sm text-gray-400 mb-6">Skin Unlocked: <span id="skin-unlocked" class="font-semibold"></span></p>
+      <button onclick="closeBadgeUnlockModal()" class="bg-pink-600 hover:bg-pink-700 px-10 py-3 rounded-2xl">Beautiful • Thank You</button>
+    </div>
+  </div>
 
   <script>
-    // ==================== FULL WORKING JAVASCRIPT ====================
+    // ==================== JAVASCRIPT ====================
 
     function switchTab(n) {
       document.getElementById('creative-sub').classList.add('hidden');
@@ -235,10 +299,18 @@
       document.getElementById('creative-sub').classList.remove('hidden');
     }
 
-    // My Tribe
+    // Make This Yours (new onboarding)
+    function makeThisYours() {
+      alert("Beautiful! This space is now yours. Feel free to customize your username, About Me, add your own songs, photos, and vibe.");
+      // In a real version this would enable full editing mode
+    }
+
     function customizeProfile() {
       let name = prompt("New username?", "yourusername");
       if (name) document.getElementById('username').textContent = "@" + name;
+
+      let mood = prompt("What's your current vibe/mood?");
+      if (mood) document.getElementById('mood').innerHTML = `Currently vibing to: ${mood}`;
     }
 
     function editAboutMe() {
@@ -295,7 +367,7 @@
       renderJams();
     }
 
-    // Photos with Comments & Emojis
+    // Photos
     let photoCount = 0;
 
     function uploadPhoto() {
@@ -379,16 +451,16 @@
 
       if (type === 'coffee') {
         title.innerHTML = '☕ Coffee House Lounge';
-        content.innerHTML = `<p>This section is coming soon. A place for poetry, short stories, and open mic nights.</p>`;
+        content.innerHTML = `<p>Coming soon — a place for poetry, short stories, and open mic nights.</p>`;
       } else if (type === 'art') {
         title.innerHTML = '🎨 Art Easel';
-        content.innerHTML = `<p>Coming soon. A space to share paintings, drawings, and digital art.</p>`;
+        content.innerHTML = `<p>Coming soon — share paintings, drawings, and digital art.</p>`;
       } else if (type === 'rocks') {
         title.innerHTML = '🪨 God’s Creations';
-        content.innerHTML = `<p>Coming soon. Share rocks, crystals, and nature finds.</p>`;
+        content.innerHTML = `<p>Coming soon — share rocks, crystals, and nature finds.</p>`;
       } else if (type === 'music') {
         title.innerHTML = '🎵 Music Studio';
-        content.innerHTML = `<p>Coming soon. Upload original songs and lyric videos.</p>`;
+        content.innerHTML = `<p>Coming soon — upload original songs and lyric videos.</p>`;
       }
 
       modal.classList.remove('hidden');
@@ -401,7 +473,7 @@
       modal.classList.add('hidden');
     }
 
-    // Rivers of Eden + Badge System
+    // Rivers of Eden
     let riverPosts = { pishon: [], gihon: [], tigris: [], euphrates: [] };
     let givingCount = 0;
     let currentBadgeLevel = 'none';
@@ -595,7 +667,8 @@
     }
 
     function init() {
-      switchTab(4);
+      // Start on My Tribe (Profile) tab
+      switchTab(1);
     }
 
     init();
