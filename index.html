@@ -41,21 +41,25 @@
       <button onclick="showCreativeSub()" class="px-6 py-3 bg-zinc-800 hover:bg-amber-600 rounded-2xl text-sm">🎨 Creative Corner</button>
     </div>
 
-    <!-- VILLAGE SQUARE -->
+    <!-- VILLAGE SQUARE (NOW FIXED) -->
     <div id="tab0" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-10">
         <h2 class="text-4xl mb-8 text-center">💫 Village Square</h2>
-        <div id="feed" class="space-y-6"></div>
-        <textarea id="new-post" rows="3" placeholder="Share hope, a song, a prayer..." class="w-full bg-zinc-800 p-6 rounded-3xl mt-8"></textarea>
-        <button onclick="postToSquare()" class="mt-4 w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-3xl">Share with the Village</button>
+        <div id="feed" class="space-y-6 mb-8"></div>
+        
+        <textarea id="new-post" rows="3" placeholder="Share hope, a song, a prayer..." 
+                  class="w-full bg-zinc-800 p-6 rounded-3xl"></textarea>
+        <button onclick="postToSquare()" 
+                class="mt-4 w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-3xl font-semibold">
+          Share with the Village
+        </button>
       </div>
     </div>
 
-    <!-- MY TRIBE / PROFILE (Starting tab) -->
+    <!-- MY TRIBE / PROFILE -->
     <div id="tab1" class="tab-content">
       <div class="bg-zinc-900 rounded-3xl p-10">
 
-        <!-- Welcome Message -->
         <div class="bg-black/60 border border-pink-500/30 rounded-3xl p-8 mb-10 text-center">
           <p class="text-pink-400 text-lg mb-2">Welcome to the Village</p>
           <p class="text-2xl">This is the founder’s vibe. Make it your own.</p>
@@ -75,7 +79,6 @@
 
         <button onclick="customizeProfile()" class="bg-pink-600 hover:bg-pink-700 px-8 py-4 rounded-2xl mb-8">Customize Profile</button>
 
-        <!-- About Me -->
         <div class="mt-8 bg-black p-6 rounded-2xl">
           <h3 class="font-bold flex justify-between mb-2">About Me</h3>
           <p id="about-me" class="text-gray-300 leading-relaxed">
@@ -89,7 +92,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-black p-6 rounded-2xl">
             <h4 class="font-bold mb-3 text-pink-400">My Tribe (Top 8)</h4>
-            <div class="space-y-1 text-sm" id="top-tribe">
+            <div class="space-y-1 text-sm">
               <div>@tryamourstar <span class="text-pink-400 text-xs">(Founder • Your first fan)</span></div>
               <div>@bestie1</div>
               <div>@musicbro</div>
@@ -110,7 +113,7 @@
           </div>
         </div>
 
-        <!-- My Jams + Queue (Pre-loaded with your songs) -->
+        <!-- My Jams (Pre-loaded with your songs) -->
         <h3 class="text-2xl mt-10 mb-4">🎵 My Jams</h3>
         <div class="flex gap-3 mb-4">
           <button onclick="addSong()" class="bg-pink-600 px-5 py-2 rounded-2xl text-sm">+ Add Song</button>
@@ -241,7 +244,7 @@
     </div>
   </div>
 
-  <!-- RIVERS OF EDEN MODALS (All 4) -->
+  <!-- RIVERS OF EDEN MODALS -->
   <!-- Pishon -->
   <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-amber-900 to-yellow-900 rounded-3xl max-w-3xl w-full p-8">
@@ -346,24 +349,47 @@
     }
 
     function makeThisYours() {
-      alert("Beautiful! This space is now yours. Feel free to customize your username, About Me, add your own songs, photos, and vibe.");
+      alert("Beautiful! This space is now yours. Feel free to customize everything.");
     }
 
     function customizeProfile() {
       let name = prompt("New username?", "yourusername");
       if (name) document.getElementById('username').textContent = "@" + name;
-
       let mood = prompt("What's your current vibe/mood?");
       if (mood) document.getElementById('mood').innerHTML = `Currently vibing to: ${mood}`;
     }
 
-    function editAboutMe() {
-      const current = document.getElementById('about-me').innerText;
-      const newText = prompt("Edit your About Me:", current);
-      if (newText !== null) document.getElementById('about-me').innerText = newText;
+    // Village Square (FIXED)
+    let feedPosts = [];
+
+    function postToSquare() {
+      const input = document.getElementById('new-post');
+      if (!input.value.trim()) return;
+
+      feedPosts.unshift({
+        text: input.value.trim(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+
+      input.value = '';
+      renderFeed();
     }
 
-    // Pre-loaded with your songs
+    function renderFeed() {
+      const container = document.getElementById('feed');
+      if (feedPosts.length === 0) {
+        container.innerHTML = `<p class="text-center text-gray-400 py-8">The Square is quiet right now. Be the first to share hope.</p>`;
+        return;
+      }
+      container.innerHTML = feedPosts.map(post => `
+        <div class="bg-zinc-800 p-6 rounded-2xl">
+          <p class="mb-2">${post.text}</p>
+          <p class="text-xs text-gray-400 text-right">${post.time}</p>
+        </div>
+      `).join('');
+    }
+
+    // My Jams (Pre-loaded with your songs)
     let myJams = [
       { title: "Phoenix", artist: "For Today" },
       { title: "Seraphim", artist: "For Today" },
@@ -371,7 +397,6 @@
       { title: "All Around Me", artist: "Flyleaf" },
       { title: "Talmidim", artist: "For Today" }
     ];
-
     let jamsQueue = [...myJams];
 
     function renderJams() {
@@ -411,13 +436,11 @@
 
     // Photos
     let photoCount = 0;
-
     function uploadPhoto() {
       if (photoCount >= 20) return alert("Maximum 20 photos reached!");
       photoCount++;
       const grid = document.getElementById('photos-grid');
       const id = photoCount;
-
       grid.innerHTML += `
         <div class="bg-zinc-800 rounded-3xl p-4">
           <img src="https://picsum.photos/id/${200 + photoCount}/600/400" class="rounded-2xl w-full">
@@ -433,11 +456,7 @@
           <div id="comments-${id}" class="mt-6 space-y-3 text-sm"></div>
         </div>`;
     }
-
-    function addReaction(id, emoji) {
-      alert(`You reacted with ${emoji}`);
-    }
-
+    function addReaction(id, emoji) { alert(`You reacted with ${emoji}`); }
     function postComment(id) {
       const input = document.getElementById(`comment-input-${id}`);
       if (!input.value.trim()) return;
@@ -448,7 +467,6 @@
 
     // Live Rooms
     let liveQueue = [];
-
     function createRoom() {
       const name = prompt("Name your room?", "Prophetic Worship & Prayer");
       if (name) {
@@ -456,26 +474,17 @@
         document.getElementById('room-name').textContent = name;
       }
     }
-
-    function exitRoom() {
-      document.getElementById('room-area').classList.add('hidden');
-    }
-
+    function exitRoom() { document.getElementById('room-area').classList.add('hidden'); }
     function addToLiveQueue() {
       const song = prompt("Song title?");
-      if (song) {
-        liveQueue.push(song);
-        renderLiveQueue();
-      }
+      if (song) { liveQueue.push(song); renderLiveQueue(); }
     }
-
     function renderLiveQueue() {
       const container = document.getElementById('live-queue');
       container.innerHTML = liveQueue.length 
         ? liveQueue.map((s, i) => `<div>${i+1}. ${s}</div>`).join('')
         : '<p class="text-gray-500 text-sm">Queue is empty</p>';
     }
-
     function sendChatMessage() {
       const input = document.getElementById('chat-input');
       if (!input.value.trim()) return;
@@ -490,29 +499,15 @@
       const modal = document.getElementById('creative-modal');
       const title = document.getElementById('creative-title');
       const content = document.getElementById('creative-content');
-
-      if (type === 'coffee') {
-        title.innerHTML = '☕ Coffee House Lounge';
-        content.innerHTML = `<p>Coming soon — a place for poetry, short stories, and open mic nights.</p>`;
-      } else if (type === 'art') {
-        title.innerHTML = '🎨 Art Easel';
-        content.innerHTML = `<p>Coming soon — share paintings, drawings, and digital art.</p>`;
-      } else if (type === 'rocks') {
-        title.innerHTML = '🪨 God’s Creations';
-        content.innerHTML = `<p>Coming soon — share rocks, crystals, and nature finds.</p>`;
-      } else if (type === 'music') {
-        title.innerHTML = '🎵 Music Studio';
-        content.innerHTML = `<p>Coming soon — upload original songs and lyric videos.</p>`;
-      }
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      if (type === 'coffee') { title.innerHTML = '☕ Coffee House Lounge'; content.innerHTML = `<p>Coming soon — poetry, stories, open mic.</p>`; }
+      else if (type === 'art') { title.innerHTML = '🎨 Art Easel'; content.innerHTML = `<p>Coming soon — paintings & digital art.</p>`; }
+      else if (type === 'rocks') { title.innerHTML = '🪨 God’s Creations'; content.innerHTML = `<p>Coming soon — rocks, crystals, beach finds.</p>`; }
+      else if (type === 'music') { title.innerHTML = '🎵 Music Studio'; content.innerHTML = `<p>Coming soon — original songs & lyric videos.</p>`; }
+      modal.classList.remove('hidden'); modal.classList.add('flex');
     }
-
     function closeCreativeModal() {
       const modal = document.getElementById('creative-modal');
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
+      modal.classList.remove('flex'); modal.classList.add('hidden');
     }
 
     // Rivers of Eden
@@ -525,7 +520,6 @@
       document.getElementById(river + '-modal').classList.add('flex');
       renderRiverFeed(river);
     }
-
     function closeRiverModal(river) {
       document.getElementById(river + '-modal').classList.remove('flex');
       document.getElementById(river + '-modal').classList.add('hidden');
@@ -534,68 +528,47 @@
     function postToRiver(river) {
       const input = document.getElementById(river + '-burden');
       if (!input.value.trim()) return;
-
       const isPracticalNeed = river === 'pishon' && document.getElementById('pishon-need-help')?.checked;
-
-      const post = {
-        id: Date.now(),
-        burden: input.value.trim(),
-        isPracticalNeed: isPracticalNeed,
-        responses: [],
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-
+      const post = { id: Date.now(), burden: input.value.trim(), isPracticalNeed, responses: [], time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
       riverPosts[river].unshift(post);
       input.value = '';
       if (river === 'pishon') document.getElementById('pishon-need-help').checked = false;
-
       renderRiverFeed(river);
     }
 
     function renderRiverFeed(river) {
       const container = document.getElementById(river + '-feed');
       container.innerHTML = '';
-
       if (riverPosts[river].length === 0) {
         container.innerHTML = `<p class="text-center text-gray-400 py-8">The river is quiet right now.</p>`;
         return;
       }
-
       riverPosts[river].forEach(post => {
         const postEl = document.createElement('div');
         postEl.className = 'bg-black/50 p-5 rounded-2xl';
-
         let verse = '';
         if (river === 'pishon') verse = `"The Lord will open the heavens, the storehouse of his bounty..." — Deuteronomy 28:12`;
         if (river === 'gihon') verse = `"He heals the brokenhearted and binds up their wounds." — Psalm 147:3`;
         if (river === 'tigris') verse = `"For God has not given us a spirit of fear, but of power..." — 2 Timothy 1:7`;
         if (river === 'euphrates') verse = `"The fruit of the Spirit is love, joy, peace..." — Galatians 5:22`;
 
-        let html = `
-          <p class="text-sm mb-3">${post.burden}</p>
-          <p class="text-xs text-gray-400 mb-4">Laid down at ${post.time}</p>
-          <div class="bg-zinc-800/60 p-4 rounded-xl mb-4 text-sm italic text-gray-300">"${verse}"</div>
-        `;
+        let html = `<p class="text-sm mb-3">${post.burden}</p><p class="text-xs text-gray-400 mb-4">Laid down at ${post.time}</p>
+          <div class="bg-zinc-800/60 p-4 rounded-xl mb-4 text-sm italic text-gray-300">"${verse}"</div>`;
 
         if (river === 'pishon' && post.isPracticalNeed) {
-          html += `
-            <div class="flex gap-3 mb-4">
-              <button onclick="giveToPost(${post.id}, 2.22)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $2.22</button>
-              <button onclick="giveToPost(${post.id}, 5.55)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $5.55</button>
-            </div>
-          `;
+          html += `<div class="flex gap-3 mb-4">
+            <button onclick="giveToPost(${post.id}, 2.22)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $2.22</button>
+            <button onclick="giveToPost(${post.id}, 5.55)" class="flex-1 bg-amber-600 hover:bg-amber-700 py-2 rounded-xl text-sm">Give $5.55</button>
+          </div>`;
         }
-
-        html += `
-          <div class="flex gap-2 mb-3">
-            <button onclick="prayForPost(this)" class="flex-1 bg-sky-600 hover:bg-sky-700 py-2 rounded-xl text-sm">🙏 I'm praying with you</button>
-          </div>
-          <div class="flex gap-2">
-            <input id="response-${river}-${post.id}" placeholder="Leave a short prayer..." class="flex-1 bg-zinc-800 p-3 rounded-2xl text-sm">
-            <button onclick="addResponse('${river}', ${post.id})" class="bg-zinc-700 hover:bg-zinc-600 px-5 rounded-2xl text-sm">Send</button>
-          </div>
-          <div id="responses-${river}-${post.id}" class="mt-4 space-y-2 text-sm"></div>
-        `;
+        html += `<div class="flex gap-2 mb-3">
+          <button onclick="prayForPost(this)" class="flex-1 bg-sky-600 hover:bg-sky-700 py-2 rounded-xl text-sm">🙏 I'm praying with you</button>
+        </div>
+        <div class="flex gap-2">
+          <input id="response-${river}-${post.id}" placeholder="Leave a short prayer..." class="flex-1 bg-zinc-800 p-3 rounded-2xl text-sm">
+          <button onclick="addResponse('${river}', ${post.id})" class="bg-zinc-700 hover:bg-zinc-600 px-5 rounded-2xl text-sm">Send</button>
+        </div>
+        <div id="responses-${river}-${post.id}" class="mt-4 space-y-2 text-sm"></div>`;
 
         postEl.innerHTML = html;
         container.appendChild(postEl);
@@ -606,7 +579,6 @@
     function giveToPost(postId, amount) {
       givingCount++;
       showThankYouCard();
-
       const newLevel = getBadgeLevel(givingCount);
       if (newLevel !== currentBadgeLevel) {
         currentBadgeLevel = newLevel;
@@ -630,10 +602,8 @@
         "God is able to bless you abundantly... — 2 Corinthians 9:8"
       ];
       verseEl.innerHTML = verses[Math.floor(Math.random() * verses.length)];
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      modal.classList.remove('hidden'); modal.classList.add('flex');
     }
-
     function closeThankYouModal() {
       document.getElementById('thank-you-modal').classList.remove('flex');
       document.getElementById('thank-you-modal').classList.add('hidden');
@@ -644,47 +614,24 @@
       const levelName = document.getElementById('badge-level-name');
       const description = document.getElementById('badge-description');
       const skin = document.getElementById('skin-unlocked');
-
-      if (level === 'seed') {
-        levelName.innerHTML = '🌱 Seed';
-        description.innerHTML = 'You took your first step of faith at the River.';
-        skin.innerHTML = 'Golden Seed Skin';
-      } else if (level === 'sprout') {
-        levelName.innerHTML = '🌿 Sprout';
-        description.innerHTML = 'Your generosity is growing beautifully.';
-        skin.innerHTML = 'Sprout Skin';
-      } else if (level === 'bloom') {
-        levelName.innerHTML = '💜 Bloom';
-        description.innerHTML = 'You are becoming a cheerful and faithful giver.';
-        skin.innerHTML = 'Cheerful Giver Skin';
-      } else if (level === 'harvest') {
-        levelName.innerHTML = '✨ Faithful';
-        description.innerHTML = 'You have become a mature and consistent sower at the River.';
-        skin.innerHTML = 'Faithful Harvest Skin';
-      }
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      if (level === 'seed') { levelName.innerHTML = '🌱 Seed'; description.innerHTML = 'You took your first step of faith at the River.'; skin.innerHTML = 'Golden Seed Skin'; }
+      else if (level === 'sprout') { levelName.innerHTML = '🌿 Sprout'; description.innerHTML = 'Your generosity is growing beautifully.'; skin.innerHTML = 'Sprout Skin'; }
+      else if (level === 'bloom') { levelName.innerHTML = '💜 Bloom'; description.innerHTML = 'You are becoming a cheerful and faithful giver.'; skin.innerHTML = 'Cheerful Giver Skin'; }
+      else if (level === 'harvest') { levelName.innerHTML = '✨ Faithful'; description.innerHTML = 'You have become a mature and consistent sower at the River.'; skin.innerHTML = 'Faithful Harvest Skin'; }
+      modal.classList.remove('hidden'); modal.classList.add('flex');
     }
-
     function closeBadgeUnlockModal() {
       document.getElementById('badge-unlock-modal').classList.remove('flex');
       document.getElementById('badge-unlock-modal').classList.add('hidden');
     }
 
-    function prayForPost(btn) {
-      btn.innerHTML = '❤️ Praying';
-      btn.disabled = true;
-      setTimeout(() => btn.innerHTML = 'Thank you for praying', 1400);
-    }
+    function prayForPost(btn) { btn.innerHTML = '❤️ Praying'; btn.disabled = true; setTimeout(() => btn.innerHTML = 'Thank you for praying', 1400); }
 
     function addResponse(river, postId) {
       const input = document.getElementById(`response-${river}-${postId}`);
       if (!input.value.trim()) return;
-
       const post = riverPosts[river].find(p => p.id === postId);
       if (!post) return;
-
       post.responses.push({ text: input.value.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       input.value = '';
       renderResponses(river, postId);
@@ -693,13 +640,8 @@
     function renderResponses(river, postId) {
       const container = document.getElementById(`responses-${river}-${postId}`);
       if (!container) return;
-
       const post = riverPosts[river].find(p => p.id === postId);
-      if (!post || post.responses.length === 0) {
-        container.innerHTML = '';
-        return;
-      }
-
+      if (!post || post.responses.length === 0) { container.innerHTML = ''; return; }
       container.innerHTML = post.responses.map(r => `
         <div class="bg-zinc-800/60 p-3 rounded-xl text-sm">
           <p>${r.text}</p>
@@ -711,7 +653,8 @@
     function init() {
       renderJams();
       renderJamsQueue();
-      switchTab(1); // Start on Profile (My Tribe)
+      renderFeed();
+      switchTab(1); // Start on My Tribe (your profile)
     }
 
     init();
