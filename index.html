@@ -41,16 +41,14 @@
       <button onclick="showCreativeSub()" class="px-6 py-3 bg-zinc-800 hover:bg-amber-600 rounded-2xl text-sm">🎨 Creative Corner</button>
     </div>
 
-    <!-- VILLAGE SQUARE (NOW FIXED) -->
+    <!-- VILLAGE SQUARE -->
     <div id="tab0" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-10">
         <h2 class="text-4xl mb-8 text-center">💫 Village Square</h2>
         <div id="feed" class="space-y-6 mb-8"></div>
         
-        <textarea id="new-post" rows="3" placeholder="Share hope, a song, a prayer..." 
-                  class="w-full bg-zinc-800 p-6 rounded-3xl"></textarea>
-        <button onclick="postToSquare()" 
-                class="mt-4 w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-3xl font-semibold">
+        <textarea id="new-post" rows="3" placeholder="Share hope, a song, a prayer..." class="w-full bg-zinc-800 p-6 rounded-3xl"></textarea>
+        <button onclick="postToSquare()" class="mt-4 w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-3xl font-semibold">
           Share with the Village
         </button>
       </div>
@@ -63,8 +61,7 @@
         <div class="bg-black/60 border border-pink-500/30 rounded-3xl p-8 mb-10 text-center">
           <p class="text-pink-400 text-lg mb-2">Welcome to the Village</p>
           <p class="text-2xl">This is the founder’s vibe. Make it your own.</p>
-          <button onclick="makeThisYours()" 
-                  class="mt-6 bg-pink-600 hover:bg-pink-700 px-10 py-4 rounded-3xl text-lg font-semibold">
+          <button onclick="makeThisYours()" class="mt-6 bg-pink-600 hover:bg-pink-700 px-10 py-4 rounded-3xl text-lg font-semibold">
             ✨ Make This Your Space
           </button>
         </div>
@@ -94,32 +91,32 @@
             <h4 class="font-bold mb-3 text-pink-400">My Tribe (Top 8)</h4>
             <div class="space-y-1 text-sm">
               <div>@tryamourstar <span class="text-pink-400 text-xs">(Founder • Your first fan)</span></div>
-              <div>@bestie1</div>
-              <div>@musicbro</div>
-              <div>@chillvibes</div>
-              <div>@scenequeen</div>
-              <div>@lofiaddict</div>
-              <div>@nightowl</div>
-              <div>@dreamer</div>
+              <div>@bestie1</div><div>@musicbro</div><div>@chillvibes</div><div>@scenequeen</div>
+              <div>@lofiaddict</div><div>@nightowl</div><div>@dreamer</div>
             </div>
           </div>
           <div class="bg-black p-6 rounded-2xl">
             <h4 class="font-bold mb-3 text-purple-400">Top Fans</h4>
             <div class="space-y-1 text-sm">
-              <div>@fan1 • 124 loves</div>
-              <div>@fan2 • 89 loves</div>
-              <div>@fan3 • 67 loves</div>
+              <div>@fan1 • 124 loves</div><div>@fan2 • 89 loves</div><div>@fan3 • 67 loves</div>
             </div>
           </div>
         </div>
 
-        <!-- My Jams (Pre-loaded with your songs) -->
+        <!-- My Jams (NOW PLAYABLE) -->
         <h3 class="text-2xl mt-10 mb-4">🎵 My Jams</h3>
         <div class="flex gap-3 mb-4">
           <button onclick="addSong()" class="bg-pink-600 px-5 py-2 rounded-2xl text-sm">+ Add Song</button>
           <button onclick="clearJamsQueue()" class="bg-zinc-700 px-5 py-2 rounded-2xl text-sm">Clear Queue</button>
         </div>
         <div id="playlist" class="space-y-3 mb-4"></div>
+
+        <!-- Music Player Area -->
+        <div id="music-player-area" class="hidden mb-6">
+          <h4 class="font-semibold mb-2">Now Playing</h4>
+          <div id="youtube-player" class="rounded-3xl overflow-hidden"></div>
+        </div>
+
         <h4 class="font-semibold mb-2">Queue</h4>
         <div id="jams-queue" class="bg-black p-4 rounded-2xl min-h-[70px] mb-6 text-sm"></div>
 
@@ -139,14 +136,11 @@
         <div id="room-area" class="hidden">
           <button onclick="exitRoom()" class="text-red-400 mb-6">← Leave Room</button>
           <h3 id="room-name" class="text-3xl mb-6"></h3>
-          <iframe id="music-player" width="100%" height="320" class="rounded-3xl mb-8" frameborder="0" allowfullscreen></iframe>
-
           <div class="mb-6">
             <h4 class="font-bold mb-2">Music Queue</h4>
             <div id="live-queue" class="bg-black p-4 rounded-2xl min-h-[70px] mb-3 text-sm"></div>
             <button onclick="addToLiveQueue()" class="bg-purple-600 px-5 py-2 rounded-2xl text-sm">+ Add to Queue</button>
           </div>
-
           <div>
             <h4 class="font-bold mb-3">Live Chat</h4>
             <div id="chat-log" class="h-72 overflow-y-auto bg-black p-4 rounded-3xl mb-4"></div>
@@ -244,7 +238,7 @@
     </div>
   </div>
 
-  <!-- RIVERS OF EDEN MODALS -->
+  <!-- RIVERS OF EDEN MODALS (All 4) -->
   <!-- Pishon -->
   <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-amber-900 to-yellow-900 rounded-3xl max-w-3xl w-full p-8">
@@ -335,7 +329,7 @@
   </div>
 
   <script>
-    // ==================== JAVASCRIPT ====================
+    // ==================== JAVASCRIPT WITH PERSISTENCE + PLAYABLE SONGS ====================
 
     function switchTab(n) {
       document.getElementById('creative-sub').classList.add('hidden');
@@ -359,8 +353,8 @@
       if (mood) document.getElementById('mood').innerHTML = `Currently vibing to: ${mood}`;
     }
 
-    // Village Square (FIXED)
-    let feedPosts = [];
+    // ==================== VILLAGE SQUARE (with persistence) ====================
+    let feedPosts = JSON.parse(localStorage.getItem('feedPosts')) || [];
 
     function postToSquare() {
       const input = document.getElementById('new-post');
@@ -371,6 +365,7 @@
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       });
 
+      localStorage.setItem('feedPosts', JSON.stringify(feedPosts));
       input.value = '';
       renderFeed();
     }
@@ -381,7 +376,7 @@
         container.innerHTML = `<p class="text-center text-gray-400 py-8">The Square is quiet right now. Be the first to share hope.</p>`;
         return;
       }
-      container.innerHTML = feedPosts.map(post => `
+      container.innerHTML = feedPosts.map((post, index) => `
         <div class="bg-zinc-800 p-6 rounded-2xl">
           <p class="mb-2">${post.text}</p>
           <p class="text-xs text-gray-400 text-right">${post.time}</p>
@@ -389,15 +384,16 @@
       `).join('');
     }
 
-    // My Jams (Pre-loaded with your songs)
-    let myJams = [
-      { title: "Phoenix", artist: "For Today" },
-      { title: "Seraphim", artist: "For Today" },
-      { title: "Tithemi", artist: "Sleeping Giants" },
-      { title: "All Around Me", artist: "Flyleaf" },
-      { title: "Talmidim", artist: "For Today" }
+    // ==================== MY JAMS + PLAYABLE SONGS ====================
+    let myJams = JSON.parse(localStorage.getItem('myJams')) || [
+      { title: "Phoenix", artist: "For Today", videoId: "RFmVXa6FOSk" },
+      { title: "Seraphim", artist: "For Today", videoId: "hcF12UXHCAE" },
+      { title: "Tithemi", artist: "Sleeping Giants", videoId: "RdxdnVqn08E" },
+      { title: "All Around Me", artist: "Flyleaf", videoId: "xN0FFK8JSYE" },
+      { title: "Talmidim", artist: "For Today", videoId: "4tOLCDYyOvM" }
     ];
-    let jamsQueue = [...myJams];
+
+    let jamsQueue = JSON.parse(localStorage.getItem('jamsQueue')) || [...myJams];
 
     function renderJams() {
       const container = document.getElementById('playlist');
@@ -405,6 +401,7 @@
         <div class="flex justify-between items-center bg-zinc-800 p-4 rounded-2xl">
           <span>${song.title} — ${song.artist}</span>
           <div class="flex gap-2">
+            <button onclick="playSong(${i})" class="bg-green-600 px-4 py-1 rounded-xl text-sm">▶ Play</button>
             <button onclick="addToJamsQueue(${i})" class="bg-purple-600 px-3 py-1 rounded-xl text-sm">Queue</button>
             <button onclick="deleteSong(${i})" class="bg-red-600 px-3 py-1 rounded-xl text-sm">×</button>
           </div>
@@ -412,8 +409,22 @@
       `).join('');
     }
 
+    function playSong(index) {
+      const song = myJams[index];
+      const playerArea = document.getElementById('music-player-area');
+      const playerContainer = document.getElementById('youtube-player');
+
+      playerContainer.innerHTML = `
+        <iframe width="100%" height="315" 
+                src="https://www.youtube-nocookie.com/embed/${song.videoId}?autoplay=1" 
+                frameborder="0" allowfullscreen></iframe>
+      `;
+      playerArea.classList.remove('hidden');
+    }
+
     function addToJamsQueue(i) {
       jamsQueue.push(myJams[i]);
+      localStorage.setItem('jamsQueue', JSON.stringify(jamsQueue));
       renderJamsQueue();
     }
 
@@ -426,21 +437,27 @@
 
     function clearJamsQueue() {
       jamsQueue = [];
+      localStorage.setItem('jamsQueue', JSON.stringify(jamsQueue));
       renderJamsQueue();
     }
 
     function deleteSong(i) {
       myJams.splice(i, 1);
+      localStorage.setItem('myJams', JSON.stringify(myJams));
       renderJams();
     }
 
-    // Photos
-    let photoCount = 0;
+    // ==================== PHOTOS ====================
+    let photoCount = parseInt(localStorage.getItem('photoCount')) || 0;
+
     function uploadPhoto() {
       if (photoCount >= 20) return alert("Maximum 20 photos reached!");
       photoCount++;
+      localStorage.setItem('photoCount', photoCount);
+
       const grid = document.getElementById('photos-grid');
       const id = photoCount;
+
       grid.innerHTML += `
         <div class="bg-zinc-800 rounded-3xl p-4">
           <img src="https://picsum.photos/id/${200 + photoCount}/600/400" class="rounded-2xl w-full">
@@ -456,6 +473,7 @@
           <div id="comments-${id}" class="mt-6 space-y-3 text-sm"></div>
         </div>`;
     }
+
     function addReaction(id, emoji) { alert(`You reacted with ${emoji}`); }
     function postComment(id) {
       const input = document.getElementById(`comment-input-${id}`);
@@ -465,7 +483,7 @@
       input.value = '';
     }
 
-    // Live Rooms
+    // ==================== LIVE ROOMS ====================
     let liveQueue = [];
     function createRoom() {
       const name = prompt("Name your room?", "Prophetic Worship & Prayer");
@@ -494,7 +512,7 @@
       input.value = '';
     }
 
-    // Creative Corner
+    // ==================== CREATIVE CORNER ====================
     function openCreativeSection(type) {
       const modal = document.getElementById('creative-modal');
       const title = document.getElementById('creative-title');
@@ -510,10 +528,10 @@
       modal.classList.remove('flex'); modal.classList.add('hidden');
     }
 
-    // Rivers of Eden
-    let riverPosts = { pishon: [], gihon: [], tigris: [], euphrates: [] };
-    let givingCount = 0;
-    let currentBadgeLevel = 'none';
+    // ==================== RIVERS OF EDEN + BADGE SYSTEM ====================
+    let riverPosts = JSON.parse(localStorage.getItem('riverPosts')) || { pishon: [], gihon: [], tigris: [], euphrates: [] };
+    let givingCount = parseInt(localStorage.getItem('givingCount')) || 0;
+    let currentBadgeLevel = localStorage.getItem('currentBadgeLevel') || 'none';
 
     function openRiverModal(river) {
       document.getElementById(river + '-modal').classList.remove('hidden');
@@ -531,6 +549,7 @@
       const isPracticalNeed = river === 'pishon' && document.getElementById('pishon-need-help')?.checked;
       const post = { id: Date.now(), burden: input.value.trim(), isPracticalNeed, responses: [], time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
       riverPosts[river].unshift(post);
+      localStorage.setItem('riverPosts', JSON.stringify(riverPosts));
       input.value = '';
       if (river === 'pishon') document.getElementById('pishon-need-help').checked = false;
       renderRiverFeed(river);
@@ -578,10 +597,13 @@
 
     function giveToPost(postId, amount) {
       givingCount++;
+      localStorage.setItem('givingCount', givingCount);
       showThankYouCard();
+
       const newLevel = getBadgeLevel(givingCount);
       if (newLevel !== currentBadgeLevel) {
         currentBadgeLevel = newLevel;
+        localStorage.setItem('currentBadgeLevel', currentBadgeLevel);
         setTimeout(() => showBadgeUnlock(newLevel), 1800);
       }
     }
@@ -633,6 +655,7 @@
       const post = riverPosts[river].find(p => p.id === postId);
       if (!post) return;
       post.responses.push({ text: input.value.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+      localStorage.setItem('riverPosts', JSON.stringify(riverPosts));
       input.value = '';
       renderResponses(river, postId);
     }
@@ -650,11 +673,12 @@
       `).join('');
     }
 
+    // ==================== INIT ====================
     function init() {
+      renderFeed();
       renderJams();
       renderJamsQueue();
-      renderFeed();
-      switchTab(1); // Start on My Tribe (your profile)
+      switchTab(1); // Start on My Tribe
     }
 
     init();
