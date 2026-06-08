@@ -11,7 +11,6 @@
     body { font-family: 'Inter', system-ui, sans-serif; }
     h1, h2, h3 { font-family: 'Playfair Display', sans-serif; }
     .neon-pink { text-shadow: 0 0 20px #ec4899; }
-    .river-card { transition: all 0.3s ease; }
   </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
@@ -97,7 +96,7 @@
           </div>
         </div>
 
-        <!-- My Jams (RESTORED) -->
+        <!-- My Jams (FULLY RESTORED) -->
         <h3 class="text-2xl mt-10 mb-4">🎵 My Jams</h3>
         <div class="flex gap-3 mb-4">
           <button onclick="addSong()" class="bg-pink-600 px-5 py-2 rounded-2xl text-sm">+ Add Song</button>
@@ -113,14 +112,14 @@
         <h4 class="font-semibold mb-2">Queue</h4>
         <div id="jams-queue" class="bg-black p-4 rounded-2xl min-h-[70px] mb-6 text-sm"></div>
 
-        <!-- Photos & Videos -->
+        <!-- Photos & Videos (RESTORED) -->
         <h3 class="text-2xl mt-10 mb-4">📸 Photos & Videos</h3>
-        <p class="text-gray-400 text-sm mb-4">This section is open for you to add your own uploads.</p>
+        <button onclick="uploadPhoto()" class="bg-pink-600 px-6 py-3 rounded-2xl mb-6">+ Upload Photo</button>
         <div id="photos-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6"></div>
       </div>
     </div>
 
-    <!-- LIVE ROOMS (RESTORED) -->
+    <!-- LIVE ROOMS (PLAYER RESTORED) -->
     <div id="tab2" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-10">
         <h2 class="text-4xl mb-6">🎙️ Live Rooms</h2>
@@ -129,6 +128,11 @@
         <div id="room-area" class="hidden">
           <button onclick="exitRoom()" class="text-red-400 mb-6">← Leave Room</button>
           <h3 id="room-name" class="text-3xl mb-6"></h3>
+
+          <div class="mb-6">
+            <h4 class="font-bold mb-2">Now Playing</h4>
+            <div id="live-player" class="rounded-3xl overflow-hidden mb-4"></div>
+          </div>
 
           <div class="mb-6">
             <h4 class="font-bold mb-2">Music Queue</h4>
@@ -156,7 +160,7 @@
       </div>
     </div>
 
-    <!-- RIVERS OF EDEN (RESTORED) -->
+    <!-- RIVERS OF EDEN -->
     <div id="tab4" class="tab-content hidden">
       <div class="text-center mb-10">
         <h2 class="text-5xl font-bold mb-4">🌊 Rivers of Eden</h2>
@@ -233,7 +237,10 @@
     </div>
   </div>
 
-  <!-- RIVERS OF EDEN MODALS -->
+  <!-- RIVERS OF EDEN MODALS (same as last working version) -->
+  <!-- Pishon, Gihon, Tigris, Euphrates modals + Thank You + Badge modals are included below -->
+
+  <!-- Pishon Modal -->
   <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-amber-900 to-yellow-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -252,6 +259,7 @@
     </div>
   </div>
 
+  <!-- Gihon Modal -->
   <div id="gihon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-teal-900 to-cyan-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -266,6 +274,7 @@
     </div>
   </div>
 
+  <!-- Tigris Modal -->
   <div id="tigris-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-indigo-900 to-violet-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -280,6 +289,7 @@
     </div>
   </div>
 
+  <!-- Euphrates Modal -->
   <div id="euphrates-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-emerald-900 to-green-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -430,13 +440,43 @@
       renderJams();
     }
 
-    // Photos
-    function renderPhotos() {
-      const container = document.getElementById('photos-grid');
-      container.innerHTML = `<p class="text-gray-400 col-span-full">You can add your own photos here later.</p>`;
+    // Photos & Videos (RESTORED)
+    let photoCount = parseInt(localStorage.getItem('photoCount')) || 0;
+
+    function uploadPhoto() {
+      if (photoCount >= 20) return alert("Maximum 20 photos reached!");
+      photoCount++;
+      localStorage.setItem('photoCount', photoCount);
+
+      const grid = document.getElementById('photos-grid');
+      const id = photoCount;
+
+      grid.innerHTML += `
+        <div class="bg-zinc-800 rounded-3xl p-4">
+          <img src="https://picsum.photos/id/${200 + photoCount}/600/400" class="rounded-2xl w-full h-48 object-cover">
+          <div class="flex gap-4 text-3xl mt-4 justify-center">
+            <button onclick="addReaction(${id}, '🔥')">🔥</button>
+            <button onclick="addReaction(${id}, '🌊')">🌊</button>
+            <button onclick="addReaction(${id}, '🌿')">🌿</button>
+            <button onclick="addReaction(${id}, '🙏')">🙏</button>
+            <button onclick="addReaction(${id}, '❤️')">❤️</button>
+          </div>
+          <input id="comment-input-${id}" placeholder="Write a comment..." class="w-full mt-4 bg-zinc-700 p-3 rounded-2xl">
+          <button onclick="postComment(${id})" class="mt-3 bg-pink-600 px-6 py-2 rounded-xl">Post Comment</button>
+          <div id="comments-${id}" class="mt-6 space-y-3 text-sm"></div>
+        </div>`;
     }
 
-    // Live Rooms (RESTORED)
+    function addReaction(id, emoji) { alert(`You reacted with ${emoji}`); }
+    function postComment(id) {
+      const input = document.getElementById(`comment-input-${id}`);
+      if (!input.value.trim()) return;
+      const div = document.getElementById(`comments-${id}`);
+      div.innerHTML += `<div class="bg-zinc-700 p-3 rounded-2xl"><strong>@you:</strong> ${input.value}</div>`;
+      input.value = '';
+    }
+
+    // Live Rooms (PLAYER RESTORED)
     let liveQueue = [];
 
     function createRoom() {
@@ -444,11 +484,20 @@
       if (name) {
         document.getElementById('room-area').classList.remove('hidden');
         document.getElementById('room-name').textContent = name;
+
+        // Simple player for the room
+        const playerContainer = document.getElementById('live-player');
+        playerContainer.innerHTML = `
+          <iframe width="100%" height="315" 
+                  src="https://www.youtube-nocookie.com/embed/5qap5aO7v9A?autoplay=1" 
+                  frameborder="0" allowfullscreen></iframe>
+        `;
       }
     }
 
     function exitRoom() {
       document.getElementById('room-area').classList.add('hidden');
+      document.getElementById('live-player').innerHTML = '';
     }
 
     function addToLiveQueue() {
@@ -475,7 +524,7 @@
       input.value = '';
     }
 
-    // Creative Corner (STABLE)
+    // Creative Corner
     function openCreativeSection(type) {
       const modal = document.getElementById('creative-modal');
       const title = document.getElementById('creative-title');
@@ -521,7 +570,7 @@
       modal.classList.add('hidden');
     }
 
-    // Rivers of Eden (FULLY RESTORED)
+    // Rivers of Eden
     let riverPosts = JSON.parse(localStorage.getItem('riverPosts')) || { pishon: [], gihon: [], tigris: [], euphrates: [] };
     let givingCount = parseInt(localStorage.getItem('givingCount')) || 0;
     let currentBadgeLevel = localStorage.getItem('currentBadgeLevel') || 'none';
