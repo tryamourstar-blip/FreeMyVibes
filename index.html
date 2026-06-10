@@ -129,7 +129,6 @@
           <button onclick="exitRoom()" class="text-red-400 mb-6">← Leave Room</button>
           <h3 id="room-name" class="text-3xl mb-6"></h3>
 
-          <!-- Live Player -->
           <div class="mb-6">
             <h4 class="font-bold mb-2">Now Playing</h4>
             <div id="live-player" class="rounded-3xl overflow-hidden mb-4"></div>
@@ -373,7 +372,7 @@
       `).join('');
     }
 
-    // My Jams
+    // My Jams - YOUR 5 SONGS
     let myJams = JSON.parse(localStorage.getItem('myJams')) || [
       { title: "Phoenix", artist: "For Today", videoId: "RFmVXa6FOSk" },
       { title: "Seraphim", artist: "For Today", videoId: "hcF12UXHCAE" },
@@ -435,6 +434,17 @@
       renderJams();
     }
 
+    function addSong() {
+      const title = prompt("Song title?");
+      const artist = prompt("Artist?");
+      const videoId = prompt("YouTube video ID (the part after v= in the URL)?");
+      if (title && artist && videoId) {
+        myJams.push({ title, artist, videoId });
+        localStorage.setItem('myJams', JSON.stringify(myJams));
+        renderJams();
+      }
+    }
+
     // Photos
     let photoCount = parseInt(localStorage.getItem('photoCount')) || 0;
 
@@ -480,7 +490,6 @@
         document.getElementById('room-area').classList.remove('hidden');
         document.getElementById('room-name').textContent = name;
 
-        // Add player
         const playerContainer = document.getElementById('live-player');
         playerContainer.innerHTML = `
           <iframe width="100%" height="315" 
@@ -715,7 +724,7 @@
       renderFeed();
       renderJams();
       renderJamsQueue();
-      switchTab(1);
+      switchTab(1); // Start on My Tribe so your songs are visible immediately
     }
 
     init();
