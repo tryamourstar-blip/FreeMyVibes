@@ -480,7 +480,7 @@
         document.getElementById('room-area').classList.remove('hidden');
         document.getElementById('room-name').textContent = name;
 
-        // Add simple player
+        // Add player
         const playerContainer = document.getElementById('live-player');
         playerContainer.innerHTML = `
           <iframe width="100%" height="315" 
@@ -641,4 +641,84 @@
       const newLevel = getBadgeLevel(givingCount);
       if (newLevel !== currentBadgeLevel) {
         currentBadgeLevel = newLevel;
-        localStorage.setItem('currentBadgeLevel
+        localStorage.setItem('currentBadgeLevel', currentBadgeLevel);
+        setTimeout(() => showBadgeUnlock(newLevel), 1800);
+      }
+    }
+
+    function getBadgeLevel(count) {
+      if (count >= 11) return 'harvest';
+      if (count >= 6) return 'bloom';
+      if (count >= 2) return 'sprout';
+      return 'seed';
+    }
+
+    function showThankYouCard() {
+      const modal = document.getElementById('thank-you-modal');
+      const verseEl = document.getElementById('thank-you-verse');
+      const verses = [
+        "Give, and it will be given to you. A good measure, pressed down, shaken together and running over... — Luke 6:38",
+        "The generous will themselves be blessed... — Proverbs 22:9",
+        "God is able to bless you abundantly... — 2 Corinthians 9:8"
+      ];
+      verseEl.innerHTML = verses[Math.floor(Math.random() * verses.length)];
+      modal.classList.remove('hidden'); modal.classList.add('flex');
+    }
+    function closeThankYouModal() {
+      document.getElementById('thank-you-modal').classList.remove('flex');
+      document.getElementById('thank-you-modal').classList.add('hidden');
+    }
+
+    function showBadgeUnlock(level) {
+      const modal = document.getElementById('badge-unlock-modal');
+      const levelName = document.getElementById('badge-level-name');
+      const description = document.getElementById('badge-description');
+      const skin = document.getElementById('skin-unlocked');
+      if (level === 'seed') { levelName.innerHTML = '🌱 Seed'; description.innerHTML = 'You took your first step of faith at the River.'; skin.innerHTML = 'Golden Seed Skin'; }
+      else if (level === 'sprout') { levelName.innerHTML = '🌿 Sprout'; description.innerHTML = 'Your generosity is growing beautifully.'; skin.innerHTML = 'Sprout Skin'; }
+      else if (level === 'bloom') { levelName.innerHTML = '💜 Bloom'; description.innerHTML = 'You are becoming a cheerful and faithful giver.'; skin.innerHTML = 'Cheerful Giver Skin'; }
+      else if (level === 'harvest') { levelName.innerHTML = '✨ Faithful'; description.innerHTML = 'You have become a mature and consistent sower at the River.'; skin.innerHTML = 'Faithful Harvest Skin'; }
+      modal.classList.remove('hidden'); modal.classList.add('flex');
+    }
+    function closeBadgeUnlockModal() {
+      document.getElementById('badge-unlock-modal').classList.remove('flex');
+      document.getElementById('badge-unlock-modal').classList.add('hidden');
+    }
+
+    function prayForPost(btn) { btn.innerHTML = '❤️ Praying'; btn.disabled = true; setTimeout(() => btn.innerHTML = 'Thank you for praying', 1400); }
+
+    function addResponse(river, postId) {
+      const input = document.getElementById(`response-${river}-${postId}`);
+      if (!input.value.trim()) return;
+      const post = riverPosts[river].find(p => p.id === postId);
+      if (!post) return;
+      post.responses.push({ text: input.value.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+      localStorage.setItem('riverPosts', JSON.stringify(riverPosts));
+      input.value = '';
+      renderResponses(river, postId);
+    }
+
+    function renderResponses(river, postId) {
+      const container = document.getElementById(`responses-${river}-${postId}`);
+      if (!container) return;
+      const post = riverPosts[river].find(p => p.id === postId);
+      if (!post || post.responses.length === 0) { container.innerHTML = ''; return; }
+      container.innerHTML = post.responses.map(r => `
+        <div class="bg-zinc-800/60 p-3 rounded-xl text-sm">
+          <p>${r.text}</p>
+          <p class="text-xs text-gray-400 mt-1 text-right">${r.time}</p>
+        </div>
+      `).join('');
+    }
+
+    function init() {
+      renderFeed();
+      renderJams();
+      renderJamsQueue();
+      switchTab(1);
+    }
+
+    init();
+  </script>
+</body>
+</html>
