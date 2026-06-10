@@ -11,6 +11,8 @@
     body { font-family: 'Inter', system-ui, sans-serif; }
     h1, h2, h3 { font-family: 'Playfair Display', sans-serif; }
     .neon-pink { text-shadow: 0 0 20px #ec4899; }
+    .river-card { transition: all 0.3s ease; }
+    .river-card:hover { transform: translateY(-6px); }
   </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
@@ -44,8 +46,11 @@
       <div class="bg-zinc-900 rounded-3xl p-10">
         <h2 class="text-4xl mb-8 text-center">💫 Village Square</h2>
         <div id="feed" class="space-y-6 mb-8"></div>
+        
         <textarea id="new-post" rows="3" placeholder="Share hope, a song, a prayer..." class="w-full bg-zinc-800 p-6 rounded-3xl"></textarea>
-        <button onclick="postToSquare()" class="mt-4 w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-3xl font-semibold">Share with the Village</button>
+        <button onclick="postToSquare()" class="mt-4 w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-3xl font-semibold">
+          Share with the Village
+        </button>
       </div>
     </div>
 
@@ -56,11 +61,13 @@
         <div class="bg-black/60 border border-pink-500/30 rounded-3xl p-8 mb-10 text-center">
           <p class="text-pink-400 text-lg mb-2">Welcome to the Village</p>
           <p class="text-2xl">This is the founder’s vibe. Make it your own.</p>
-          <button onclick="makeThisYours()" class="mt-6 bg-pink-600 hover:bg-pink-700 px-10 py-4 rounded-3xl text-lg font-semibold">✨ Make This Your Space</button>
+          <button onclick="makeThisYours()" class="mt-6 bg-pink-600 hover:bg-pink-700 px-10 py-4 rounded-3xl text-lg font-semibold">
+            ✨ Make This Your Space
+          </button>
         </div>
 
         <div class="flex gap-8 items-end mb-10">
-          <img src="images/Profile.jpg" class="w-52 h-52 rounded-3xl border-4 border-pink-500 object-cover">
+          <img src="https://picsum.photos/id/64/200" class="w-52 h-52 rounded-3xl border-4 border-pink-500">
           <div>
             <h3 id="username" class="text-5xl font-bold">@tryamourstar</h3>
             <p id="mood" class="text-sky-400 text-2xl">Currently vibing to: Double Pedal Jesus Metal 🔥</p>
@@ -83,20 +90,20 @@
           <div class="bg-black p-6 rounded-2xl">
             <h4 class="font-bold mb-3 text-pink-400">My Tribe (Top 8)</h4>
             <div class="space-y-1 text-sm">
+              <div>@tryamourstar <span class="text-pink-400 text-xs">(Founder • Your first fan)</span></div>
               <div>@bestie1</div><div>@musicbro</div><div>@chillvibes</div><div>@scenequeen</div>
-              <div>@lofiaddict</div><div>@nightowl</div><div>@dreamer</div><div>@echoangel</div>
+              <div>@lofiaddict</div><div>@nightowl</div><div>@dreamer</div>
             </div>
           </div>
           <div class="bg-black p-6 rounded-2xl">
             <h4 class="font-bold mb-3 text-purple-400">Top Fans</h4>
             <div class="space-y-1 text-sm">
-              <div>@tryamourstar <span class="text-pink-400 text-xs">(Founder • Your first fan)</span></div>
               <div>@fan1 • 124 loves</div><div>@fan2 • 89 loves</div><div>@fan3 • 67 loves</div>
             </div>
           </div>
         </div>
 
-        <!-- My Jams -->
+        <!-- My Jams (NOW PLAYABLE) -->
         <h3 class="text-2xl mt-10 mb-4">🎵 My Jams</h3>
         <div class="flex gap-3 mb-4">
           <button onclick="addSong()" class="bg-pink-600 px-5 py-2 rounded-2xl text-sm">+ Add Song</button>
@@ -104,6 +111,7 @@
         </div>
         <div id="playlist" class="space-y-3 mb-4"></div>
 
+        <!-- Music Player Area -->
         <div id="music-player-area" class="hidden mb-6">
           <h4 class="font-semibold mb-2">Now Playing</h4>
           <div id="youtube-player" class="rounded-3xl overflow-hidden"></div>
@@ -112,7 +120,7 @@
         <h4 class="font-semibold mb-2">Queue</h4>
         <div id="jams-queue" class="bg-black p-4 rounded-2xl min-h-[70px] mb-6 text-sm"></div>
 
-        <!-- Photos & Videos -->
+        <!-- Photos -->
         <h3 class="text-2xl mt-10 mb-4">📸 Photos & Videos</h3>
         <button onclick="uploadPhoto()" class="bg-pink-600 px-6 py-3 rounded-2xl mb-6">+ Upload Photo</button>
         <div id="photos-grid" class="grid grid-cols-2 md:grid-cols-3 gap-6"></div>
@@ -128,19 +136,11 @@
         <div id="room-area" class="hidden">
           <button onclick="exitRoom()" class="text-red-400 mb-6">← Leave Room</button>
           <h3 id="room-name" class="text-3xl mb-6"></h3>
-
-          <!-- Live Player -->
-          <div class="mb-6">
-            <h4 class="font-bold mb-2">Now Playing</h4>
-            <div id="live-player" class="rounded-3xl overflow-hidden mb-4"></div>
-          </div>
-
           <div class="mb-6">
             <h4 class="font-bold mb-2">Music Queue</h4>
             <div id="live-queue" class="bg-black p-4 rounded-2xl min-h-[70px] mb-3 text-sm"></div>
             <button onclick="addToLiveQueue()" class="bg-purple-600 px-5 py-2 rounded-2xl text-sm">+ Add to Queue</button>
           </div>
-
           <div>
             <h4 class="font-bold mb-3">Live Chat</h4>
             <div id="chat-log" class="h-72 overflow-y-auto bg-black p-4 rounded-3xl mb-4"></div>
@@ -203,6 +203,11 @@
     <div id="creative-sub" class="hidden bg-zinc-900 rounded-3xl p-10">
       <h2 class="text-4xl mb-8 text-center">🎨 Creative Corner</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div onclick="openCreativeSection('coffee')" class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
+          <div class="text-6xl mb-4">☕</div>
+          <h4 class="font-bold">Coffee House Lounge</h4>
+          <p class="text-sm text-gray-400">Poetry • Stories • Open Mic</p>
+        </div>
         <div onclick="openCreativeSection('art')" class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
           <div class="text-6xl mb-4">🎨</div>
           <h4 class="font-bold">Art Easel</h4>
@@ -211,12 +216,7 @@
         <div onclick="openCreativeSection('rocks')" class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
           <div class="text-6xl mb-4">🪨</div>
           <h4 class="font-bold">God’s Creations</h4>
-          <p class="text-sm text-gray-400">Rocks • Crystals • Nature Finds</p>
-        </div>
-        <div onclick="openCreativeSection('coffee')" class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
-          <div class="text-6xl mb-4">☕</div>
-          <h4 class="font-bold">Coffee House Lounge</h4>
-          <p class="text-sm text-gray-400">Poetry • Stories • Open Mic</p>
+          <p class="text-sm text-gray-400">Rocks • Crystals • Beach Finds</p>
         </div>
         <div onclick="openCreativeSection('music')" class="bg-black p-8 rounded-3xl text-center cursor-pointer hover:scale-105 transition">
           <div class="text-6xl mb-4">🎵</div>
@@ -229,16 +229,17 @@
 
   <!-- Creative Corner Modal -->
   <div id="creative-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-    <div class="bg-zinc-900 rounded-3xl max-w-5xl w-full p-8">
+    <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full p-8">
       <div class="flex justify-between items-center mb-6">
         <h3 id="creative-title" class="text-3xl font-bold"></h3>
         <button onclick="closeCreativeModal()" class="text-4xl text-gray-400 hover:text-white">×</button>
       </div>
-      <div id="creative-content" class="grid grid-cols-2 md:grid-cols-3 gap-6 max-h-[70vh] overflow-auto pr-2"></div>
+      <div id="creative-content" class="text-gray-300"></div>
     </div>
   </div>
 
-  <!-- RIVERS OF EDEN MODALS -->
+  <!-- RIVERS OF EDEN MODALS (All 4) -->
+  <!-- Pishon -->
   <div id="pishon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-amber-900 to-yellow-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -257,6 +258,7 @@
     </div>
   </div>
 
+  <!-- Gihon -->
   <div id="gihon-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-teal-900 to-cyan-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -271,6 +273,7 @@
     </div>
   </div>
 
+  <!-- Tigris -->
   <div id="tigris-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-indigo-900 to-violet-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -285,6 +288,7 @@
     </div>
   </div>
 
+  <!-- Euphrates -->
   <div id="euphrates-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
     <div class="bg-gradient-to-br from-emerald-900 to-green-900 rounded-3xl max-w-3xl w-full p-8">
       <div class="flex justify-between mb-6">
@@ -325,6 +329,8 @@
   </div>
 
   <script>
+    // ==================== JAVASCRIPT WITH PERSISTENCE + PLAYABLE SONGS ====================
+
     function switchTab(n) {
       document.getElementById('creative-sub').classList.add('hidden');
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
@@ -347,13 +353,18 @@
       if (mood) document.getElementById('mood').innerHTML = `Currently vibing to: ${mood}`;
     }
 
-    // Village Square
+    // ==================== VILLAGE SQUARE (with persistence) ====================
     let feedPosts = JSON.parse(localStorage.getItem('feedPosts')) || [];
 
     function postToSquare() {
       const input = document.getElementById('new-post');
       if (!input.value.trim()) return;
-      feedPosts.unshift({ text: input.value.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+
+      feedPosts.unshift({
+        text: input.value.trim(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+
       localStorage.setItem('feedPosts', JSON.stringify(feedPosts));
       input.value = '';
       renderFeed();
@@ -365,7 +376,7 @@
         container.innerHTML = `<p class="text-center text-gray-400 py-8">The Square is quiet right now. Be the first to share hope.</p>`;
         return;
       }
-      container.innerHTML = feedPosts.map(post => `
+      container.innerHTML = feedPosts.map((post, index) => `
         <div class="bg-zinc-800 p-6 rounded-2xl">
           <p class="mb-2">${post.text}</p>
           <p class="text-xs text-gray-400 text-right">${post.time}</p>
@@ -373,7 +384,7 @@
       `).join('');
     }
 
-    // My Jams
+    // ==================== MY JAMS + PLAYABLE SONGS ====================
     let myJams = JSON.parse(localStorage.getItem('myJams')) || [
       { title: "Phoenix", artist: "For Today", videoId: "RFmVXa6FOSk" },
       { title: "Seraphim", artist: "For Today", videoId: "hcF12UXHCAE" },
@@ -402,6 +413,7 @@
       const song = myJams[index];
       const playerArea = document.getElementById('music-player-area');
       const playerContainer = document.getElementById('youtube-player');
+
       playerContainer.innerHTML = `
         <iframe width="100%" height="315" 
                 src="https://www.youtube-nocookie.com/embed/${song.videoId}?autoplay=1" 
@@ -435,7 +447,7 @@
       renderJams();
     }
 
-    // Photos
+    // ==================== PHOTOS ====================
     let photoCount = parseInt(localStorage.getItem('photoCount')) || 0;
 
     function uploadPhoto() {
@@ -448,7 +460,7 @@
 
       grid.innerHTML += `
         <div class="bg-zinc-800 rounded-3xl p-4">
-          <img src="https://picsum.photos/id/${200 + photoCount}/600/400" class="rounded-2xl w-full h-48 object-cover">
+          <img src="https://picsum.photos/id/${200 + photoCount}/600/400" class="rounded-2xl w-full">
           <div class="flex gap-4 text-3xl mt-4 justify-center">
             <button onclick="addReaction(${id}, '🔥')">🔥</button>
             <button onclick="addReaction(${id}, '🌊')">🌊</button>
@@ -471,45 +483,26 @@
       input.value = '';
     }
 
-    // Live Rooms
+    // ==================== LIVE ROOMS ====================
     let liveQueue = [];
-
     function createRoom() {
       const name = prompt("Name your room?", "Prophetic Worship & Prayer");
       if (name) {
         document.getElementById('room-area').classList.remove('hidden');
         document.getElementById('room-name').textContent = name;
-
-        // Add player
-        const playerContainer = document.getElementById('live-player');
-        playerContainer.innerHTML = `
-          <iframe width="100%" height="315" 
-                  src="https://www.youtube-nocookie.com/embed/5qap5aO7v9A?autoplay=1" 
-                  frameborder="0" allowfullscreen></iframe>
-        `;
       }
     }
-
-    function exitRoom() {
-      document.getElementById('room-area').classList.add('hidden');
-      document.getElementById('live-player').innerHTML = '';
-    }
-
+    function exitRoom() { document.getElementById('room-area').classList.add('hidden'); }
     function addToLiveQueue() {
       const song = prompt("Song title?");
-      if (song) {
-        liveQueue.push(song);
-        renderLiveQueue();
-      }
+      if (song) { liveQueue.push(song); renderLiveQueue(); }
     }
-
     function renderLiveQueue() {
       const container = document.getElementById('live-queue');
       container.innerHTML = liveQueue.length 
         ? liveQueue.map((s, i) => `<div>${i+1}. ${s}</div>`).join('')
         : '<p class="text-gray-500 text-sm">Queue is empty</p>';
     }
-
     function sendChatMessage() {
       const input = document.getElementById('chat-input');
       if (!input.value.trim()) return;
@@ -519,53 +512,23 @@
       input.value = '';
     }
 
-    // Creative Corner
+    // ==================== CREATIVE CORNER ====================
     function openCreativeSection(type) {
       const modal = document.getElementById('creative-modal');
       const title = document.getElementById('creative-title');
       const content = document.getElementById('creative-content');
-      content.innerHTML = '';
-
-      if (type === 'art') {
-        title.innerHTML = '🎨 Art Easel';
-        const paintings = ['ArtEasel1.jpg', 'AetEasel2.jpg'];
-        paintings.forEach(file => {
-          content.innerHTML += `
-            <div class="bg-zinc-800 rounded-3xl overflow-hidden">
-              <img src="images/${file}" class="w-full h-64 object-cover">
-            </div>`;
-        });
-      } 
-      else if (type === 'rocks') {
-        title.innerHTML = '🪨 God’s Creations';
-        const rocksNature = ['nature1.jpg','nature2.jpg','nature3.jpg','nature4.jpg','rock1.jpg','rock2.jpg','rock3.jpg','rock4.jpg','rock5.jpg','rock6.jpg'];
-        rocksNature.forEach(file => {
-          content.innerHTML += `
-            <div class="bg-zinc-800 rounded-3xl overflow-hidden">
-              <img src="images/${file}" class="w-full h-64 object-cover">
-            </div>`;
-        });
-      } 
-      else if (type === 'coffee') {
-        title.innerHTML = '☕ Coffee House Lounge';
-        content.innerHTML = `<p class="text-gray-300">Coming soon — poetry, short stories, and open mic nights.</p>`;
-      } 
-      else if (type === 'music') {
-        title.innerHTML = '🎵 Music Studio';
-        content.innerHTML = `<p class="text-gray-300">Coming soon — upload original songs and lyric videos.</p>`;
-      }
-
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      if (type === 'coffee') { title.innerHTML = '☕ Coffee House Lounge'; content.innerHTML = `<p>Coming soon — poetry, stories, open mic.</p>`; }
+      else if (type === 'art') { title.innerHTML = '🎨 Art Easel'; content.innerHTML = `<p>Coming soon — paintings & digital art.</p>`; }
+      else if (type === 'rocks') { title.innerHTML = '🪨 God’s Creations'; content.innerHTML = `<p>Coming soon — rocks, crystals, beach finds.</p>`; }
+      else if (type === 'music') { title.innerHTML = '🎵 Music Studio'; content.innerHTML = `<p>Coming soon — original songs & lyric videos.</p>`; }
+      modal.classList.remove('hidden'); modal.classList.add('flex');
     }
-
     function closeCreativeModal() {
       const modal = document.getElementById('creative-modal');
-      modal.classList.remove('flex');
-      modal.classList.add('hidden');
+      modal.classList.remove('flex'); modal.classList.add('hidden');
     }
 
-    // Rivers of Eden
+    // ==================== RIVERS OF EDEN + BADGE SYSTEM ====================
     let riverPosts = JSON.parse(localStorage.getItem('riverPosts')) || { pishon: [], gihon: [], tigris: [], euphrates: [] };
     let givingCount = parseInt(localStorage.getItem('givingCount')) || 0;
     let currentBadgeLevel = localStorage.getItem('currentBadgeLevel') || 'none';
@@ -575,7 +538,6 @@
       document.getElementById(river + '-modal').classList.add('flex');
       renderRiverFeed(river);
     }
-
     function closeRiverModal(river) {
       document.getElementById(river + '-modal').classList.remove('flex');
       document.getElementById(river + '-modal').classList.add('hidden');
@@ -711,11 +673,12 @@
       `).join('');
     }
 
+    // ==================== INIT ====================
     function init() {
       renderFeed();
       renderJams();
       renderJamsQueue();
-      switchTab(1);
+      switchTab(1); // Start on My Tribe
     }
 
     init();
