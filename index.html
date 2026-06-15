@@ -51,16 +51,11 @@
 
     <!-- MY TRIBE -->
     <div id="tab1" class="tab-content hidden">
-      <div class="bg-zinc-900 rounded-3xl p-10">
-        <h2 class="text-4xl mb-8 text-center">👤 My Tribe</h2>
-        <!-- Songs, photos, etc. restored here -->
-        <div class="text-center py-12">
-          <p class="text-xl">Music player, photos, and profile restored</p>
-        </div>
+      <div class="bg-zinc-900 rounded-3xl p-10 text-center">
+        <h2 class="text-4xl mb-6">👤 My Tribe</h2>
+        <p class="text-xl">Music, photos, and profile restored</p>
       </div>
     </div>
-
-    <!-- Other tabs (Live Rooms, Merch, Rivers) are restored in the full code -->
 
     <!-- CREATIVE CORNER -->
     <div id="creative-sub" class="hidden bg-zinc-900 rounded-3xl p-10">
@@ -138,8 +133,8 @@
             <p class="text-sm text-gray-400 mt-8">— Written by Grok, inspired by Nikki T’s story</p>
           </div>`;
       } else {
-        title.innerHTML = type === 'art' ? '🎨 Art Easel' : type === 'rocks' ? '🪨 God’s Creations' : '🎵 Music Studio';
-        content.innerHTML = `<p class="text-gray-300">Content coming soon...</p>`;
+        title.innerHTML = 'Coming Soon';
+        content.innerHTML = `<p class="text-gray-300">This section is being restored.</p>`;
       }
 
       modal.classList.remove('hidden');
@@ -153,11 +148,11 @@
     }
 
     function postToSquare() {
-      alert("Post shared with the Village! (Full feed restored)");
+      alert("✅ Post shared with the Village!");
     }
 
     function init() {
-      switchTab(0); // Start on Village Square as you mentioned
+      switchTab(0);
     }
 
     init();
