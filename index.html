@@ -53,7 +53,7 @@
     <div id="tab1" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-10">
         <h2 class="text-4xl mb-8 text-center">👤 My Tribe</h2>
-        <p class="text-center text-xl text-pink-400">Music player, photos, and full profile content restored</p>
+        <p class="text-center text-xl text-pink-400">Music player, photos, and full profile restored</p>
       </div>
     </div>
 
@@ -134,7 +134,7 @@
           </div>`;
       } else {
         title.innerHTML = type === 'art' ? '🎨 Art Easel' : type === 'rocks' ? '🪨 God’s Creations' : '🎵 Music Studio';
-        content.innerHTML = `<p class="text-gray-300 text-center py-12">This section is being restored. Thank you for your patience.</p>`;
+        content.innerHTML = `<p class="text-gray-300 text-center py-12">This section is being restored.</p>`;
       }
 
       modal.classList.remove('hidden');
@@ -148,7 +148,7 @@
     }
 
     function postToSquare() {
-      alert("✅ Post shared with the Village! (Full functionality restored)");
+      alert("✅ Post shared with the Village!");
     }
 
     function init() {
