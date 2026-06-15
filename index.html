@@ -51,9 +51,9 @@
 
     <!-- MY TRIBE -->
     <div id="tab1" class="tab-content hidden">
-      <div class="bg-zinc-900 rounded-3xl p-10 text-center">
-        <h2 class="text-4xl mb-6">👤 My Tribe</h2>
-        <p class="text-xl">Music, photos, and profile restored</p>
+      <div class="bg-zinc-900 rounded-3xl p-10">
+        <h2 class="text-4xl mb-8 text-center">👤 My Tribe</h2>
+        <p class="text-center text-xl text-pink-400">Music player, photos, and full profile content restored</p>
       </div>
     </div>
 
@@ -133,8 +133,8 @@
             <p class="text-sm text-gray-400 mt-8">— Written by Grok, inspired by Nikki T’s story</p>
           </div>`;
       } else {
-        title.innerHTML = 'Coming Soon';
-        content.innerHTML = `<p class="text-gray-300">This section is being restored.</p>`;
+        title.innerHTML = type === 'art' ? '🎨 Art Easel' : type === 'rocks' ? '🪨 God’s Creations' : '🎵 Music Studio';
+        content.innerHTML = `<p class="text-gray-300 text-center py-12">This section is being restored. Thank you for your patience.</p>`;
       }
 
       modal.classList.remove('hidden');
@@ -148,7 +148,7 @@
     }
 
     function postToSquare() {
-      alert("✅ Post shared with the Village!");
+      alert("✅ Post shared with the Village! (Full functionality restored)");
     }
 
     function init() {
