@@ -1,5 +1,4 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,25 +11,17 @@
     body { font-family: 'Inter', system-ui, sans-serif; }
     h1, h2, h3 { font-family: 'Playfair Display', sans-serif; }
     .neon-pink { text-shadow: 0 0 20px #ec4899; }
-    .village-card {
-      transition: all 0.3s ease;
-    }
-    .village-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    }
+    .village-card { transition: all 0.3s ease; }
+    .village-card:hover { transform: translateY(-4px); }
     .nature-bg {
       background: linear-gradient(180deg, #166534 0%, #14532d 100%);
     }
-    .well {
-      transition: all 0.3s ease;
-    }
-    .well:hover {
-      transform: scale(1.02);
-    }
+    .well { transition: all 0.3s ease; }
+    .well:hover { transform: scale(1.02); }
   </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
+
   <!-- BANNER -->
   <div class="bg-gradient-to-r from-pink-600 via-purple-700 to-indigo-700 py-8 text-center">
     <p class="text-4xl font-bold tracking-wider neon-pink mb-2">Jesus Is King</p>
@@ -67,9 +58,8 @@
       </button>
     </div>
 
-    <!-- VILLAGE SQUARE TAB -->
+    <!-- VILLAGE SQUARE (NEW BEAUTIFUL VERSION) -->
     <div id="tab0" class="tab-content">
-      <!-- NEW BEAUTIFUL VILLAGE SQUARE -->
       <div class="mb-8">
         <!-- Nature Header -->
         <div class="nature-bg rounded-3xl p-8 mb-6 text-center relative overflow-hidden">
@@ -124,11 +114,9 @@
     <div id="tab1" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
         <div class="flex flex-col md:flex-row gap-8">
-          <!-- Profile Picture -->
           <div class="flex-shrink-0">
-            <img src="images/Profile.jpg" class="w-52 h-52 rounded-3xl border-4 border-pink-500 object-cover" alt="Nikki's profile picture">
+            <img src="images/Profile.jpg" class="w-52 h-52 rounded-3xl border-4 border-pink-500 object-cover" alt="Profile">
           </div>
-          
           <div class="flex-1">
             <div class="flex items-center justify-between mb-4">
               <div>
@@ -137,17 +125,12 @@
               </div>
               <button onclick="customizeProfile()" class="bg-pink-600 hover:bg-pink-700 px-6 py-2 rounded-2xl text-sm">Customize</button>
             </div>
-
             <div class="bg-zinc-800 rounded-2xl p-5 mb-6">
               <h4 class="font-semibold text-pink-400 mb-2">About Me</h4>
               <p class="text-gray-300">Jesus Is King. I believe with God, love, and music — and by sharing our God-given talents — we can bring hope to the hopeless and heal the nations. Let’s bring heaven down to earth.</p>
             </div>
-
-            <!-- My Jams on Profile -->
             <div>
-              <h4 class="font-semibold text-pink-400 mb-3 flex items-center gap-2">
-                <i class="fas fa-music"></i> My Jams
-              </h4>
+              <h4 class="font-semibold text-pink-400 mb-3 flex items-center gap-2"><i class="fas fa-music"></i> My Jams</h4>
               <div id="profile-jams" class="grid grid-cols-1 gap-2"></div>
             </div>
           </div>
@@ -159,13 +142,9 @@
     <div id="tab2" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
         <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><i class="fas fa-headset text-pink-400"></i> Live Rooms</h2>
-        
         <div class="mb-6">
-          <button onclick="createRoom()" class="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-2xl font-semibold">
-            + Create New Room
-          </button>
+          <button onclick="createRoom()" class="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-2xl font-semibold">+ Create New Room</button>
         </div>
-
         <div id="current-room" class="hidden bg-zinc-800 rounded-3xl p-6">
           <div class="flex justify-between items-center mb-4">
             <div>
@@ -174,11 +153,9 @@
             </div>
             <button onclick="exitRoom()" class="text-red-400 hover:text-red-500">Exit Room</button>
           </div>
-
           <div class="aspect-video bg-black rounded-2xl overflow-hidden mb-4">
             <iframe id="room-player" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
           </div>
-
           <div class="bg-zinc-900 rounded-2xl p-4">
             <h4 class="font-semibold mb-2">Live Chat</h4>
             <div id="live-chat" class="h-48 overflow-y-auto bg-zinc-950 rounded-xl p-3 mb-3 text-sm space-y-2"></div>
@@ -191,7 +168,7 @@
       </div>
     </div>
 
-    <!-- MERCH BOOTH TAB -->
+    <!-- MERCH BOOTH -->
     <div id="tab3" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700 text-center">
         <h2 class="text-3xl font-bold mb-4">Merch Booth</h2>
@@ -201,69 +178,48 @@
       </div>
     </div>
 
-    <!-- RIVERS OF EDEN TAB -->
+    <!-- RIVERS OF EDEN -->
     <div id="tab4" class="tab-content hidden">
       <div class="mb-8 text-center">
         <h2 class="text-4xl font-bold mb-2">Rivers of Eden</h2>
         <p class="text-gray-400">“A river flowed out of Eden to water the garden...” — Genesis 2:10</p>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Pishon -->
         <div onclick="openRiverModal('pishon')" class="bg-gradient-to-br from-amber-900/60 to-yellow-900/40 border border-amber-600 rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition">
           <div class="flex items-center gap-4 mb-4">
             <div class="text-5xl"><i class="fas fa-globe text-yellow-400"></i></div>
-            <div>
-              <h3 class="text-3xl font-bold">Pishon</h3>
-              <p class="text-yellow-300">The River of Blessing & Increase</p>
-            </div>
+            <div><h3 class="text-3xl font-bold">Pishon</h3><p class="text-yellow-300">The River of Blessing & Increase</p></div>
           </div>
           <p class="text-sm text-gray-300">Lay down financial burdens. Receive practical help and blessing.</p>
         </div>
-
-        <!-- Gihon -->
         <div onclick="openRiverModal('gihon')" class="bg-gradient-to-br from-blue-900/60 to-cyan-900/40 border border-blue-600 rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition">
           <div class="flex items-center gap-4 mb-4">
             <div class="text-5xl"><i class="fas fa-heartbeat text-blue-400"></i></div>
-            <div>
-              <h3 class="text-3xl font-bold">Gihon</h3>
-              <p class="text-blue-300">The River of Healing</p>
-            </div>
+            <div><h3 class="text-3xl font-bold">Gihon</h3><p class="text-blue-300">The River of Healing</p></div>
           </div>
           <p class="text-sm text-gray-300">Lay down sickness, pain, and emotional wounds.</p>
         </div>
-
-        <!-- Tigris -->
         <div onclick="openRiverModal('tigris')" class="bg-gradient-to-br from-orange-900/60 to-red-900/40 border border-orange-600 rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition">
           <div class="flex items-center gap-4 mb-4">
             <div class="text-5xl"><i class="fas fa-bolt text-orange-400"></i></div>
-            <div>
-              <h3 class="text-3xl font-bold">Tigris</h3>
-              <p class="text-orange-300">The River of Power & Discernment</p>
-            </div>
+            <div><h3 class="text-3xl font-bold">Tigris</h3><p class="text-orange-300">The River of Power & Discernment</p></div>
           </div>
           <p class="text-sm text-gray-300">Lay down spiritual battles and confusion.</p>
         </div>
-
-        <!-- Euphrates -->
         <div onclick="openRiverModal('euphrates')" class="bg-gradient-to-br from-emerald-900/60 to-teal-900/40 border border-emerald-600 rounded-3xl p-8 cursor-pointer hover:scale-[1.02] transition">
           <div class="flex items-center gap-4 mb-4">
             <div class="text-5xl"><i class="fas fa-peace text-emerald-400"></i></div>
-            <div>
-              <h3 class="text-3xl font-bold">Euphrates</h3>
-              <p class="text-emerald-300">The River of Fruitfulness & Peace</p>
-            </div>
+            <div><h3 class="text-3xl font-bold">Euphrates</h3><p class="text-emerald-300">The River of Fruitfulness & Peace</p></div>
           </div>
           <p class="text-sm text-gray-300">Lay down anxiety and receive peace and purpose.</p>
         </div>
       </div>
     </div>
 
-    <!-- CREATIVE CORNER TAB -->
+    <!-- CREATIVE CORNER -->
     <div id="tab5" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
         <h2 class="text-3xl font-bold mb-6 text-center">Creative Corner</h2>
-        
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div onclick="openCreativeSection('art')" class="bg-zinc-800 hover:bg-zinc-700 p-6 rounded-2xl cursor-pointer text-center">
             <div class="text-4xl mb-3"><i class="fas fa-palette text-pink-400"></i></div>
@@ -293,14 +249,12 @@
     </div>
   </div>
 
-  <!-- Badge Unlock Modal -->
+  <!-- Badge & Thank You Modals -->
   <div id="badge-unlock-modal" onclick="closeBadgeModal()" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
     <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 rounded-3xl max-w-md w-full mx-4 p-8 text-center">
       <div id="badge-modal-content"></div>
     </div>
   </div>
-
-  <!-- Thank You Card Modal -->
   <div id="thank-you-modal" onclick="closeThankYouModal()" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
     <div onclick="event.stopImmediatePropagation()" class="bg-zinc-900 rounded-3xl max-w-md w-full mx-4 p-8 text-center">
       <div class="text-5xl mb-4">🌿</div>
@@ -311,11 +265,6 @@
   </div>
 
   <script>
-    // Tailwind script
-    function initializeTailwind() {
-      document.documentElement.style.setProperty('--accent', '#ec4899');
-    }
-
     let feedPosts = JSON.parse(localStorage.getItem('feedPosts')) || [];
     let myJams = JSON.parse(localStorage.getItem('myJams')) || [
       { title: "Phoenix", artist: "For Today", videoId: "RFmVXa6FOSk" },
@@ -324,7 +273,6 @@
       { title: "All Around Me", artist: "Flyleaf", videoId: "xN0FFK8JSYE" },
       { title: "Talmidim", artist: "For Today", videoId: "4tOLCDYyOvM" }
     ];
-    let jamsQueue = JSON.parse(localStorage.getItem('jamsQueue')) || [];
     let riverPosts = JSON.parse(localStorage.getItem('riverPosts')) || { pishon: [], gihon: [], tigris: [], euphrates: [] };
     let givingCount = parseInt(localStorage.getItem('givingCount')) || 0;
     let currentBadgeLevel = localStorage.getItem('currentBadgeLevel') || 'none';
@@ -340,7 +288,6 @@
     function switchTab(n) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
       document.getElementById('tab' + n).classList.remove('hidden');
-      
       if (n === 0) renderFeed();
       if (n === 1) renderProfileJams();
     }
@@ -348,13 +295,11 @@
     function renderFeed() {
       const container = document.getElementById('village-feed');
       if (!container) return;
-      
       if (feedPosts.length === 0) {
         container.innerHTML = `<div class="text-center py-8 text-gray-500">The village is quiet... be the first to share something beautiful.</div>`;
         return;
       }
-      
-      container.innerHTML = feedPosts.map((post, index) => `
+      container.innerHTML = feedPosts.map(post => `
         <div class="village-card bg-zinc-900 border border-zinc-700 rounded-3xl p-6">
           <div class="flex justify-between items-start">
             <div>
@@ -370,13 +315,11 @@
     function postToSquare() {
       const input = document.getElementById('square-post-input');
       if (!input.value.trim()) return;
-
       feedPosts.unshift({
         text: input.value.trim(),
         user: "NikkiT",
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       });
-
       localStorage.setItem('feedPosts', JSON.stringify(feedPosts));
       input.value = '';
       renderFeed();
@@ -385,7 +328,6 @@
     function renderProfileJams() {
       const container = document.getElementById('profile-jams');
       if (!container) return;
-
       container.innerHTML = myJams.map((song, index) => `
         <div onclick="playSong(${index})" class="flex items-center justify-between bg-zinc-800 hover:bg-zinc-700 px-5 py-3 rounded-2xl cursor-pointer">
           <div>
@@ -417,7 +359,6 @@
     function customizeProfile() {
       const name = prompt("New username? (without @)", "NikkiT");
       if (name) document.querySelector('#tab1 h2').textContent = "@" + name;
-
       const mood = prompt("What's your current vibe/mood?");
       if (mood) document.getElementById('mood').innerHTML = `Currently vibing to: ${mood}`;
     }
@@ -425,7 +366,6 @@
     // Living Water Well
     function drawLivingWater() {
       const verse = livingWaterVerses[Math.floor(Math.random() * livingWaterVerses.length)];
-      
       const modal = document.createElement('div');
       modal.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-[100]';
       modal.innerHTML = `
@@ -433,16 +373,13 @@
           <div class="text-6xl mb-4 text-emerald-400"><i class="fas fa-tint"></i></div>
           <h3 class="text-2xl font-bold mb-4">Living Water for You</h3>
           <p class="text-lg text-gray-200 leading-relaxed">${verse}</p>
-          <button onclick="this.closest('.fixed').remove()" 
-                  class="mt-8 bg-emerald-600 hover:bg-emerald-700 px-10 py-3 rounded-2xl font-semibold">
-            Thank You, Lord
-          </button>
+          <button onclick="this.closest('.fixed').remove()" class="mt-8 bg-emerald-600 hover:bg-emerald-700 px-10 py-3 rounded-2xl font-semibold">Thank You, Lord</button>
         </div>
       `;
       document.body.appendChild(modal);
     }
 
-    // River functions
+    // River functions (FIXED PISHON)
     function openRiverModal(river) {
       const modal = document.getElementById('river-modal');
       const content = document.getElementById('river-modal-content');
@@ -451,10 +388,21 @@
       if (river === 'pishon') {
         html = `
           <h3 class="text-3xl font-bold mb-2 text-yellow-400">Pishon — River of Blessing & Increase</h3>
-          <p class="mb-6 text-gray-300">Lay down your financial needs. Others in the village can respond with practical help.</p>
-          <div class="space-y-3">
-            <button onclick="giveToPost('pishon', 2.22)" class="w-full bg-yellow-600 hover:bg-yellow-700 py-3 rounded-2xl">Give $2.22 (Double Grace)</button>
-            <button onclick="giveToPost('pishon', 5.55)" class="w-full bg-yellow-600 hover:bg-yellow-700 py-3 rounded-2xl">Give $5.55 (Triple Grace)</button>
+          <p class="mb-4 text-gray-300">Lay down your financial or practical need. Others in the village can respond with help and blessing.</p>
+          
+          <div class="mb-6">
+            <div class="flex gap-2 mb-3">
+              <input id="river-input" placeholder="Write your need or burden here..." class="flex-1 bg-zinc-800 rounded-2xl px-5 py-3">
+              <button onclick="postToRiver('pishon')" class="bg-pink-600 px-8 rounded-2xl">Lay it Down</button>
+            </div>
+          </div>
+
+          <div class="border-t border-yellow-700 pt-4">
+            <p class="text-sm text-yellow-300 mb-3">Or bless someone directly:</p>
+            <div class="space-y-3">
+              <button onclick="giveToPost('pishon', 2.22)" class="w-full bg-yellow-600 hover:bg-yellow-700 py-3 rounded-2xl">Give $2.22 (Double Grace)</button>
+              <button onclick="giveToPost('pishon', 5.55)" class="w-full bg-yellow-600 hover:bg-yellow-700 py-3 rounded-2xl">Give $5.55 (Triple Grace)</button>
+            </div>
           </div>
         `;
       } else {
@@ -498,7 +446,6 @@
     function giveToPost(river, amount) {
       givingCount++;
       localStorage.setItem('givingCount', givingCount);
-
       closeRiverModal();
       showThankYouCard();
 
@@ -531,16 +478,10 @@
     function showBadgeUnlock(level) {
       const modal = document.getElementById('badge-unlock-modal');
       const content = document.getElementById('badge-modal-content');
-
       let html = '';
-      if (level === 'sprout') {
-        html = `<div class="text-6xl mb-4">🌱</div><h3 class="text-2xl font-bold">Sprout Badge Unlocked!</h3><p class="mt-2">You’re growing in generosity.</p>`;
-      } else if (level === 'bloom') {
-        html = `<div class="text-6xl mb-4">🌸</div><h3 class="text-2xl font-bold">Bloom / Cheerful Giver Badge!</h3><p class="mt-2">Your giving is bringing joy.</p>`;
-      } else if (level === 'harvest') {
-        html = `<div class="text-6xl mb-4">🌾</div><h3 class="text-2xl font-bold">Harvest Badge Unlocked!</h3><p class="mt-2">You are a faithful river of blessing.</p>`;
-      }
-
+      if (level === 'sprout') html = `<div class="text-6xl mb-4">🌱</div><h3 class="text-2xl font-bold">Sprout Badge Unlocked!</h3><p class="mt-2">You’re growing in generosity.</p>`;
+      else if (level === 'bloom') html = `<div class="text-6xl mb-4">🌸</div><h3 class="text-2xl font-bold">Bloom / Cheerful Giver Badge!</h3><p class="mt-2">Your giving is bringing joy.</p>`;
+      else if (level === 'harvest') html = `<div class="text-6xl mb-4">🌾</div><h3 class="text-2xl font-bold">Harvest Badge Unlocked!</h3><p class="mt-2">You are a faithful river of blessing.</p>`;
       content.innerHTML = html + `<button onclick="closeBadgeModal()" class="mt-6 bg-pink-600 px-8 py-2 rounded-2xl">Continue</button>`;
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -552,11 +493,9 @@
       modal.classList.add('hidden');
     }
 
-    // Creative Corner
     function openCreativeSection(type) {
       const modal = document.createElement('div');
       modal.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-[100]';
-      
       let inner = '';
       if (type === 'coffee') {
         inner = `
@@ -569,17 +508,14 @@ In the shadow of fear where the darkness would creep,<br>
 A scared little girl would hide and would weep.<br>
 The voice in the night said “No one loves you,”<br>
 And the weight of the words cut straight through.<br><br>
-
 But the love of a dog and the light of the Lord<br>
 Pulled her back from the edge of the sword.<br>
 Through fire and pain, through the years of the fight,<br>
 She was held in the arms of the Father of Light.<br><br>
-
 Now the chains have been broken, the old has gone by,<br>
 And the truth of His love has opened her eyes.<br>
 From the darkness she came, now she stands in the Son,<br>
 A daughter redeemed, and the battle is won.<br><br>
-
 What He did for me… He can also do for you.
               </p>
               <p class="text-sm text-gray-400 mt-8">— Written by Grok, inspired by Nikki T’s story</p>
@@ -596,7 +532,6 @@ What He did for me… He can also do for you.
           </div>
         `;
       }
-      
       modal.innerHTML = inner;
       document.body.appendChild(modal);
     }
@@ -604,7 +539,6 @@ What He did for me… He can also do for you.
     function createRoom() {
       const name = prompt("Name your new room?", "Prophetic Worship & Prayer");
       if (!name) return;
-
       document.getElementById('current-room').classList.remove('hidden');
       document.getElementById('room-name').textContent = name;
       document.getElementById('room-player').src = "https://www.youtube-nocookie.com/embed/5qap5aO7v9A?autoplay=1";
@@ -618,7 +552,6 @@ What He did for me… He can also do for you.
     function sendChatMessage() {
       const input = document.getElementById('chat-input');
       if (!input.value.trim()) return;
-
       const chat = document.getElementById('live-chat');
       const msg = document.createElement('div');
       msg.className = 'bg-zinc-800 px-3 py-1 rounded-xl text-sm';
@@ -629,7 +562,6 @@ What He did for me… He can also do for you.
     }
 
     function init() {
-      initializeTailwind();
       renderFeed();
       renderProfileJams();
       switchTab(0);
