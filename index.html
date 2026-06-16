@@ -13,9 +13,7 @@
     .neon-pink { text-shadow: 0 0 20px #ec4899; }
     .village-card { transition: all 0.3s ease; }
     .village-card:hover { transform: translateY(-4px); }
-    .nature-bg {
-      background: linear-gradient(180deg, #166534 0%, #14532d 100%);
-    }
+    .nature-bg { background: linear-gradient(180deg, #166534 0%, #14532d 100%); }
     .well { transition: all 0.3s ease; }
     .well:hover { transform: scale(1.02); }
   </style>
@@ -58,7 +56,7 @@
       </button>
     </div>
 
-    <!-- VILLAGE SQUARE (BEAUTIFUL VERSION) -->
+    <!-- VILLAGE SQUARE -->
     <div id="tab0" class="tab-content">
       <div class="mb-8">
         <div class="nature-bg rounded-3xl p-8 mb-6 text-center relative overflow-hidden">
@@ -83,8 +81,7 @@
               <h3 class="text-2xl font-bold text-white mb-1">The Village Well</h3>
               <p class="text-emerald-200 text-sm mb-4">Draw Living Water • Be Refreshed</p>
               <button class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3 rounded-2xl font-semibold flex items-center gap-2 mx-auto">
-                <i class="fas fa-hand-holding-water"></i> 
-                <span>Draw Living Water</span>
+                <i class="fas fa-hand-holding-water"></i> <span>Draw Living Water</span>
               </button>
             </div>
           </div>
@@ -97,8 +94,7 @@
           <i class="fas fa-feather-alt text-pink-400"></i> Share with the Village
         </h3>
         <div class="flex gap-3">
-          <input id="square-post-input" type="text" placeholder="What's on your heart today?" 
-                 class="flex-1 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-3 text-white focus:outline-none focus:border-pink-500">
+          <input id="square-post-input" type="text" placeholder="What's on your heart today?" class="flex-1 bg-zinc-800 border border-zinc-700 rounded-2xl px-5 py-3 text-white focus:outline-none focus:border-pink-500">
           <button onclick="postToSquare()" class="bg-pink-600 hover:bg-pink-700 px-8 rounded-2xl font-semibold">Share</button>
         </div>
       </div>
@@ -128,9 +124,37 @@
               <button onclick="editAboutMe()" class="mt-2 text-sm text-pink-400 hover:text-pink-300">✏️ Edit About Me</button>
             </div>
 
-            <div>
+            <!-- My Jams -->
+            <div class="mb-6">
               <h4 class="font-semibold text-pink-400 mb-3 flex items-center gap-2"><i class="fas fa-music"></i> My Jams</h4>
               <div id="profile-jams" class="grid grid-cols-1 gap-2"></div>
+            </div>
+
+            <!-- Top Tribe / Fans -->
+            <div>
+              <h4 class="font-semibold text-pink-400 mb-3">My Tribe (Top Friends)</h4>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="bg-zinc-800 rounded-2xl p-3 text-center">
+                  <div class="w-12 h-12 bg-pink-600 rounded-full mx-auto mb-2 flex items-center justify-center">👑</div>
+                  <div class="text-sm font-semibold">Momma T</div>
+                  <div class="text-xs text-gray-400">Real Life Homie</div>
+                </div>
+                <div class="bg-zinc-800 rounded-2xl p-3 text-center">
+                  <div class="w-12 h-12 bg-pink-600 rounded-full mx-auto mb-2 flex items-center justify-center">🕊️</div>
+                  <div class="text-sm font-semibold">Pastor Mike</div>
+                  <div class="text-xs text-gray-400">Spiritual Dad</div>
+                </div>
+                <div class="bg-zinc-800 rounded-2xl p-3 text-center">
+                  <div class="w-12 h-12 bg-pink-600 rounded-full mx-auto mb-2 flex items-center justify-center">❤️</div>
+                  <div class="text-sm font-semibold">Grandson</div>
+                  <div class="text-xs text-gray-400">My Heart</div>
+                </div>
+                <div class="bg-zinc-800 rounded-2xl p-3 text-center">
+                  <div class="w-12 h-12 bg-pink-600 rounded-full mx-auto mb-2 flex items-center justify-center">🌿</div>
+                  <div class="text-sm font-semibold">Ministry Sister</div>
+                  <div class="text-xs text-gray-400">Prayer Warrior</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -144,13 +168,14 @@
       </div>
     </div>
 
-    <!-- LIVE ROOMS -->
+    <!-- LIVE ROOMS (WITH QUEUE) -->
     <div id="tab2" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
         <h2 class="text-3xl font-bold mb-6 flex items-center gap-3"><i class="fas fa-headset text-pink-400"></i> Live Rooms</h2>
-        <button onclick="createRoom()" class="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-2xl font-semibold">+ Create New Room</button>
         
-        <div id="current-room" class="hidden mt-6 bg-zinc-800 rounded-3xl p-6">
+        <button onclick="createRoom()" class="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-2xl font-semibold mb-6">+ Create New Room</button>
+
+        <div id="current-room" class="hidden bg-zinc-800 rounded-3xl p-6">
           <div class="flex justify-between items-center mb-4">
             <div>
               <h3 id="room-name" class="text-2xl font-bold"></h3>
@@ -158,12 +183,26 @@
             </div>
             <button onclick="exitRoom()" class="text-red-400 hover:text-red-500">Exit Room</button>
           </div>
+
+          <!-- Player -->
           <div class="aspect-video bg-black rounded-2xl overflow-hidden mb-4">
             <iframe id="room-player" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
           </div>
+
+          <!-- Song Queue -->
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2 flex items-center gap-2"><i class="fas fa-list"></i> Song Queue (Max 8)</h4>
+            <div class="flex gap-2 mb-2">
+              <input id="queue-input" type="text" placeholder="YouTube Video ID or Song Title" class="flex-1 bg-zinc-900 rounded-xl px-4 py-2 text-sm">
+              <button onclick="addToQueue()" class="bg-pink-600 px-6 rounded-xl text-sm">Add to Queue</button>
+            </div>
+            <div id="queue-list" class="bg-zinc-950 rounded-xl p-3 min-h-[60px] text-sm space-y-1"></div>
+          </div>
+
+          <!-- Live Chat -->
           <div class="bg-zinc-900 rounded-2xl p-4">
             <h4 class="font-semibold mb-2">Live Chat</h4>
-            <div id="live-chat" class="h-48 overflow-y-auto bg-zinc-950 rounded-xl p-3 mb-3 text-sm space-y-2"></div>
+            <div id="live-chat" class="h-40 overflow-y-auto bg-zinc-950 rounded-xl p-3 mb-3 text-sm space-y-2"></div>
             <div class="flex gap-2">
               <input id="chat-input" type="text" placeholder="Send a message..." class="flex-1 bg-zinc-800 rounded-xl px-4 py-2 text-sm">
               <button onclick="sendChatMessage()" class="bg-pink-600 px-6 rounded-xl">Send</button>
@@ -271,7 +310,6 @@
   </div>
 
   <script>
-    // State
     let feedPosts = JSON.parse(localStorage.getItem('feedPosts')) || [];
     let myJams = JSON.parse(localStorage.getItem('myJams')) || [
       { title: "Phoenix", artist: "For Today", videoId: "RFmVXa6FOSk" },
@@ -284,6 +322,7 @@
     let givingCount = parseInt(localStorage.getItem('givingCount')) || 0;
     let currentBadgeLevel = localStorage.getItem('currentBadgeLevel') || 'none';
     let photoCount = parseInt(localStorage.getItem('photoCount')) || 0;
+    let liveQueue = [];
 
     const livingWaterVerses = [
       "“Whoever drinks the water I give them will never thirst...” — John 4:14",
@@ -298,7 +337,6 @@
       if (n === 1) { renderProfileJams(); renderPhotos(); }
     }
 
-    // Village Square
     function renderFeed() {
       const container = document.getElementById('village-feed');
       if (!container) return;
@@ -322,17 +360,12 @@
     function postToSquare() {
       const input = document.getElementById('square-post-input');
       if (!input.value.trim()) return;
-      feedPosts.unshift({
-        text: input.value.trim(),
-        user: "NikkiT",
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
+      feedPosts.unshift({ text: input.value.trim(), user: "NikkiT", time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       localStorage.setItem('feedPosts', JSON.stringify(feedPosts));
       input.value = '';
       renderFeed();
     }
 
-    // Living Water Well
     function drawLivingWater() {
       const verse = livingWaterVerses[Math.floor(Math.random() * livingWaterVerses.length)];
       const modal = document.createElement('div');
@@ -435,18 +468,51 @@
       }
     }
 
-    // Live Rooms
+    // Live Rooms with Queue
     function createRoom() {
       const name = prompt("Name your new room?", "Prophetic Worship & Prayer");
       if (!name) return;
       document.getElementById('current-room').classList.remove('hidden');
       document.getElementById('room-name').textContent = name;
       document.getElementById('room-player').src = "https://www.youtube-nocookie.com/embed/5qap5aO7v9A?autoplay=1";
+      liveQueue = [];
+      renderQueue();
     }
+
     function exitRoom() {
       document.getElementById('current-room').classList.add('hidden');
       document.getElementById('room-player').src = "";
+      liveQueue = [];
     }
+
+    function addToQueue() {
+      const input = document.getElementById('queue-input');
+      if (!input.value.trim() || liveQueue.length >= 8) return;
+      liveQueue.push(input.value.trim());
+      input.value = '';
+      renderQueue();
+    }
+
+    function renderQueue() {
+      const container = document.getElementById('queue-list');
+      if (!container) return;
+      if (liveQueue.length === 0) {
+        container.innerHTML = `<p class="text-gray-500 text-sm">Queue is empty. Add songs for the room.</p>`;
+        return;
+      }
+      container.innerHTML = liveQueue.map((song, i) => `
+        <div class="flex justify-between items-center bg-zinc-800 px-3 py-1 rounded-lg text-sm">
+          <span>${i + 1}. ${song}</span>
+          <button onclick="removeFromQueue(${i})" class="text-red-400 hover:text-red-500">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function removeFromQueue(index) {
+      liveQueue.splice(index, 1);
+      renderQueue();
+    }
+
     function sendChatMessage() {
       const input = document.getElementById('chat-input');
       if (!input.value.trim()) return;
@@ -459,7 +525,7 @@
       input.value = '';
     }
 
-    // Rivers (FIXED PISHON)
+    // Rivers
     function openRiverModal(river) {
       const modal = document.getElementById('river-modal');
       const content = document.getElementById('river-modal-content');
@@ -469,16 +535,13 @@
         html = `
           <h3 class="text-3xl font-bold mb-2 text-yellow-400">Pishon — River of Blessing & Increase</h3>
           <p class="mb-4 text-gray-300">Lay down your financial or practical need. Others in the village can respond with help and blessing.</p>
-          
           <div class="mb-6">
             <div class="flex gap-2 mb-3">
               <input id="pishon-input" placeholder="I need help with..." class="flex-1 bg-zinc-800 rounded-2xl px-5 py-3">
               <button onclick="postPishonBurden()" class="bg-pink-600 px-8 rounded-2xl">Lay it Down</button>
             </div>
           </div>
-
           <div id="pishon-posts" class="mb-6"></div>
-
           <div class="border-t border-yellow-700 pt-4">
             <p class="text-sm text-yellow-300 mb-3">Or bless someone directly:</p>
             <div class="space-y-3">
@@ -495,6 +558,7 @@
             <input id="river-input" placeholder="Write your burden or prayer request..." class="flex-1 bg-zinc-800 rounded-2xl px-5 py-3">
             <button onclick="postToRiver('${river}')" class="bg-pink-600 px-8 rounded-2xl">Post</button>
           </div>
+          <div id="river-posts" class="mt-4"></div>
         `;
       }
       
@@ -503,6 +567,7 @@
       modal.classList.add('flex');
 
       if (river === 'pishon') renderPishonPosts();
+      else renderRiverPosts(river);
     }
 
     function closeRiverModal() {
@@ -514,21 +579,21 @@
     function postPishonBurden() {
       const input = document.getElementById('pishon-input');
       if (!input || !input.value.trim()) return;
-
       if (!riverPosts.pishon) riverPosts.pishon = [];
-      riverPosts.pishon.unshift({
-        text: input.value.trim(),
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
+      riverPosts.pishon.unshift({ text: input.value.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       localStorage.setItem('riverPosts', JSON.stringify(riverPosts));
       input.value = '';
       renderPishonPosts();
-      alert("Your need has been laid at the river. Others will come alongside you.");
+      alert("Your need has been laid at the river.");
     }
 
     function renderPishonPosts() {
       const container = document.getElementById('pishon-posts');
-      if (!container || !riverPosts.pishon || riverPosts.pishon.length === 0) return;
+      if (!container) return;
+      if (!riverPosts.pishon || riverPosts.pishon.length === 0) {
+        container.innerHTML = '';
+        return;
+      }
       container.innerHTML = riverPosts.pishon.slice(0, 3).map(p => `
         <div class="bg-zinc-800 rounded-xl p-3 mb-2 text-sm">
           <p>${p.text}</p>
@@ -541,13 +606,21 @@
       const input = document.getElementById('river-input');
       if (!input || !input.value.trim()) return;
       if (!riverPosts[river]) riverPosts[river] = [];
-      riverPosts[river].unshift({
-        text: input.value.trim(),
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      });
+      riverPosts[river].unshift({ text: input.value.trim(), time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
       localStorage.setItem('riverPosts', JSON.stringify(riverPosts));
       closeRiverModal();
       alert("Your burden has been laid at the river.");
+    }
+
+    function renderRiverPosts(river) {
+      const container = document.getElementById('river-posts');
+      if (!container || !riverPosts[river] || riverPosts[river].length === 0) return;
+      container.innerHTML = riverPosts[river].slice(0, 3).map(p => `
+        <div class="bg-zinc-800 rounded-xl p-3 mb-2 text-sm">
+          <p>${p.text}</p>
+          <p class="text-xs text-gray-500 mt-1">${p.time}</p>
+        </div>
+      `).join('');
     }
 
     function giveToPost(river, amount) {
@@ -629,11 +702,36 @@ What He did for me… He can also do for you.
             <button onclick="this.closest('.fixed').remove()" class="mt-8 w-full bg-amber-600 hover:bg-amber-700 py-3 rounded-2xl">Close</button>
           </div>
         `;
+      } else if (type === 'art') {
+        inner = `
+          <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full mx-4 p-8">
+            <h3 class="text-2xl font-bold mb-4 text-center">🎨 Art Easel</h3>
+            <p class="text-center text-gray-400 mb-4">Your paintings and creative expressions will live here.</p>
+            <div class="grid grid-cols-2 gap-4">
+              <img src="https://picsum.photos/id/1015/300/200" class="rounded-2xl">
+              <img src="https://picsum.photos/id/160/300/200" class="rounded-2xl">
+            </div>
+            <button onclick="this.closest('.fixed').remove()" class="mt-6 w-full bg-zinc-700 hover:bg-zinc-600 py-2 rounded-2xl">Close</button>
+          </div>
+        `;
+      } else if (type === 'rocks') {
+        inner = `
+          <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full mx-4 p-8">
+            <h3 class="text-2xl font-bold mb-4 text-center">🪨 God’s Creations – RockHound Heaven</h3>
+            <p class="text-center text-gray-400 mb-4">Rocks, crystals, and treasures found on the beach or in the earth.</p>
+            <div class="grid grid-cols-3 gap-3">
+              <img src="https://picsum.photos/id/251/200/150" class="rounded-2xl">
+              <img src="https://picsum.photos/id/312/200/150" class="rounded-2xl">
+              <img src="https://picsum.photos/id/133/200/150" class="rounded-2xl">
+            </div>
+            <button onclick="this.closest('.fixed').remove()" class="mt-6 w-full bg-zinc-700 hover:bg-zinc-600 py-2 rounded-2xl">Close</button>
+          </div>
+        `;
       } else {
         inner = `
           <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full mx-4 p-8 text-center">
-            <h3 class="text-2xl font-bold mb-4">${type === 'art' ? 'Art Easel' : type === 'rocks' ? 'God’s Creations – RockHound Heaven' : 'Music Studio'}</h3>
-            <p class="text-gray-400">This section is coming to life soon.</p>
+            <h3 class="text-2xl font-bold mb-4">🎵 Music Studio</h3>
+            <p class="text-gray-400">A space for original music, lyrics, and new artists to be heard.</p>
             <button onclick="this.closest('.fixed').remove()" class="mt-6 bg-zinc-700 hover:bg-zinc-600 px-8 py-2 rounded-2xl">Close</button>
           </div>
         `;
@@ -646,7 +744,7 @@ What He did for me… He can also do for you.
       renderFeed();
       renderProfileJams();
       renderPhotos();
-      switchTab(0); // Start on the beautiful Village Square
+      switchTab(0);
     }
 
     init();
