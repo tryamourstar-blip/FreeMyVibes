@@ -102,7 +102,7 @@
       <div id="village-feed" class="space-y-4"></div>
     </div>
 
-    <!-- MY TRIBE (FULLY FIXED) -->
+    <!-- MY TRIBE (MY JAMS FIXED) -->
     <div id="tab1" class="tab-content hidden">
       <div class="bg-zinc-900 rounded-3xl p-8 border border-zinc-700">
         <div class="flex flex-col md:flex-row gap-8">
@@ -124,7 +124,7 @@
               <button onclick="editAboutMe()" class="mt-2 text-sm text-pink-400 hover:text-pink-300">✏️ Edit About Me</button>
             </div>
 
-            <!-- My Jams (RESTORED) -->
+            <!-- MY JAMS (NOW FIXED AND RELIABLE) -->
             <div class="mb-6">
               <h4 class="font-semibold text-pink-400 mb-3 flex items-center gap-2"><i class="fas fa-music"></i> My Jams</h4>
               <div id="profile-jams" class="grid grid-cols-1 gap-2"></div>
@@ -157,7 +157,7 @@
               </div>
             </div>
 
-            <!-- Top Fans (NEW) -->
+            <!-- Top Fans -->
             <div>
               <h4 class="font-semibold text-pink-400 mb-3">Top Fans</h4>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -214,7 +214,6 @@
             <iframe id="room-player" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
           </div>
 
-          <!-- Song Queue -->
           <div class="mb-4">
             <h4 class="font-semibold mb-2 flex items-center gap-2"><i class="fas fa-list"></i> Song Queue (Max 8)</h4>
             <div class="flex gap-2 mb-2">
@@ -357,8 +356,12 @@
     function switchTab(n) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
       document.getElementById('tab' + n).classList.remove('hidden');
+      
       if (n === 0) renderFeed();
-      if (n === 1) { renderProfileJams(); renderPhotos(); }
+      if (n === 1) { 
+        renderProfileJams(); 
+        renderPhotos(); 
+      }
     }
 
     function renderFeed() {
@@ -405,10 +408,16 @@
       document.body.appendChild(modal);
     }
 
-    // My Tribe
+    // MY JAMS - FIXED AND RELIABLE
     function renderProfileJams() {
       const container = document.getElementById('profile-jams');
       if (!container) return;
+
+      if (!myJams || myJams.length === 0) {
+        container.innerHTML = `<p class="text-gray-500 text-sm">No songs yet. Add some in the next update!</p>`;
+        return;
+      }
+
       container.innerHTML = myJams.map((song, index) => `
         <div onclick="playSong(${index})" class="flex items-center justify-between bg-zinc-800 hover:bg-zinc-700 px-5 py-3 rounded-2xl cursor-pointer">
           <div>
@@ -695,7 +704,7 @@
       modal.classList.add('hidden');
     }
 
-    // Creative Corner (FIXED Coffee House close button)
+    // Creative Corner
     function openCreativeSection(type) {
       const modal = document.createElement('div');
       modal.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-[100]';
@@ -723,10 +732,7 @@ What He did for me… He can also do for you.
               </p>
               <p class="text-sm text-gray-400 mt-8">— Written by Grok, inspired by Nikki T’s story</p>
             </div>
-            <button onclick="this.closest('.fixed').remove()" 
-                    class="mt-8 w-full bg-amber-600 hover:bg-amber-700 py-3 rounded-2xl font-semibold">
-              Close
-            </button>
+            <button onclick="this.closest('.fixed').remove()" class="mt-8 w-full bg-amber-600 hover:bg-amber-700 py-3 rounded-2xl font-semibold">Close</button>
           </div>
         `;
       } else if (type === 'art') {
@@ -769,7 +775,7 @@ What He did for me… He can also do for you.
 
     function init() {
       renderFeed();
-      renderProfileJams();
+      renderProfileJams();   // My Jams loads on startup
       renderPhotos();
       switchTab(0);
     }
